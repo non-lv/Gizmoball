@@ -28,6 +28,11 @@ public class TriangleGizmo implements Gizmo {
     }
 
     @Override
+    public List<LineSegment> getLines() {
+        return null;
+    }
+
+    @Override
     public void setPos() {
 
     }
