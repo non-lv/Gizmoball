@@ -1,6 +1,7 @@
 package Model;
 
 import physics.Circle;
+import physics.LineSegment;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ public class CircleGizmo implements Gizmo {
         List<Circle> l = new ArrayList<>();
         l.add(new Circle(xpos + .5, ypos + .5, .5));
         return l;
+    }
+
+    public List<LineSegment> getLines() {
+        return new ArrayList<>();
     }
 
     @Override
