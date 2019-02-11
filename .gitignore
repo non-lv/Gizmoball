@@ -1,3 +1,5 @@
 .idea/
 out/
 *.iml
+src/Main.production/
+src/producon.gizmoball/
