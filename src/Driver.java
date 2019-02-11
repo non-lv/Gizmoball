@@ -1,5 +1,4 @@
 import Model.LoadBoardFromFile;
-import View.*;
 
 public class Driver {
 

@@ -27,16 +27,22 @@ public class LoadBoardFromFile {
                     gizmos.add(new SquareGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
                     break;
                 case "circle":
+                    gizmos.add(new CircleGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
                     break;
                 case "triangle":
+                    gizmos.add(new TriangleGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
                     break;
                 case "absorber":
+                    gizmos.add(new AbsorberGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
                     break;
                 case "leftflipper":
+                    //gizmos.add(new FlipperGizmo());
                     break;
                 case "rightflipper":
+                    //gizmos.add(new FlipperGizmo());
                     break;
                 case "ball":
+                    //gizmos.add(new Ball(Integer.parseInt(tokens[3]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
                     break;
 
             }
