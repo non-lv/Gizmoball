@@ -3,3 +3,4 @@ out/
 *.iml
 src/Main.production/
 src/producon.gizmoball/
+src/.DS_Store
