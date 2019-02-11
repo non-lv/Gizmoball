@@ -11,10 +11,11 @@ public class TriangleGizmo implements Gizmo {
 
     private int xpos;
     private int ypos;
-
+    private Color colour;
     public TriangleGizmo(int x, int y){
         this.xpos = x;
         this.ypos = y;
+        colour = Color.blue;
     }
 
     @Override
@@ -35,4 +36,17 @@ public class TriangleGizmo implements Gizmo {
     public void trigger() {
 
     }
+
+    public int getXpos(){
+        return xpos;
+    }
+
+    public int getYpos(){
+        return ypos;
+    }
+
+    public Color getColour() {
+        return colour;
+    }
 }
+

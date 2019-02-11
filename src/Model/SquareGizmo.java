@@ -3,6 +3,7 @@ package Model;
 import physics.Circle;
 import physics.LineSegment;
 
+import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -10,10 +11,12 @@ public class SquareGizmo implements Gizmo {
 
     private int xpos;
     private int ypos;
+    private Color colour;
 
     public SquareGizmo(int x, int y) {
         xpos = x;
         ypos = y;
+        colour = Color.BLUE;
     }
 
     public List<Circle> getCircles() {
@@ -42,5 +45,13 @@ public class SquareGizmo implements Gizmo {
     @Override
     public void trigger() {
 
+    }
+
+    public int getXpos(){
+        return xpos;
+    }
+
+    public int getYpos(){
+        return ypos;
     }
 }

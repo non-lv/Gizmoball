@@ -1,7 +1,7 @@
 package Model;
 
 import java.awt.*;
-
+/*
 public class FlipperGizmo implements Gizmo {
     @Override
     public Point getPos() {
@@ -18,3 +18,4 @@ public class FlipperGizmo implements Gizmo {
 
     }
 }
+*/
