@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LoadBoardFromFile {
 
-    public static void readFromFile(String fileName) throws IOException {
+    public static void readFromFile(String fileName, Model m) throws IOException {
 
         File file = new File(fileName);
         List<Gizmo> gizmos = new ArrayList<>();
@@ -24,13 +24,13 @@ public class LoadBoardFromFile {
 
             switch (type){
                 case "square":
-                    gizmos.add(new SquareGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
+                    m.addSquare(new SquareGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
                     break;
                 case "circle":
-                    gizmos.add(new CircleGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
+                    m.addCircle(new CircleGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
                     break;
                 case "triangle":
-                    gizmos.add(new TriangleGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
+                    m.addTriangle(new TriangleGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
                     break;
                 case "absorber":
                     gizmos.add(new AbsorberGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));

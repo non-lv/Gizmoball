@@ -63,4 +63,21 @@ public class AbsorberGizmo implements Gizmo {
     public void trigger() {
 
     }
+
+    public int getXpos(){
+    return xpos;
+}
+
+    public int getYpos(){
+        return ypos;
+    }
+
+    public int getXpos2(){
+        return x2pos;
+    }
+
+    public int getYpos2(){
+        return y2pos;
+    }
+
 }

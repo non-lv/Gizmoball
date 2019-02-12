@@ -14,6 +14,7 @@ public class Model extends Observable {
     private ArrayList<CircleGizmo> circles;
     private ArrayList<SquareGizmo> squares;
     private ArrayList<TriangleGizmo> triangles;
+    private ArrayList<AbsorberGizmo> absorber;
     private static double mu = 0.025;
     private static double mu2 = 0.025;
     private static double gravity = 25;
@@ -27,6 +28,7 @@ public class Model extends Observable {
         circles = new ArrayList<>();
         squares = new ArrayList<>();
         triangles = new ArrayList<>();
+        absorber = new ArrayList<>();
     }
     public ArrayList<CircleGizmo> getCircles() {
         return circles;
@@ -40,6 +42,8 @@ public class Model extends Observable {
         return triangles;
     }
 
+    public ArrayList<AbsorberGizmo> getAbsorber(){return absorber;}
+
     public void addCircle(CircleGizmo c) {
         circles.add(c);
     }
@@ -51,6 +55,8 @@ public class Model extends Observable {
     public void addTriangle(TriangleGizmo t) {
         triangles.add(t);
     }
+
+    public void addAbsorber(AbsorberGizmo a){absorber.add(a);}
     private void moveBalls() {
         double moveTime = this.moveTime;
 

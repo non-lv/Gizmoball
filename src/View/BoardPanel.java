@@ -6,6 +6,7 @@ import Model.Model;
 import Model.CircleGizmo;
 import Model.SquareGizmo;
 import Model.TriangleGizmo;
+import Model.AbsorberGizmo;
 public class BoardPanel extends JPanel {
 
     //private JPanel board;
@@ -62,6 +63,15 @@ public class BoardPanel extends JPanel {
             g2.fillPolygon(xpoints, ypoints, npoints);
 
 
+        }
+
+        for(AbsorberGizmo a: m.getAbsorber()){
+            int x = (LstoPx(a.getXpos()));
+            int y = (LstoPx(a.getYpos()));
+            int x2 = (LstoPx(a.getXpos2()));
+            int y2 = (LstoPx(a.getYpos2()));
+
+            g2.fillRect(x,y, x2-x, y2-y);
         }
 
 

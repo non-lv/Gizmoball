@@ -4,6 +4,7 @@ import Model.Model;
 import Model.CircleGizmo;
 import Model.SquareGizmo;
 import Model.TriangleGizmo;
+import Model.AbsorberGizmo;
 
 public class Driver {
 
@@ -18,11 +19,11 @@ public class Driver {
         HomeFrame homeFrame = new HomeFrame(playModePanel, optionsPanel, boardPanel, notificationPanel);
 
         try{
-            LoadBoardFromFile.readFromFile("inputFile.txt");
+            LoadBoardFromFile.readFromFile("/inputFile.txt",m);
 
 
         } catch (Exception ex){
-
+            System.out.println("cant read");
         }
 
         m.addCircle(new CircleGizmo(15,10));
@@ -30,6 +31,7 @@ public class Driver {
         m.addCircle(new CircleGizmo(2, 2));
         m.addSquare(new SquareGizmo(5,5));
         m.addTriangle(new TriangleGizmo(3,3));
+        m.addAbsorber(new AbsorberGizmo(1,15,9,17));
 
     }
 }
