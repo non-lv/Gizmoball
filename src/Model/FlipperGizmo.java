@@ -9,11 +9,12 @@ import java.util.List;
 public class FlipperGizmo implements Gizmo {
     private int xpos;
     private int ypos;
+    int left;
 
-
-    public FlipperGizmo(int x, int y) {
+    public FlipperGizmo(int x, int y, int l) {
         xpos = x;
         ypos = y;
+        left = l;
 
     }
 
@@ -38,7 +39,12 @@ public class FlipperGizmo implements Gizmo {
     }
 
     public int getXpos(){
-        return xpos;
+        if(left == 1) {
+            return xpos;
+        }else{
+            return xpos = xpos + 2;
+        }
+
     }
 
     public int getYpos(){

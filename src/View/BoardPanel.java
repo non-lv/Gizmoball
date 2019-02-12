@@ -71,6 +71,17 @@ public class BoardPanel extends JPanel {
             int y = (LstoPx(a.getYpos()));
             int x2 = (LstoPx(a.getXpos2()));
             int y2 = (LstoPx(a.getYpos2()));
+            if(x2<x){
+                int temp = x;
+                x = x2;
+                x2 = temp;
+            }
+
+            if(y2<y){
+                int temp = y;
+                y = y2;
+                y2 = temp;
+            }
             g2.setColor(Color.CYAN);
             g2.fillRect(x,y, x2-x, y2-y);
         }

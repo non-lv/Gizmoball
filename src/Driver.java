@@ -31,9 +31,12 @@ public class Driver {
         m.addCircle(new CircleGizmo(18,18));
         m.addCircle(new CircleGizmo(2, 2));
         m.addSquare(new SquareGizmo(5,5));
+        m.addSquare(new SquareGizmo(6,18));
         m.addTriangle(new TriangleGizmo(3,3));
-        m.addAbsorber(new AbsorberGizmo(1,15,9,17));
-        m.addFlipper(new FlipperGizmo(8,8));
+        m.addTriangle(new TriangleGizmo(20,20));
+        m.addAbsorber(new AbsorberGizmo(15,15,9,17));
+        m.addFlipper(new FlipperGizmo(8,8, 1));
+        m.addFlipper(new FlipperGizmo(8,8, 0));
 
     }
 }
