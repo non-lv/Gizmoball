@@ -35,7 +35,7 @@ public class BoardPanel extends JPanel {
         for (CircleGizmo c : m.getCircles()) {
             int x = (LstoPx(c.getXpos()));
             int y = (LstoPx(c.getXpos()));
-
+            g2.setColor(Color.ORANGE);
             g2.fillOval(x,y, LstoPx(1),LstoPx(1));
 
         }
@@ -46,7 +46,7 @@ public class BoardPanel extends JPanel {
 
             s.getCircles();
             s.getLines();
-
+            g2.setColor(Color.RED);
             g2.fillRect(x,y,LstoPx(1),LstoPx(1));
 
 
@@ -59,7 +59,7 @@ public class BoardPanel extends JPanel {
             int xpoints[] = {x,x,x+25};
             int ypoints[] = {y,y-25,y};
             int npoints = 3;
-
+            g2.setColor(Color.blue);
             g2.fillPolygon(xpoints, ypoints, npoints);
 
 
@@ -70,7 +70,7 @@ public class BoardPanel extends JPanel {
             int y = (LstoPx(a.getYpos()));
             int x2 = (LstoPx(a.getXpos2()));
             int y2 = (LstoPx(a.getYpos2()));
-
+            g2.setColor(Color.CYAN);
             g2.fillRect(x,y, x2-x, y2-y);
         }
 

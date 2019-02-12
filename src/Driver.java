@@ -19,7 +19,7 @@ public class Driver {
         HomeFrame homeFrame = new HomeFrame(playModePanel, optionsPanel, boardPanel, notificationPanel);
 
         try{
-            LoadBoardFromFile.readFromFile("/inputFile.txt",m);
+            LoadBoardFromFile.readFromFile("inputFile.txt",m);
 
 
         } catch (Exception ex){
