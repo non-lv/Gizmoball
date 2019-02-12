@@ -7,6 +7,7 @@ import Model.CircleGizmo;
 import Model.SquareGizmo;
 import Model.TriangleGizmo;
 import Model.AbsorberGizmo;
+import Model.FlipperGizmo;
 public class BoardPanel extends JPanel {
 
     //private JPanel board;
@@ -72,6 +73,13 @@ public class BoardPanel extends JPanel {
             int y2 = (LstoPx(a.getYpos2()));
             g2.setColor(Color.CYAN);
             g2.fillRect(x,y, x2-x, y2-y);
+        }
+
+        for(FlipperGizmo f: m.getFlippers()){
+            int x = (LstoPx(f.getXpos()));
+            int y = (LstoPx(f.getYpos()));
+            g2.setColor(Color.green);
+            g2.fillRoundRect(x,y,12,LstoPx(2), 50,15);
         }
 
 

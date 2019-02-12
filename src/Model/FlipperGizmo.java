@@ -7,8 +7,14 @@ import java.awt.*;
 import java.util.List;
 
 public class FlipperGizmo implements Gizmo {
-    public Point getPos() {
-        return null;
+    private int xpos;
+    private int ypos;
+
+
+    public FlipperGizmo(int x, int y) {
+        xpos = x;
+        ypos = y;
+
     }
 
     @Override
@@ -29,5 +35,13 @@ public class FlipperGizmo implements Gizmo {
     @Override
     public void trigger() {
 
+    }
+
+    public int getXpos(){
+        return xpos;
+    }
+
+    public int getYpos(){
+        return ypos;
     }
 }

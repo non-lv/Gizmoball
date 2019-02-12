@@ -5,6 +5,7 @@ import Model.CircleGizmo;
 import Model.SquareGizmo;
 import Model.TriangleGizmo;
 import Model.AbsorberGizmo;
+import Model.FlipperGizmo;
 
 public class Driver {
 
@@ -32,6 +33,7 @@ public class Driver {
         m.addSquare(new SquareGizmo(5,5));
         m.addTriangle(new TriangleGizmo(3,3));
         m.addAbsorber(new AbsorberGizmo(1,15,9,17));
+        m.addFlipper(new FlipperGizmo(8,8));
 
     }
 }
