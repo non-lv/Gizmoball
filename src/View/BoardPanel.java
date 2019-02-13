@@ -90,10 +90,11 @@ public class BoardPanel extends JPanel {
         }
 
         for(FlipperGizmo f: m.getFlippers()){
-            int x = (LstoPx(f.getXpos()));
+            int x = (f.getXpos());
             int y = (LstoPx(f.getYpos()));
             g2.setColor(Color.green);
             g2.fillRoundRect(x,y,12,LstoPx(2), 50,15);
+
         }
 
 

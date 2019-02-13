@@ -40,9 +40,9 @@ public class FlipperGizmo implements Gizmo {
 
     public int getXpos(){
         if(left == 1) {
-            return xpos;
+            return xpos *25;
         }else{
-            return xpos = xpos + 2;
+            return ((xpos*25)+37);
         }
 
     }
