@@ -97,33 +97,43 @@ public class TriangleGizmo implements IGizmo {
     }
 
     public int getXpos() {
-        return xpos;
+        switch (rotation) {
+            case TOP_LEFT:
+            case BOTTOM_LEFT:
+                return xpos;
+            default:
+                return xpos + 1;
+        }
     }
 
     public int getYpos() {
-        return ypos;
+        switch (rotation) {
+            case TOP_LEFT:
+            case TOP_RIGHT:
+                return ypos;
+            default:
+                return ypos + 1;
+        }
     }
 
     // Left dot
     public int getX2() {
         switch (rotation) {
+            case TOP_LEFT:
             case TOP_RIGHT:
-                return xpos - 1;
-            case BOTTOM_LEFT:
-                return xpos + 1;
-            default:
                 return xpos;
+            default:
+                return xpos + 1;
         }
     }
 
     public int gety2() {
         switch (rotation) {
-            case TOP_LEFT:
-                return ypos - 1;
+            case TOP_RIGHT:
             case BOTTOM_RIGHT:
-                return ypos + 1;
-            default:
                 return ypos;
+            default:
+                return ypos + 1;
         }
     }
 
@@ -131,23 +141,21 @@ public class TriangleGizmo implements IGizmo {
     // Right dot
     public int getX3() {
         switch (rotation) {
-            case TOP_LEFT:
-                return xpos + 1;
+            case BOTTOM_LEFT:
             case BOTTOM_RIGHT:
-                return xpos - 1;
-            default:
                 return xpos;
+            default:
+                return xpos + 1;
         }
     }
 
     public int gety3() {
         switch (rotation) {
-            case TOP_RIGHT:
-                return ypos + 1;
+            case TOP_LEFT:
             case BOTTOM_LEFT:
-                return ypos - 1;
-            default:
                 return ypos;
+            default:
+                return ypos + 1;
         }
     }
 
