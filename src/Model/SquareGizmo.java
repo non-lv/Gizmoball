@@ -7,8 +7,9 @@ import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
 
-public class SquareGizmo implements Gizmo {
+public class SquareGizmo implements IGizmo {
 
+    private String id;
     private int xpos;
     private int ypos;
     private Color colour;
@@ -45,6 +46,11 @@ public class SquareGizmo implements Gizmo {
     @Override
     public void trigger() {
 
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     public int getXpos(){

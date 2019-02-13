@@ -9,7 +9,7 @@ public class LoadBoardFromFile {
     public static void readFromFile(String fileName, Model m) throws IOException {
 
         File file = new File(fileName);
-        List<Gizmo> gizmos = new ArrayList<>();
+        List<IGizmo> iGizmos = new ArrayList<>();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -41,7 +41,7 @@ public class LoadBoardFromFile {
                     m.addFlipper(new FlipperGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), 0));
                     break;
                 case "ball":
-                    //gizmos.add(new Ball(Integer.parseInt(tokens[3]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
+                    //iGizmos.add(new Ball(Integer.parseInt(tokens[3]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
                     break;
                 case "rotate":
                     TriangleGizmo t = m.getTrianglebyName(tokens[1]);

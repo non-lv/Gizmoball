@@ -7,13 +7,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TriangleGizmo implements Gizmo {
+public class TriangleGizmo implements IGizmo {
 
     // the right angle corner in triangle
     private enum Rotation {
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     }
 
+    private String id;
     private int xpos;
     private int ypos;
     private Color colour;
@@ -88,6 +89,11 @@ public class TriangleGizmo implements Gizmo {
     @Override
     public void trigger() {
 
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     public int getXpos() {

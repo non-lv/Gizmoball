@@ -3,10 +3,11 @@ package Model;
 import physics.Circle;
 import physics.LineSegment;
 
-import java.awt.*;
 import java.util.List;
 
-public class FlipperGizmo implements Gizmo {
+public class FlipperGizmo implements IGizmo {
+
+    private String id;
     private int xpos;
     private int ypos;
     int left;
@@ -36,6 +37,11 @@ public class FlipperGizmo implements Gizmo {
     @Override
     public void trigger() {
 
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     public int getXpos(){

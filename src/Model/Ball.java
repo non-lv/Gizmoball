@@ -5,6 +5,7 @@ import physics.Vect;
 
 public class Ball {
 
+    private String id;
     private Vect velocity;
     private double xpos;
     private double ypos;
@@ -46,4 +47,7 @@ public class Ball {
     public double getY() {
         return ypos;
     }
+
+
 }
+

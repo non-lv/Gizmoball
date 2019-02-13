@@ -5,9 +5,12 @@ import java.awt.*;
 import Model.Model;
 import Model.CircleGizmo;
 import Model.SquareGizmo;
-import Model.TriangleGizmo;
-import Model.AbsorberGizmo;
 import Model.FlipperGizmo;
+import Model.AbsorberGizmo;
+import Model.TriangleGizmo;
+
+
+
 public class BoardPanel extends JPanel {
 
     //private JPanel board;

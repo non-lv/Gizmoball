@@ -6,8 +6,9 @@ import physics.LineSegment;
 import java.util.List;
 import java.util.ArrayList;
 
-public class AbsorberGizmo implements Gizmo {
+public class AbsorberGizmo implements IGizmo {
 
+    private String id;
     private int xpos;
     private int ypos;
     private int x2pos;
@@ -62,6 +63,11 @@ public class AbsorberGizmo implements Gizmo {
     @Override
     public void trigger() {
 
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     public int getXpos(){

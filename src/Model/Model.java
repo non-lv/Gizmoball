@@ -18,12 +18,13 @@ public class Model extends Observable {
     private static int gridSizeX = 20;
     private static int gridSizeY = 20;
 
-    private List<Gizmo> gizmos;
+    private List<IGizmo> iGizmos;
     private List<LineSegment> walls;
     private List<Ball> balls;
 
     public Model() {
-        gizmos = new ArrayList<>();
+        iGizmos = new ArrayList<>();
+        walls = new ArrayList<>();
         walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
         walls.add(new LineSegment(gridSizeX, 0, gridSizeX, gridSizeY));
@@ -32,7 +33,7 @@ public class Model extends Observable {
 
     public List<CircleGizmo> getCircles() {
         List<CircleGizmo> l = new ArrayList<>();
-        for (Gizmo g : gizmos)
+        for (IGizmo g : iGizmos)
             if (g instanceof CircleGizmo)
                 l.add((CircleGizmo) g);
         return l;
@@ -40,7 +41,7 @@ public class Model extends Observable {
 
     public List<SquareGizmo> getSquare() {
         List<SquareGizmo> l = new ArrayList<>();
-        for (Gizmo g : gizmos)
+        for (IGizmo g : iGizmos)
             if (g instanceof SquareGizmo)
                 l.add((SquareGizmo) g);
         return l;
@@ -48,7 +49,7 @@ public class Model extends Observable {
 
     public List<TriangleGizmo> getTriangles() {
         List<TriangleGizmo> l = new ArrayList<>();
-        for (Gizmo g : gizmos)
+        for (IGizmo g : iGizmos)
             if (g instanceof TriangleGizmo)
                 l.add((TriangleGizmo) g);
         return l;
@@ -56,7 +57,7 @@ public class Model extends Observable {
 
     public List<AbsorberGizmo> getAbsorber() {
         List<AbsorberGizmo> l = new ArrayList<>();
-        for (Gizmo g : gizmos)
+        for (IGizmo g : iGizmos)
             if (g instanceof AbsorberGizmo)
                 l.add((AbsorberGizmo) g);
         return l;
@@ -64,30 +65,30 @@ public class Model extends Observable {
 
     public List<FlipperGizmo> getFlippers() {
         List<FlipperGizmo> l = new ArrayList<>();
-        for (Gizmo g : gizmos)
+        for (IGizmo g : iGizmos)
             if (g instanceof FlipperGizmo)
                 l.add((FlipperGizmo) g);
         return l;
     }
 
     public void addCircle(CircleGizmo c) {
-        gizmos.add(c);
+        iGizmos.add(c);
     }
 
     public void addSquare(SquareGizmo s) {
-        gizmos.add(s);
+        iGizmos.add(s);
     }
 
     public void addTriangle(TriangleGizmo t) {
-        gizmos.add(t);
+        iGizmos.add(t);
     }
 
     public void addAbsorber(AbsorberGizmo a) {
-        gizmos.add(a);
+        iGizmos.add(a);
     }
 
     public void addFlipper(FlipperGizmo f) {
-        gizmos.add(f);
+        iGizmos.add(f);
     }
 
     public TriangleGizmo getTrianglebyName(String name) {
@@ -130,8 +131,8 @@ public class Model extends Observable {
         double shortestTime = Double.MAX_VALUE;
         double time = 0.0D;
 
-        for (Gizmo gizmo : gizmos) {
-            for (Circle circle : gizmo.getCircles()) {
+        for (IGizmo iIGizmo : iGizmos) {
+            for (Circle circle : iIGizmo.getCircles()) {
                 time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
                 if (time < shortestTime) {
                     shortestTime = time;
@@ -139,7 +140,7 @@ public class Model extends Observable {
                 }
             }
 
-            for (LineSegment line : gizmo.getLines()) {
+            for (LineSegment line : iIGizmo.getLines()) {
                 time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
                 if (time < shortestTime) {
                     shortestTime = time;

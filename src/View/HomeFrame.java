@@ -16,7 +16,8 @@ public class HomeFrame implements Observer {
                 private JPanel optionsPanelTop;
             private JPanel boardAndNotificationBarContainer;
                 private JPanel notificationPanel;
-                private JPanel boardPanel;
+                private JPanel boardContainer;
+                    private JPanel boardPanel;
 
 
     public HomeFrame(JPanel menuPanelLeft, JPanel optionsPanelTop, JPanel boardPanel, JPanel notificationPanel){
@@ -35,6 +36,7 @@ public class HomeFrame implements Observer {
             border = new JPanel(new BorderLayout());
                 leftAlignment = new JPanel(new FlowLayout(FlowLayout.LEFT));
                 boardAndNotificationBarContainer = new JPanel(new BorderLayout());
+                    boardContainer = new JPanel();
 
         border.add(menuPanelLeft, BorderLayout.LINE_START);
 
@@ -44,7 +46,8 @@ public class HomeFrame implements Observer {
 
         border.add(leftAlignment, BorderLayout.PAGE_START);
 
-        boardAndNotificationBarContainer.add(boardPanel, BorderLayout.CENTER);
+        boardContainer.add(boardPanel);
+        boardAndNotificationBarContainer.add(boardContainer, BorderLayout.CENTER);
         boardAndNotificationBarContainer.add(notificationPanel, BorderLayout.PAGE_END);
 
         border.add(boardAndNotificationBarContainer, BorderLayout.CENTER);

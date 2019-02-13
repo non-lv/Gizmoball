@@ -1,11 +1,7 @@
 import Model.LoadBoardFromFile;
 import View.*;
 import Model.Model;
-import Model.CircleGizmo;
-import Model.SquareGizmo;
-import Model.TriangleGizmo;
-import Model.AbsorberGizmo;
-import Model.FlipperGizmo;
+
 
 public class Driver {
 
@@ -28,6 +24,10 @@ public class Driver {
 
         HomeFrame homeFrame = new HomeFrame(playModePanel, optionsPanel, boardPanel, notificationPanel);
 
+//        JFrame f = new JFrame();
+//        f.add(boardPanel);
+//        f.pack();
+//        f.setVisible(true);
 
 
 //        m.addCircle(new CircleGizmo(15,10));

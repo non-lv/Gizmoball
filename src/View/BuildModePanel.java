@@ -20,10 +20,10 @@ public class BuildModePanel extends JPanel {
     }
 
     public void init(){
-        //Gizmo adding panel
+        //IGizmo adding panel
         addGizmo = new JPanel(new GridLayout(2, 3));
 
-        //Gizmo adding button dimensions
+        //IGizmo adding button dimensions
         Dimension addGizmoDim = new Dimension(100, 70);
 
         //Add gizmo button declarations
@@ -75,7 +75,7 @@ public class BuildModePanel extends JPanel {
         ball.add(test, BorderLayout.LINE_START);
         ball.add(velocities, BorderLayout.CENTER);
 
-        //Gizmo and Ball panels together
+        //IGizmo and Ball panels together
         gizmoAndBall = new JPanel(new BorderLayout());
         gizmoAndBall.add(addGizmo, BorderLayout.PAGE_START);
         gizmoAndBall.add(ball, BorderLayout.CENTER);
