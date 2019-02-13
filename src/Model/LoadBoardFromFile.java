@@ -11,7 +11,6 @@ public class LoadBoardFromFile {
         File file = new File(fileName);
         List<Gizmo> gizmos = new ArrayList<>();
 
-
         BufferedReader br = new BufferedReader(new FileReader(file));
 
         String line;

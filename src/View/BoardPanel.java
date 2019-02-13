@@ -35,7 +35,7 @@ public class BoardPanel extends JPanel {
         // Draw all the vertical lines
         for (CircleGizmo c : m.getCircles()) {
             int x = (LstoPx(c.getXpos()));
-            int y = (LstoPx(c.getXpos()));
+            int y = (LstoPx(c.getYpos()));
             g2.setColor(Color.ORANGE);
             g2.fillOval(x,y, LstoPx(1),LstoPx(1));
 
@@ -43,10 +43,10 @@ public class BoardPanel extends JPanel {
 
         for(SquareGizmo s: m.getSquare()){
             int x = (LstoPx(s.getXpos()));
-            int y = (LstoPx(s.getXpos()));
+            int y = (LstoPx(s.getYpos()));
 
-            s.getCircles();
-            s.getLines();
+//            s.getCircles();
+//            s.getLines();
             g2.setColor(Color.RED);
             g2.fillRect(x,y,LstoPx(1),LstoPx(1));
 
@@ -55,7 +55,7 @@ public class BoardPanel extends JPanel {
 
         for(TriangleGizmo s: m.getTriangles()){
             int x = (LstoPx(s.getXpos()));
-            int y = (LstoPx(s.getXpos()));
+            int y = (LstoPx(s.getYpos()));
 
             int xpoints[] = {x,x,x+25};
             int ypoints[] = {y,y-25,y};
