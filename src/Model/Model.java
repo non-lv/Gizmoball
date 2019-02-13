@@ -15,12 +15,19 @@ public class Model extends Observable {
     private static double mu2 = 0.025;
     private static double gravity = 25;
     private static double moveTime = 0.05;
+    private static int gridSizeX = 20;
+    private static int gridSizeY = 20;
 
     private List<Gizmo> gizmos;
+    private List<LineSegment> walls;
     private List<Ball> balls;
 
     public Model() {
         gizmos = new ArrayList<>();
+        walls.add(new LineSegment(0, 0, gridSizeX, 0));
+        walls.add(new LineSegment(0, 0, 0, gridSizeY));
+        walls.add(new LineSegment(gridSizeX, 0, gridSizeX, gridSizeY));
+        walls.add(new LineSegment(0, gridSizeY, gridSizeX, gridSizeY));
     }
 
     public List<CircleGizmo> getCircles() {
@@ -138,6 +145,14 @@ public class Model extends Observable {
                     shortestTime = time;
                     newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
                 }
+            }
+        }
+
+        for (LineSegment line : walls) {
+            time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+            if (time < shortestTime) {
+                shortestTime = time;
+                newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
             }
         }
 
