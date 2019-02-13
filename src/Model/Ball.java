@@ -31,7 +31,13 @@ public class Ball {
         ypos = y;
     }
 
-    public void setVelocity(double xv, double yv){ velocity = new Vect(xv, yv); }
+    public void setVelocity(double xv, double yv) {
+        velocity = new Vect(xv, yv);
+    }
+
+    public void setVelocity(Vect velocity) {
+        this.velocity = velocity;
+    }
 
     public double getX() {
         return xpos;

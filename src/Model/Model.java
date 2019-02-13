@@ -63,6 +63,7 @@ public class Model extends Observable {
     public void addAbsorber(AbsorberGizmo a){absorber.add(a);}
 
     public void addFlipper(FlipperGizmo f){flippers.add(f);}
+
     private void moveBalls() {
         double moveTime = this.moveTime;
 
@@ -70,17 +71,17 @@ public class Model extends Observable {
             CollisionDetails cd = timeUntilCollision(ball);
             double tuc = cd.getTuc();
             if(tuc > moveTime) {
-                //ball = moveBallForTime(ball, moveTime);
+                ball = moveBallForTime(ball, moveTime);
 
-                friction(ball, moveTime);
-                gravity(ball, moveTime);
+                ball = friction(ball, moveTime);
+                ball = gravity(ball, moveTime);
             } else {
-                //ball = moveBallForTime(ball, moveTime);
+                ball = moveBallForTime(ball, moveTime);
 
-                //ball.setVelocity(cd.getVelo());
+                ball.setVelocity(cd.getVelo());
 
-                friction(ball, tuc);
-                gravity(ball, tuc);
+                ball = friction(ball, tuc);
+                ball = gravity(ball, tuc);
             }
         }
 
@@ -117,18 +118,29 @@ public class Model extends Observable {
         return new CollisionDetails(shortestTime, newVelo);
     }
 
-    private void friction(Ball ball, double delta_t) {
+    private Ball moveBallForTime(Ball ball, double time){
+        double xVel = ball.getVelocity().x();
+        double yVel = ball.getVelocity().y();
+        xVel = ball.getX() + (xVel * time);
+        xVel = ball.getY() + (yVel * time);
+        ball.setVelocity(xVel, yVel);
+        return ball;
+    }
+
+    private Ball friction(Ball ball, double delta_t) {
         double xVel = ball.getVelocity().x();
         double yVel = ball.getVelocity().y();
         xVel *= (1 - mu * delta_t - mu2 * Math.abs(xVel) * delta_t);
         yVel *= (1 - mu * delta_t - mu2 * Math.abs(yVel) * delta_t);
         ball.setVelocity(xVel, yVel);
+        return ball;
     }
 
-    private void gravity(Ball ball, double delta_t) {
+    private Ball gravity(Ball ball, double delta_t) {
         double xVel = ball.getVelocity().x();
         double yVel = ball.getVelocity().y();
         xVel -= gravity * delta_t;
         ball.setVelocity(xVel, yVel);
+        return ball;
     }
 }
