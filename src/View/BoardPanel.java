@@ -22,6 +22,7 @@ public class BoardPanel extends JPanel {
     public void init(){
 
         this.setPreferredSize(new Dimension(LstoPx(20),LstoPx(20)));
+
         this.setBackground(new Color(255,255,255));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -57,12 +58,11 @@ public class BoardPanel extends JPanel {
             int x = (LstoPx(s.getXpos()));
             int y = (LstoPx(s.getYpos()));
 
-            int xpoints[] = {x,x,x+25};
-            int ypoints[] = {y,y-25,y};
+            int xpoints[] = {x,x+25,x};
+            int ypoints[] = {y+25,y,y};
             int npoints = 3;
             g2.setColor(Color.blue);
             g2.fillPolygon(xpoints, ypoints, npoints);
-
 
         }
 
