@@ -35,10 +35,10 @@ public class LoadBoardFromFile {
                     m.addAbsorber(new AbsorberGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
                     break;
                 case "leftflipper":
-                    //gizmos.add(new FlipperGizmo());
+                    m.addFlipper(new FlipperGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), 1));
                     break;
                 case "rightflipper":
-                    //gizmos.add(new FlipperGizmo());
+                    m.addFlipper(new FlipperGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), 0));
                     break;
                 case "ball":
                     //gizmos.add(new Ball(Integer.parseInt(tokens[3]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));

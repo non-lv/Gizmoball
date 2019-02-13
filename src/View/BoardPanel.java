@@ -56,21 +56,12 @@ public class BoardPanel extends JPanel {
         for(TriangleGizmo s: m.getTriangles()){
             int x = (LstoPx(s.getXpos()));
             int y = (LstoPx(s.getYpos()));
-            int x2 = LstoPx(s.getX2());
-            int x3 = LstoPx(s.getX3());
-            int y2 = LstoPx(s.gety2());
-            int y3 = LstoPx(s.gety3());
-            System.out.println(x);
-            System.out.println("1 " + x2);
-            System.out.println("2 " + x3);
-            System.out.println("3 " + y2);
-            System.out.println("4 " + y3);
-            int xpoints[] = {x,x2,x3};
-            int ypoints[] = {y,y2,y3};
 
+            int xpoints[] = {x,x,x+25};
+            int ypoints[] = {y,y-25,y};
             int npoints = 3;
             g2.setColor(Color.blue);
-            g2.fillPolygon(xpoints,ypoints,npoints);
+            g2.fillPolygon(xpoints, ypoints, npoints);
 
 
         }
