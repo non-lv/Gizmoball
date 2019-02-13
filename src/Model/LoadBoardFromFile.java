@@ -29,10 +29,10 @@ public class LoadBoardFromFile {
                     m.addCircle(new CircleGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
                     break;
                 case "triangle":
-                    m.addTriangle(new TriangleGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3])));
+                    m.addTriangle(new TriangleGizmo(tokens[1], Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), "topleft"));
                     break;
                 case "absorber":
-                    gizmos.add(new AbsorberGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
+                    m.addAbsorber(new AbsorberGizmo(Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
                     break;
                 case "leftflipper":
                     //gizmos.add(new FlipperGizmo());
@@ -43,6 +43,9 @@ public class LoadBoardFromFile {
                 case "ball":
                     //gizmos.add(new Ball(Integer.parseInt(tokens[3]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
                     break;
+                case "rotate":
+                    TriangleGizmo t = m.getTrianglebyName(tokens[1]);
+                    t.rotate();
 
             }
 

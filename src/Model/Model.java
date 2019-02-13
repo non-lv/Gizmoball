@@ -32,27 +32,32 @@ public class Model extends Observable {
         absorber = new ArrayList<>();
         flippers = new ArrayList<>();
     }
+
     public ArrayList<CircleGizmo> getCircles() {
         return circles;
     }
 
-    public ArrayList<SquareGizmo> getSquare(){
+    public ArrayList<SquareGizmo> getSquare() {
         return squares;
     }
 
-    public ArrayList<TriangleGizmo> getTriangles(){
+    public ArrayList<TriangleGizmo> getTriangles() {
         return triangles;
     }
 
-    public ArrayList<AbsorberGizmo> getAbsorber(){return absorber;}
+    public ArrayList<AbsorberGizmo> getAbsorber() {
+        return absorber;
+    }
 
-    public ArrayList<FlipperGizmo> getFlippers(){return flippers;}
+    public ArrayList<FlipperGizmo> getFlippers() {
+        return flippers;
+    }
 
     public void addCircle(CircleGizmo c) {
         circles.add(c);
     }
 
-    public void addSquare(SquareGizmo s){
+    public void addSquare(SquareGizmo s) {
         squares.add(s);
     }
 
@@ -60,75 +65,90 @@ public class Model extends Observable {
         triangles.add(t);
     }
 
-    public void addAbsorber(AbsorberGizmo a){absorber.add(a);}
-
-    public void addFlipper(FlipperGizmo f){flippers.add(f);}
-    private void moveBalls() {
-        double moveTime = this.moveTime;
-
-        for(Ball ball : balls){
-            CollisionDetails cd = timeUntilCollision(ball);
-            double tuc = cd.getTuc();
-            if(tuc > moveTime) {
-                //ball = moveBallForTime(ball, moveTime);
-
-                friction(ball, moveTime);
-                gravity(ball, moveTime);
-            } else {
-                //ball = moveBallForTime(ball, moveTime);
-
-                //ball.setVelocity(cd.getVelo());
-
-                friction(ball, tuc);
-                gravity(ball, tuc);
-            }
-        }
-
-        this.setChanged();
-        this.notifyObservers();
+    public void addAbsorber(AbsorberGizmo a) {
+        absorber.add(a);
     }
 
-    private CollisionDetails timeUntilCollision(Ball ball) {
-        Circle ballCircle = ball.getCircle();
-        Vect ballVelocity = ball.getVelocity();
-        Vect newVelo = new Vect(0.0D, 0.0D);
+    public TriangleGizmo getTrianglebyName(String name) {
+        for (TriangleGizmo t : triangles) {
+            if (name.equals(t.getName())) {
 
-        double shortestTime = Double.MAX_VALUE;
-        double time = 0.0D;
+                return t;
+            }
 
-        for (Gizmo gizmo : gizmos) {
-            for (Circle circle : gizmo.getCircles()) {
-                time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
-                if (time < shortestTime) {
-                    shortestTime = time;
-                    newVelo = Geometry.reflectCircle(ballVelocity, new Vect(0, 0), ballVelocity);
+        }
+        return null;
+    }
+
+        public void addFlipper (FlipperGizmo f){
+            flippers.add(f);
+        }
+        private void moveBalls () {
+            double moveTime = this.moveTime;
+
+            for (Ball ball : balls) {
+                CollisionDetails cd = timeUntilCollision(ball);
+                double tuc = cd.getTuc();
+                if (tuc > moveTime) {
+                    //ball = moveBallForTime(ball, moveTime);
+
+                    friction(ball, moveTime);
+                    gravity(ball, moveTime);
+                } else {
+                    //ball = moveBallForTime(ball, moveTime);
+
+                    //ball.setVelocity(cd.getVelo());
+
+                    friction(ball, tuc);
+                    gravity(ball, tuc);
                 }
             }
 
-            for (LineSegment line : gizmo.getLines()) {
-                time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
-                if (time < shortestTime) {
-                    shortestTime = time;
-                    newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
-                }
-            }
+            this.setChanged();
+            this.notifyObservers();
         }
 
-        return new CollisionDetails(shortestTime, newVelo);
-    }
+        private CollisionDetails timeUntilCollision (Ball ball){
+            Circle ballCircle = ball.getCircle();
+            Vect ballVelocity = ball.getVelocity();
+            Vect newVelo = new Vect(0.0D, 0.0D);
 
-    private void friction(Ball ball, double delta_t) {
-        double xVel = ball.getVelocity().x();
-        double yVel = ball.getVelocity().y();
-        xVel *= (1 - mu * delta_t - mu2 * Math.abs(xVel) * delta_t);
-        yVel *= (1 - mu * delta_t - mu2 * Math.abs(yVel) * delta_t);
-        ball.setVelocity(xVel, yVel);
-    }
+            double shortestTime = Double.MAX_VALUE;
+            double time = 0.0D;
 
-    private void gravity(Ball ball, double delta_t) {
-        double xVel = ball.getVelocity().x();
-        double yVel = ball.getVelocity().y();
-        xVel -= gravity * delta_t;
-        ball.setVelocity(xVel, yVel);
+            for (Gizmo gizmo : gizmos) {
+                for (Circle circle : gizmo.getCircles()) {
+                    time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectCircle(ballVelocity, new Vect(0, 0), ballVelocity);
+                    }
+                }
+
+                for (LineSegment line : gizmo.getLines()) {
+                    time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        shortestTime = time;
+                        newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
+                    }
+                }
+            }
+
+            return new CollisionDetails(shortestTime, newVelo);
+        }
+
+        private void friction (Ball ball,double delta_t){
+            double xVel = ball.getVelocity().x();
+            double yVel = ball.getVelocity().y();
+            xVel *= (1 - mu * delta_t - mu2 * Math.abs(xVel) * delta_t);
+            yVel *= (1 - mu * delta_t - mu2 * Math.abs(yVel) * delta_t);
+            ball.setVelocity(xVel, yVel);
+        }
+
+        private void gravity (Ball ball,double delta_t){
+            double xVel = ball.getVelocity().x();
+            double yVel = ball.getVelocity().y();
+            xVel -= gravity * delta_t;
+            ball.setVelocity(xVel, yVel);
+        }
     }
-}
