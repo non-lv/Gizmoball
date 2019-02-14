@@ -12,7 +12,8 @@ public class FlipperGizmo implements IGizmo {
     private int ypos;
     int left;
 
-    public FlipperGizmo(int x, int y, int l) {
+    public FlipperGizmo(String id, int x, int y, int l) {
+        this.id = id;
         xpos = x;
         ypos = y;
         left = l;

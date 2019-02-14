@@ -14,7 +14,8 @@ public class SquareGizmo implements IGizmo {
     private int ypos;
     private Color colour;
 
-    public SquareGizmo(int x, int y) {
+    public SquareGizmo(String id, int x, int y) {
+        this.id = id;
         xpos = x;
         ypos = y;
         colour = Color.BLUE;

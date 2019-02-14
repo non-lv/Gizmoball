@@ -14,7 +14,8 @@ public class AbsorberGizmo implements IGizmo {
     private int x2pos;
     private int y2pos;
 
-    public AbsorberGizmo(int x, int y, int x2, int y2) {
+    public AbsorberGizmo(String id, int x, int y, int x2, int y2) {
+        this.id = id;
         xpos = x;
         ypos = y;
         x2pos = x2;

@@ -93,7 +93,7 @@ public class Model extends Observable {
 
     public TriangleGizmo getTrianglebyName(String name) {
         for (TriangleGizmo t : getTriangles())
-            if (name.equals(t.getName()))
+            if (name.equals(t.getId()))
                 return t;
         return null;
     }

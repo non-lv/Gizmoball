@@ -14,10 +14,11 @@ public class CircleGizmo implements IGizmo {
     private int ypos;
     private Color colour;
 
-    public CircleGizmo(int x, int y) {
+    public CircleGizmo(String id, int x, int y) {
         xpos = x;
         ypos = y;
         colour = Color.BLACK;
+        this.id = id;
     }
 
     public List<Circle> getCircles() {

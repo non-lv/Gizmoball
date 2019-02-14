@@ -1,6 +1,7 @@
 import Model.LoadBoardFromFile;
 import View.*;
 import Model.Model;
+import Model.SaveBoardToFile;
 
 
 public class Driver {
@@ -15,6 +16,12 @@ public class Driver {
 
         } catch (Exception ex){
             System.out.println("cant read");
+        }
+
+        try{
+            SaveBoardToFile.saveToFile("src/Model/outputFile.txt", m);
+        }catch (Exception ex){
+            System.out.println("cannot save file");
         }
 
         OptionsPanel optionsPanel = new OptionsPanel();

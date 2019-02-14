@@ -21,7 +21,7 @@ public class TriangleGizmo implements IGizmo {
     private Rotation rotation;
     private String name;
 
-    public TriangleGizmo(String n, int x, int y, String s) {
+    public TriangleGizmo(String id, int x, int y, String s) {
         this.xpos = x;
         this.ypos = y;
         colour = Color.blue;
@@ -40,7 +40,7 @@ public class TriangleGizmo implements IGizmo {
                 rotation = Rotation.BOTTOM_RIGHT;
         }
 
-        name = n;
+        this.id = id;
     }
 
     @Override
@@ -177,10 +177,6 @@ public class TriangleGizmo implements IGizmo {
             default:
                 rotation = Rotation.TOP_LEFT;
         }
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getState() {
