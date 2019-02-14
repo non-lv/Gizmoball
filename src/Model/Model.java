@@ -26,7 +26,7 @@ public class Model extends Observable {
         iGizmos = new ArrayList<>();
         walls = new ArrayList<>();
         balls = new ArrayList<>();
-        balls.add(new Ball(3, 1, 25, 20));
+        //balls.add(new Ball(3, 1, 25, 20));
         walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
         walls.add(new LineSegment(gridSizeX, 0, gridSizeX, gridSizeY));
@@ -95,6 +95,10 @@ public class Model extends Observable {
 
     public void addFlipper(FlipperGizmo f) {
         iGizmos.add(f);
+    }
+
+    public void addBall(Ball b){
+        balls.add(b);
     }
 
     public TriangleGizmo getTrianglebyName(String name) {

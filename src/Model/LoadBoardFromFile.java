@@ -41,8 +41,9 @@ public class LoadBoardFromFile {
                     m.addFlipper(new FlipperGizmo(tokens[1], Integer.parseInt(tokens[2]), Integer.parseInt(tokens[3]), 0));
                     break;
                 case "ball":
-                    //iGizmos.add(new Ball(Integer.parseInt(tokens[3]), Integer.parseInt(tokens[3]), Integer.parseInt(tokens[4]), Integer.parseInt(tokens[5])));
+                    m.addBall(new Ball((int)Double.parseDouble(tokens[2]), (int)Double.parseDouble(tokens[3]), (int)Double.parseDouble(tokens[4]), (int)Double.parseDouble(tokens[5])));
                     break;
+
                 case "rotate":
                     TriangleGizmo t = m.getTrianglebyName(tokens[1]);
                     t.rotate();
