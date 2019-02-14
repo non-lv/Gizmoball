@@ -32,10 +32,10 @@ public class SquareGizmo implements IGizmo {
 
     public List<LineSegment> getLines() {
         List<LineSegment> l = new ArrayList<>();
-        l.add(new LineSegment(xpos, ypos, xpos + 1, ypos + 1));
+        l.add(new LineSegment(xpos, ypos, xpos + 1, ypos));
         l.add(new LineSegment(xpos, ypos, xpos, ypos + 1));
-        l.add(new LineSegment(xpos, ypos + 1, xpos + 1, ypos + 1));
         l.add(new LineSegment(xpos + 1, ypos, xpos + 1, ypos + 1));
+        l.add(new LineSegment(xpos, ypos + 1, xpos + 1, ypos + 1));
         return l;
     }
 
@@ -54,11 +54,11 @@ public class SquareGizmo implements IGizmo {
         return id;
     }
 
-    public int getXpos(){
+    public int getXpos() {
         return xpos;
     }
 
-    public int getYpos(){
+    public int getYpos() {
         return ypos;
     }
 }

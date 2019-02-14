@@ -25,6 +25,8 @@ public class Model extends Observable {
     public Model() {
         iGizmos = new ArrayList<>();
         walls = new ArrayList<>();
+        balls = new ArrayList<>();
+        balls.add(new Ball(3, 1, 25, 20));
         walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
         walls.add(new LineSegment(gridSizeX, 0, gridSizeX, gridSizeY));
@@ -71,6 +73,10 @@ public class Model extends Observable {
         return l;
     }
 
+    public List<Ball> getBalls() {
+        return balls;
+    }
+
     public void addCircle(CircleGizmo c) {
         iGizmos.add(c);
     }
@@ -98,7 +104,7 @@ public class Model extends Observable {
         return null;
     }
 
-    private void moveBalls() {
+    public void moveBalls() {
         double moveTime = this.moveTime;
 
         for (Ball ball : balls) {
@@ -110,7 +116,7 @@ public class Model extends Observable {
                 ball = friction(ball, moveTime);
                 ball = gravity(ball, moveTime);
             } else {
-                ball = moveBallForTime(ball, moveTime);
+                ball = moveBallForTime(ball, tuc);
 
                 ball.setVelocity(cd.getVelo());
 
@@ -136,7 +142,7 @@ public class Model extends Observable {
                 time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
                 if (time < shortestTime) {
                     shortestTime = time;
-                    newVelo = Geometry.reflectCircle(ballVelocity, new Vect(0, 0), ballVelocity);
+                    newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ballVelocity);
                 }
             }
 
@@ -161,11 +167,14 @@ public class Model extends Observable {
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
+        double newX = 0.D;
+        double newY = 0.D;
         double xVel = ball.getVelocity().x();
         double yVel = ball.getVelocity().y();
-        xVel = ball.getX() + (xVel * time);
-        yVel = ball.getY() + (yVel * time);
-        ball.setVelocity(xVel, yVel);
+        newX = ball.getX() + (xVel * time);
+        newY = ball.getY() + (yVel * time);
+        ball.setX(newX);
+        ball.setY(newY);
         return ball;
     }
 
@@ -181,7 +190,7 @@ public class Model extends Observable {
     private Ball gravity(Ball ball, double delta_t) {
         double xVel = ball.getVelocity().x();
         double yVel = ball.getVelocity().y();
-        xVel -= gravity * delta_t;
+        yVel += gravity * delta_t;
         ball.setVelocity(xVel, yVel);
         return ball;
     }

@@ -25,7 +25,7 @@ public class Driver {
         }
 
         OptionsPanel optionsPanel = new OptionsPanel();
-        RunModePanel playModePanel = new RunModePanel();
+        RunModePanel playModePanel = new RunModePanel(m);
         BoardPanel boardPanel = new BoardPanel(m);
         NotificationPanel notificationPanel = new NotificationPanel();
 

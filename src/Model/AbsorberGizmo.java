@@ -35,23 +35,23 @@ public class AbsorberGizmo implements IGizmo {
         List<LineSegment> l = new ArrayList<>();
         l.add(new LineSegment(      xpos,
                                     ypos,
-                                xpos + (x2pos - xpos + 1),
-                                ypos + 1
+                                x2pos + 1,
+                                    ypos
         ));
         l.add(new LineSegment(      xpos,
                                     ypos,
                                     xpos,
-                                ypos + (y2pos - ypos + 1)
+                                y2pos + 1
+        ));
+        l.add(new LineSegment(  x2pos + 1,
+                                    ypos,
+                                x2pos + 1,
+                                y2pos + 1
         ));
         l.add(new LineSegment(      xpos,
-                                ypos + (y2pos - ypos + 1),
-                                xpos + (x2pos - xpos + 1),
-                                ypos + (y2pos - ypos + 1)
-        ));
-        l.add(new LineSegment(  xpos + (x2pos - xpos + 1),
-                                    ypos,
-                                xpos + (x2pos - xpos + 1),
-                                ypos + (y2pos - ypos + 1)
+                                y2pos + 1,
+                                x2pos + 1,
+                                y2pos + 1
         ));
         return l;
     }

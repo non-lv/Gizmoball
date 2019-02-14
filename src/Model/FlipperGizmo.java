@@ -3,6 +3,7 @@ package Model;
 import physics.Circle;
 import physics.LineSegment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlipperGizmo implements IGizmo {
@@ -22,12 +23,12 @@ public class FlipperGizmo implements IGizmo {
 
     @Override
     public List<Circle> getCircles() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     public List<LineSegment> getLines() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override

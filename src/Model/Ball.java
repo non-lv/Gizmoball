@@ -48,6 +48,9 @@ public class Ball {
         return ypos;
     }
 
+    public double getRadius(){
+        return .25;
+    }
 
 }
 
