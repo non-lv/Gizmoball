@@ -66,6 +66,8 @@ public class AbsorberGizmo implements IGizmo {
 
     }
 
+
+
     @Override
     public String getId() {
         return id;
@@ -83,8 +85,19 @@ public class AbsorberGizmo implements IGizmo {
         return x2pos;
     }
 
+
     public int getYpos2(){
         return y2pos;
+    }
+
+    public void addBall(Ball b){
+        b.setX(x2pos - 1);
+        b.setY(y2pos-1);
+
+    }
+
+    public void fireBall(Ball b){
+        b.setVelocity(1,10);
     }
 
 }

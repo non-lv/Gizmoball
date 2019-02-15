@@ -17,11 +17,10 @@ public class Model extends Observable {
     private static double moveTime = 0.05;
     private static int gridSizeX = 20;
     private static int gridSizeY = 20;
-
+    private boolean Collide = true;
     private List<IGizmo> iGizmos;
     private List<LineSegment> walls;
     private List<Ball> balls;
-
     public Model() {
         iGizmos = new ArrayList<>();
         walls = new ArrayList<>();
@@ -112,22 +111,50 @@ public class Model extends Observable {
         double moveTime = this.moveTime;
 
         for (Ball ball : balls) {
-            CollisionDetails cd = timeUntilCollision(ball);
-            double tuc = cd.getTuc();
-            if (tuc > moveTime) {
-                ball = moveBallForTime(ball, moveTime);
 
-                ball = friction(ball, moveTime);
-                ball = gravity(ball, moveTime);
-            } else {
-                ball = moveBallForTime(ball, tuc);
+                CollisionDetails cd = timeUntilCollision(ball);
+                double tuc = cd.getTuc();
 
-                ball.setVelocity(cd.getVelo());
+                if (tuc > moveTime) {
+                    ball = moveBallForTime(ball, moveTime);
 
-                ball = friction(ball, tuc);
-                ball = gravity(ball, tuc);
-            }
+                    ball = friction(ball, moveTime);
+                    ball = gravity(ball, moveTime);
+                } else if(ball.isActive()==true) {
+
+
+                        ball = moveBallForTime(ball, tuc);
+
+                        ball.setVelocity(cd.getVelo());
+
+                        ball = friction(ball, tuc);
+                        ball = gravity(ball, tuc);
+
+                        if (cd.getGizmo() instanceof AbsorberGizmo) {
+
+                            AbsorberGizmo a = (AbsorberGizmo) cd.getGizmo();
+                            a.addBall(ball);
+
+                            ball.setFalse();
+                           // a.fireBall(ball);
+                        }
+
+                    }else{
+                    //in theorey i should set the ball to true in here so that after it his an absorber it comes in here and fires the ball
+                    //but it doesnt seem to like that so i set it to true outide the loop which isnt how it should work
+                    System.out.println("got here");
+                        AbsorberGizmo a = (AbsorberGizmo) cd.getGizmo();
+                        //ball.setTrue();
+                        a.fireBall(ball);
+
+
+                    }
+
+            //it never gets to the else since this is here but else crashes it
+            ball.setTrue();
         }
+
+
 
         this.setChanged();
         this.notifyObservers();
@@ -140,34 +167,44 @@ public class Model extends Observable {
 
         double shortestTime = Double.MAX_VALUE;
         double time = 0.0D;
+        IGizmo gizmo = null;
 
-        for (IGizmo iIGizmo : iGizmos) {
-            for (Circle circle : iIGizmo.getCircles()) {
-                time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
-                if (time < shortestTime) {
-                    shortestTime = time;
-                    newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ballVelocity);
+            for (IGizmo iIGizmo : iGizmos) {
+                for (Circle circle : iIGizmo.getCircles()) {
+                    time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        gizmo = iIGizmo;
+                        shortestTime = time;
+                        newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ballVelocity);
+
+                    }
+                }
+
+                for (LineSegment line : iIGizmo.getLines()) {
+
+                    time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+
+                            gizmo = iIGizmo;
+                            shortestTime = time;
+                            newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
+
+                    }
+
                 }
             }
 
-            for (LineSegment line : iIGizmo.getLines()) {
+
+            for (LineSegment line : walls) {
                 time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
                 if (time < shortestTime) {
                     shortestTime = time;
                     newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
                 }
             }
-        }
 
-        for (LineSegment line : walls) {
-            time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
-            if (time < shortestTime) {
-                shortestTime = time;
-                newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
-            }
-        }
+            return new CollisionDetails(shortestTime, newVelo, gizmo);
 
-        return new CollisionDetails(shortestTime, newVelo);
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -198,4 +235,6 @@ public class Model extends Observable {
         ball.setVelocity(xVel, yVel);
         return ball;
     }
+
+
 }
