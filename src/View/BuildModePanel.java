@@ -3,8 +3,7 @@ package View;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.util.Observable;
-import java.util.Observer;
+import java.awt.event.ActionListener;
 
 public class BuildModePanel extends JPanel {
 
@@ -12,8 +11,28 @@ public class BuildModePanel extends JPanel {
     private JPanel gizmoAndBall;
     private JPanel editGizmo;
     private JPanel addGizmo;
-    private JPanel ball;
+    private JPanel ballPanel;
     private JPanel velocities;
+
+    private JButton square;
+    private JButton triangle;
+    private JButton circle;
+    private JButton rFlipper;
+    private JButton lFlipper;
+    private JButton absorber;
+    private JButton ball;
+    private JButton move;
+    private JButton rotate;
+    private JButton delete;
+    private JButton clear;
+    private JButton connect;
+    private JButton disconnect;
+    private JButton keyConnect;
+    private JButton keyDisconnect;
+    private JButton friction;
+    private JButton gravity;
+    private JPanel FrictionAndGravity;
+
 
     public BuildModePanel(){
         init();
@@ -27,23 +46,35 @@ public class BuildModePanel extends JPanel {
         Dimension addGizmoDim = new Dimension(100, 70);
 
         //Add gizmo button declarations
-        JButton square = new JButton();
+        square = new JButton();
         square.setText("Square");
+        square.setActionCommand("Square");
+        square.setIcon(new ImageIcon());
         square.setPreferredSize(addGizmoDim);
-        JButton triangle = new JButton();
+
+        triangle = new JButton();
         triangle.setText("Triangle");
+        triangle.setActionCommand("Triangle");
         triangle.setPreferredSize(addGizmoDim);
-        JButton circle = new JButton();
+
+        circle = new JButton();
         circle.setText("Circle");
+        circle.setActionCommand("Circle");
         circle.setPreferredSize(addGizmoDim);
-        JButton lFlipper = new JButton();
+
+        lFlipper = new JButton();
         lFlipper.setText("<html>Left<br/>Flipper</html>");
+        lFlipper.setActionCommand("lFlipper");
         lFlipper.setPreferredSize(addGizmoDim);
-        JButton rFlipper = new JButton();
+
+        rFlipper = new JButton();
         rFlipper.setText("<html>Right<br/>Flipper</html>");
         rFlipper.setPreferredSize(addGizmoDim);
-        JButton absorber = new JButton();
+        rFlipper.setActionCommand("rFlipper");
+
+        absorber = new JButton();
         absorber.setText("Absorber");
+        absorber.setActionCommand("Absorber");
         absorber.setPreferredSize(addGizmoDim);
 
         addGizmo.add(square);
@@ -67,47 +98,76 @@ public class BuildModePanel extends JPanel {
         velocities.add(y);
 
         //Ball text windows and button
-        JButton test = new JButton();
+        ball = new JButton();
         Dimension ballButtonSize = new Dimension(80, 80);
-        test.setPreferredSize(ballButtonSize);
-        test.setText("<html>Add<br/>Ball</html>");
-        ball = new JPanel(new BorderLayout());
-        ball.add(test, BorderLayout.LINE_START);
-        ball.add(velocities, BorderLayout.CENTER);
+        ball.setPreferredSize(ballButtonSize);
+        ball.setText("<html>Add<br/>Ball</html>");
+        ballPanel = new JPanel(new BorderLayout());
+        ballPanel.add(ball, BorderLayout.LINE_START);
+        ballPanel.add(velocities, BorderLayout.CENTER);
 
-        //IGizmo and Ball panels together
+        //Friction and Gravity
+        friction = new JButton("Set Fiction");
+        gravity = new JButton("Set Gravity");
+        JTextArea frictionText = new JTextArea();
+        frictionText.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        JTextArea gravityText = new JTextArea();
+        gravityText.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        FrictionAndGravity = new JPanel(new GridLayout(2, 2));
+        FrictionAndGravity.add(friction);
+        FrictionAndGravity.add(frictionText);
+        FrictionAndGravity.add(gravity);
+        FrictionAndGravity.add(gravityText);
+
+        //Gizmo and Ball panels together
         gizmoAndBall = new JPanel(new BorderLayout());
         gizmoAndBall.add(addGizmo, BorderLayout.PAGE_START);
-        gizmoAndBall.add(ball, BorderLayout.CENTER);
+        gizmoAndBall.add(ballPanel, BorderLayout.CENTER);
+        gizmoAndBall.add(FrictionAndGravity, BorderLayout.PAGE_END);
 
         //Edit gizmo panel
         editGizmo = new JPanel(new GridLayout(4, 2));
         Dimension editGizmoButton = new Dimension(20, 70);
 
         //Edit gizmo button declarations
-        JButton move = new JButton();
+        move = new JButton();
         move.setText("Move");
+        move.setActionCommand("Move");
         move.setPreferredSize(editGizmoButton);
-        JButton rotate = new JButton();
+
+        rotate = new JButton();
         rotate.setText("Rotate");
+        rotate.setActionCommand("Rotate");
         rotate.setPreferredSize(editGizmoButton);
-        JButton delete = new JButton();
+
+        delete = new JButton();
         delete.setText("Delete");
+        delete.setActionCommand("Delete");
         delete.setPreferredSize(editGizmoButton);
-        JButton clear = new JButton();
+
+        clear = new JButton();
         clear.setText("Clear");
+        clear.setActionCommand("Clear");
         clear.setPreferredSize(editGizmoButton);
-        JButton connect = new JButton();
+
+        connect = new JButton();
         connect.setText("Connect");
+        connect.setActionCommand("Connect");
         connect.setPreferredSize(editGizmoButton);
-        JButton disconnect = new JButton();
+
+        disconnect = new JButton();
         disconnect.setText("Disconnect");
+        disconnect.setActionCommand("Disconnect");
         disconnect.setPreferredSize(editGizmoButton);
-        JButton keyConnect = new JButton();
+
+        keyConnect = new JButton();
         keyConnect.setText("<html>Keyboard<br/>Connect</html>");
+        keyConnect.setActionCommand("keyConnect");
         keyConnect.setPreferredSize(editGizmoButton);
-        JButton keyDisconnect = new JButton();
+
+        keyDisconnect = new JButton();
         keyDisconnect.setText("<html>Keyboard<br/>Disconnect</html>");
+        keyDisconnect.setActionCommand("keyDisconnect");
         keyDisconnect.setPreferredSize(editGizmoButton);
 
         //Adding edit gizmo buttons
@@ -127,5 +187,25 @@ public class BuildModePanel extends JPanel {
 
         this.add(build);
 
+    }
+
+    public void addActionListener(ActionListener listener){
+        //Gizmo Buttons
+        square.addActionListener(listener);
+        triangle.addActionListener(listener);
+        circle.addActionListener(listener);
+        lFlipper.addActionListener(listener);
+        rFlipper.addActionListener(listener);
+        absorber.addActionListener(listener);
+
+        //Edit Gizmos buttons
+        move.addActionListener(listener);
+        rotate.addActionListener(listener);
+        delete.addActionListener(listener);
+        clear.addActionListener(listener);
+        connect.addActionListener(listener);
+        disconnect.addActionListener(listener);
+        keyConnect.addActionListener(listener);
+        keyDisconnect.addActionListener(listener);
     }
 }

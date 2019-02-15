@@ -1,3 +1,4 @@
+import Controller.OptionPanelController;
 import Model.LoadBoardFromFile;
 import View.*;
 import Model.Model;
@@ -30,6 +31,8 @@ public class Driver {
         NotificationPanel notificationPanel = new NotificationPanel();
 
         HomeFrame homeFrame = new HomeFrame(playModePanel, optionsPanel, boardPanel, notificationPanel);
+
+        OptionPanelController o = new OptionPanelController(optionsPanel, homeFrame);
 
 //        JFrame f = new JFrame();
 //        f.add(boardPanel);

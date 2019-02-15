@@ -9,8 +9,6 @@ public class NotificationPanel extends JPanel {
         private JLabel text;
 
     public NotificationPanel(){
-
-
         init();
     }
 

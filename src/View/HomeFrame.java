@@ -1,5 +1,8 @@
 package View;
 
+import Controller.OptionPanelController;
+import Controller.RunModeController;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -9,16 +12,17 @@ import java.util.Observer;
 public class HomeFrame implements Observer {
 
 
+    public JPanel runMode;
     private JFrame window;
-        private JPanel border;
-            private JPanel menuPanelLeft;
-            private JPanel leftAlignment;
-                private JPanel optionsPanelTop;
-            private JPanel boardAndNotificationBarContainer;
-                private JPanel notificationPanel;
-                private JPanel boardContainer;
-                    private JPanel boardPanel;
-
+    private JPanel border;
+    private JPanel menuPanelLeft;
+    private JPanel leftAlignment;
+    public JPanel optionsPanelTop;
+    private JPanel boardAndNotificationBarContainer;
+    private JPanel notificationPanel;
+    private JPanel boardPanel;
+    public JPanel buildMode;
+    private JPanel boardContainer;
 
     public HomeFrame(JPanel menuPanelLeft, JPanel optionsPanelTop, JPanel boardPanel, JPanel notificationPanel){
 
@@ -30,19 +34,19 @@ public class HomeFrame implements Observer {
         init();
     }
 
+
     public void init(){
 
         window = new JFrame("Gizmoball");
-            border = new JPanel(new BorderLayout());
-                leftAlignment = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                boardAndNotificationBarContainer = new JPanel(new BorderLayout());
-                    boardContainer = new JPanel();
+        border = new JPanel(new BorderLayout());
+        leftAlignment = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        boardAndNotificationBarContainer = new JPanel(new BorderLayout());
+        boardContainer = new JPanel();
 
         border.add(menuPanelLeft, BorderLayout.LINE_START);
 
         leftAlignment.setPreferredSize(new Dimension(700,80));
         leftAlignment.add(optionsPanelTop);
-
 
         border.add(leftAlignment, BorderLayout.PAGE_START);
 
@@ -56,9 +60,18 @@ public class HomeFrame implements Observer {
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
     }
 
+    public void swapToBuild(){
+        border.remove(menuPanelLeft);
+        menuPanelLeft.add(new BuildModePanel());
+        border.add(menuPanelLeft, BorderLayout.LINE_START);
+    }
+
+    public void swapToRun(){
+        border.remove(buildMode);
+        border.add(runMode, BorderLayout.LINE_START);
+    }
 
     @Override
     public void update(Observable o, Object arg) {
