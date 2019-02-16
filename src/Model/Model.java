@@ -17,7 +17,6 @@ public class Model extends Observable {
     private static double moveTime = 0.05;
     private static int gridSizeX = 20;
     private static int gridSizeY = 20;
-    private boolean Collide = true;
     private List<IGizmo> iGizmos;
     private List<LineSegment> walls;
     private List<Ball> balls;
