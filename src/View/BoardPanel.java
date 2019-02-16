@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,7 +13,6 @@ import Model.FlipperGizmo;
 import Model.AbsorberGizmo;
 import Model.TriangleGizmo;
 import Model.Ball;
-
 
 public class BoardPanel extends JPanel implements Observer {
 
@@ -106,10 +106,12 @@ public class BoardPanel extends JPanel implements Observer {
         for (Ball b : m.getBalls()) {
             if (b != null) {
                 g2.setColor(Color.black);
-                int x = (int) (b.getX()*25 - .25*25);
-                int y = (int) (b.getY()*25 - .25*25);
+                double x = (b.getX()*25 - .25*25);
+                double y = (b.getY()*25 - .25*25);
                 int width = (int) (2 * .25*25);
-                g2.fillOval(x, y, width, width);
+                //g2.fillOval(x, y, width, width);
+                Ellipse2D.Double shape = new Ellipse2D.Double(x, y, width, width);
+                g2.fill(shape);
 
             }
         }
