@@ -6,10 +6,11 @@ import physics.Vect;
 public class CollisionDetails {
     private double tuc;
     private Vect velo;
-
-    public CollisionDetails(double t, Vect v) {
+    private IGizmo g;
+    public CollisionDetails(double t, Vect v, IGizmo gizmo) {
         tuc = t;
         velo = v;
+        g = gizmo;
     }
 
     public double getTuc() {
@@ -19,5 +20,7 @@ public class CollisionDetails {
     public Vect getVelo() {
         return velo;
     }
+
+    public IGizmo getGizmo(){return g;}
 
 }

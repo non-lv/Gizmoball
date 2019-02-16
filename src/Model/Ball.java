@@ -51,6 +51,5 @@ public class Ball {
     public double getRadius(){
         return .25;
     }
-
 }
 
