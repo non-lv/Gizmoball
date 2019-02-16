@@ -9,7 +9,7 @@ public class Ball {
     private Vect velocity;
     private double xpos;
     private double ypos;
-    private boolean active = true;
+
     public Ball(double x, double y, double xv, double yv) {
         xpos = x;
         ypos = y;
@@ -51,21 +51,5 @@ public class Ball {
     public double getRadius(){
         return .25;
     }
-
-    public boolean isActive(){
-        return active==true;
-    }
-
-    public void setFalse(){
-        active = false;
-    }
-
-    public void setTrue(){
-        active = true;
-    }
-
-
-
-
 }
 

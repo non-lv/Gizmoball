@@ -66,6 +66,12 @@ public class AbsorberGizmo implements IGizmo {
 
     }
 
+    public void trigger(Ball ball){
+        ball.setX(x2pos - .5);
+        ball.setY(y2pos - .5);
+
+        ball.setVelocity(0,-100);
+    }
 
 
     @Override
@@ -90,14 +96,7 @@ public class AbsorberGizmo implements IGizmo {
         return y2pos;
     }
 
-    public void addBall(Ball b){
-        b.setX(x2pos - 1);
-        b.setY(y2pos-1);
-
+    public boolean isInside(Ball ball){
+        return (ball.getX() >= xpos && ball.getY() >= ypos && ball.getX() <= x2pos && ball.getY() <= y2pos);
     }
-
-    public void fireBall(Ball b){
-        b.setVelocity(1,10);
-    }
-
 }
