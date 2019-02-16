@@ -122,15 +122,17 @@ public class Model extends Observable {
                 ball = friction(ball, moveTime);
                 ball = gravity(ball, moveTime);
             } else {
+                if (cd.getGizmo() instanceof AbsorberGizmo) {
+                    ((AbsorberGizmo) cd.getGizmo()).trigger(ball);
+                    continue;
+                }
+
                 ball = moveBallForTime(ball, tuc);
 
                 ball.setVelocity(cd.getVelo());
 
                 ball = friction(ball, tuc);
                 ball = gravity(ball, tuc);
-
-                if (cd.getGizmo() instanceof AbsorberGizmo)
-                    ((AbsorberGizmo) cd.getGizmo()).trigger(ball);
             }
 
         }
@@ -149,6 +151,7 @@ public class Model extends Observable {
         IGizmo gizmo = null;
 
         for (IGizmo iIGizmo : iGizmos) {
+            // Ignore collisions if ball is inside Absorber
             if (iIGizmo instanceof AbsorberGizmo && ((AbsorberGizmo) iIGizmo).isInside(ball))
                 continue;
 
