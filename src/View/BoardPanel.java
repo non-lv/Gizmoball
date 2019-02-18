@@ -2,10 +2,12 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
 import java.util.Observable;
 import java.util.Observer;
 
+import Controller.KeyPressedController;
 import Model.Model;
 import Model.CircleGizmo;
 import Model.SquareGizmo;
@@ -117,6 +119,7 @@ public class BoardPanel extends JPanel implements Observer {
         }
 
     }
+
 
     public int LstoPx(int a) {
         return a * 25;

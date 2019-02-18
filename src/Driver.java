@@ -30,7 +30,7 @@ public class Driver {
         BoardPanel boardPanel = new BoardPanel(m);
         NotificationPanel notificationPanel = new NotificationPanel();
 
-        HomeFrame homeFrame = new HomeFrame(playModePanel, optionsPanel, boardPanel, notificationPanel);
+        HomeFrame homeFrame = new HomeFrame(playModePanel, optionsPanel, boardPanel, notificationPanel,m);
 
         OptionPanelController o = new OptionPanelController(optionsPanel, homeFrame);
 

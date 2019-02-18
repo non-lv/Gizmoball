@@ -5,6 +5,7 @@ import physics.LineSegment;
 
 import java.util.List;
 import java.util.ArrayList;
+import Controller.KeyPressedController;
 
 public class AbsorberGizmo implements IGizmo {
 
@@ -65,12 +66,12 @@ public class AbsorberGizmo implements IGizmo {
     public void trigger() {
 
     }
-
     public void trigger(Ball ball){
+
         ball.setX(x2pos - .5);
         ball.setY(y2pos - .5);
 
-        ball.setVelocity(0,-100);
+        ball.setVelocity(0,-40);
     }
 
 

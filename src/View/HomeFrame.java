@@ -1,13 +1,17 @@
 package View;
 
+import Controller.KeyPressedController;
 import Controller.OptionPanelController;
 import Controller.RunModeController;
-
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Observable;
 import java.util.Observer;
+import Model.Model;
+import Model.Ball;
+import Model.AbsorberGizmo;
 
 public class HomeFrame implements Observer {
 
@@ -23,14 +27,15 @@ public class HomeFrame implements Observer {
     private JPanel boardPanel;
     public JPanel buildMode;
     private JPanel boardContainer;
-
-    public HomeFrame(JPanel menuPanelLeft, JPanel optionsPanelTop, JPanel boardPanel, JPanel notificationPanel){
+    private KeyPressedController k = new KeyPressedController();
+    private Model m;
+    public HomeFrame(JPanel menuPanelLeft, JPanel optionsPanelTop, JPanel boardPanel, JPanel notificationPanel, Model m){
 
         this.menuPanelLeft = menuPanelLeft;
         this.optionsPanelTop = optionsPanelTop;
         this.boardPanel = boardPanel;
         this.notificationPanel = notificationPanel;
-
+        this.m = m;
         init();
     }
 
@@ -60,7 +65,21 @@ public class HomeFrame implements Observer {
         window.pack();
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        window.addKeyListener(k);
+        window.setFocusable(true);
+}
+
+
+    public void keyPressed(KeyEvent e){
+        absorberFire();
     }
+    public void absorberFire(){
+        if(k.getJob()=="fire"){
+
+        }
+    }
+
 
     public void swapToBuild(){
         border.remove(menuPanelLeft);

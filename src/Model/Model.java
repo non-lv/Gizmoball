@@ -121,9 +121,10 @@ public class Model extends Observable {
                 ball = friction(ball, moveTime);
                 ball = gravity(ball, moveTime);
             } else {
+
                 if (cd.getGizmo() instanceof AbsorberGizmo) {
                     ((AbsorberGizmo) cd.getGizmo()).trigger(ball);
-                    continue;
+                    break;
                 }
 
                 ball = moveBallForTime(ball, tuc);
@@ -139,6 +140,8 @@ public class Model extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+
+
 
     private CollisionDetails timeUntilCollision(Ball ball) {
         Circle ballCircle = ball.getCircle();
