@@ -107,34 +107,39 @@ public class Model extends Observable {
         return null;
     }
 
+    public void fireAbsorbers(){
+        for(AbsorberGizmo ag : this.getAbsorber())
+            ag.fire();
+    }
+
     public void moveBalls() {
         double moveTime = this.moveTime;
 
         for (Ball ball : balls) {
+            if(ball.isMoving()) {
+                CollisionDetails cd = timeUntilCollision(ball);
+                double tuc = cd.getTuc();
 
-            CollisionDetails cd = timeUntilCollision(ball);
-            double tuc = cd.getTuc();
+                if (tuc > moveTime) {
+                    ball = moveBallForTime(ball, moveTime);
 
-            if (tuc > moveTime) {
-                ball = moveBallForTime(ball, moveTime);
+                    ball = friction(ball, moveTime);
+                    ball = gravity(ball, moveTime);
+                } else {
 
-                ball = friction(ball, moveTime);
-                ball = gravity(ball, moveTime);
-            } else {
+                    if (cd.getGizmo() instanceof AbsorberGizmo) {
+                        ((AbsorberGizmo) cd.getGizmo()).trigger(ball);
+                        break;
+                    }
 
-                if (cd.getGizmo() instanceof AbsorberGizmo) {
-                    ((AbsorberGizmo) cd.getGizmo()).trigger(ball);
-                    break;
+                    ball = moveBallForTime(ball, tuc);
+
+                    ball.setVelocity(cd.getVelo());
+
+                    ball = friction(ball, tuc);
+                    ball = gravity(ball, tuc);
                 }
-
-                ball = moveBallForTime(ball, tuc);
-
-                ball.setVelocity(cd.getVelo());
-
-                ball = friction(ball, tuc);
-                ball = gravity(ball, tuc);
             }
-
         }
 
         this.setChanged();

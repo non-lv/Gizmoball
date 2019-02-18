@@ -5,7 +5,6 @@ import physics.LineSegment;
 
 import java.util.List;
 import java.util.ArrayList;
-import Controller.KeyPressedController;
 
 public class AbsorberGizmo implements IGizmo {
 
@@ -14,6 +13,7 @@ public class AbsorberGizmo implements IGizmo {
     private int ypos;
     private int x2pos;
     private int y2pos;
+    private Ball ball;
 
     public AbsorberGizmo(String id, int x, int y, int x2, int y2) {
         this.id = id;
@@ -34,25 +34,25 @@ public class AbsorberGizmo implements IGizmo {
 
     public List<LineSegment> getLines() {
         List<LineSegment> l = new ArrayList<>();
-        l.add(new LineSegment(      xpos,
-                                    ypos,
-                                x2pos + 1,
-                                    ypos
+        l.add(new LineSegment(xpos,
+                ypos,
+                x2pos + 1,
+                ypos
         ));
-        l.add(new LineSegment(      xpos,
-                                    ypos,
-                                    xpos,
-                                y2pos + 1
+        l.add(new LineSegment(xpos,
+                ypos,
+                xpos,
+                y2pos + 1
         ));
-        l.add(new LineSegment(  x2pos + 1,
-                                    ypos,
-                                x2pos + 1,
-                                y2pos + 1
+        l.add(new LineSegment(x2pos + 1,
+                ypos,
+                x2pos + 1,
+                y2pos + 1
         ));
-        l.add(new LineSegment(      xpos,
-                                y2pos + 1,
-                                x2pos + 1,
-                                y2pos + 1
+        l.add(new LineSegment(xpos,
+                y2pos + 1,
+                x2pos + 1,
+                y2pos + 1
         ));
         return l;
     }
@@ -66,38 +66,47 @@ public class AbsorberGizmo implements IGizmo {
     public void trigger() {
 
     }
-    public void trigger(Ball ball){
+
+    public void trigger(Ball ball) {
+        this.ball = ball;
 
         ball.setX(x2pos - .5);
         ball.setY(y2pos - .5);
 
-        ball.setVelocity(0,-40);
+        ball.stop();
     }
 
+    public void fire() {
+        if (ball != null) {
+            ball.setVelocity(0, -40);
+            ball.move();
+            ball = null;
+        }
+    }
 
     @Override
     public String getId() {
         return id;
     }
 
-    public int getXpos(){
-    return xpos;
-}
+    public int getXpos() {
+        return xpos;
+    }
 
-    public int getYpos(){
+    public int getYpos() {
         return ypos;
     }
 
-    public int getXpos2(){
+    public int getXpos2() {
         return x2pos;
     }
 
 
-    public int getYpos2(){
+    public int getYpos2() {
         return y2pos;
     }
 
-    public boolean isInside(Ball ball){
+    public boolean isInside(Ball ball) {
         return (ball.getX() >= xpos && ball.getY() >= ypos && ball.getX() <= x2pos && ball.getY() <= y2pos);
     }
 }

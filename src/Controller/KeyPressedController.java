@@ -1,11 +1,20 @@
 package Controller;
 
+import Model.Model;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import Model.AbsorberGizmo;
 
 public class KeyPressedController implements KeyListener {
     String job;
+    Model model;
+
+    public KeyPressedController(Model m) {
+        model = m;
+    }
+
     public void keyTyped(KeyEvent e) {
         displayInfo(e, "KEY TYPED: ");
     }
@@ -13,14 +22,15 @@ public class KeyPressedController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("got here");
+        model.fireAbsorbers();
         int key = e.getKeyCode();
-       if(key == KeyEvent.VK_LEFT){
+        if (key == KeyEvent.VK_LEFT) {
             job = "fire";
         }
 
     }
 
-    public String getJob(){
+    public String getJob() {
         return job;
     }
 

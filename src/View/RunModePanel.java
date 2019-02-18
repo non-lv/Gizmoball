@@ -47,5 +47,9 @@ public class RunModePanel extends JPanel {
 
         this.add(box);
 
+        startStop.setFocusable(false);
+        tick.setFocusable(false);
+        reload.setFocusable(false);
+        quit.setFocusable(false);
     }
 }

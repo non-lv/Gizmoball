@@ -9,11 +9,13 @@ public class Ball {
     private Vect velocity;
     private double xpos;
     private double ypos;
+    private boolean moving;
 
     public Ball(double x, double y, double xv, double yv) {
         xpos = x;
         ypos = y;
         velocity = new Vect(xv, yv);
+        moving = true;
     }
 
     public Vect getVelocity() {
@@ -50,6 +52,18 @@ public class Ball {
 
     public double getRadius(){
         return .25;
+    }
+
+    public void stop(){
+        moving = false;
+    }
+
+    public void move(){
+        moving = true;
+    }
+
+    public boolean isMoving(){
+        return moving;
     }
 }
 
