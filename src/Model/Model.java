@@ -78,26 +78,38 @@ public class Model extends Observable {
 
     public void addCircle(CircleGizmo c) {
         iGizmos.add(c);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void addSquare(SquareGizmo s) {
         iGizmos.add(s);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void addTriangle(TriangleGizmo t) {
         iGizmos.add(t);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void addAbsorber(AbsorberGizmo a) {
         iGizmos.add(a);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void addFlipper(FlipperGizmo f) {
         iGizmos.add(f);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public void addBall(Ball b) {
         balls.add(b);
+        this.setChanged();
+        this.notifyObservers();
     }
 
     public TriangleGizmo getTrianglebyName(String name) {

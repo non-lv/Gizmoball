@@ -30,7 +30,7 @@ public class RunModePanel extends JPanel {
         box = new JPanel(new GridLayout(4, 1));
         startStop = new JButton("Start/Stop");
         tick = new JButton("Tick");
-        reload = new JButton("Reload");
+        reload = new JButton("Save");
         quit = new JButton("Load");
 
         startStop.addActionListener(runModeController);

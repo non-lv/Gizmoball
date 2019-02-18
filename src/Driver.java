@@ -11,12 +11,11 @@ public class Driver {
         Model m = new Model();
 
 
+
         try{
-            LoadBoardFromFile.readFromFile("src/Model/inputFile.txt",m);
-
-
-        } catch (Exception ex){
-            System.out.println("cant read");
+            LoadBoardFromFile.readFromFile("src/Model/inputFile.txt", m);
+        }catch (Exception ex){
+            System.out.println("cannot save file");
         }
 
         try{

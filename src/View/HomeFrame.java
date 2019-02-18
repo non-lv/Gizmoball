@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Observable;
 import java.util.Observer;
 

@@ -106,6 +106,14 @@ public class TriangleGizmo implements IGizmo {
         }
     }
 
+    public int getX(){
+        return xpos;
+    }
+
+    public int getY(){
+        return ypos;
+    }
+
     public int getYpos() {
         switch (rotation) {
             case TOP_LEFT:

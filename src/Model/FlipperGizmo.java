@@ -56,6 +56,14 @@ public class FlipperGizmo implements IGizmo {
 
     }
 
+    public int getX(){
+        return xpos;
+    }
+
+    public int getY(){
+        return ypos;
+    }
+
     public int getYpos(){
         return ypos;
     }

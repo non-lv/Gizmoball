@@ -11,7 +11,8 @@ public class Ball {
     private double ypos;
     private boolean moving;
 
-    public Ball(double x, double y, double xv, double yv) {
+    public Ball(String id, double x, double y, double xv, double yv) {
+        this.id = id;
         xpos = x;
         ypos = y;
         velocity = new Vect(xv, yv);

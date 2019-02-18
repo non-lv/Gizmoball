@@ -1,4 +1,4 @@
-Triangle T 20 0
+Triangle T 19 0
 Rotate T
 
 Triangle T2 1 1
@@ -35,8 +35,8 @@ Circle C183 18 3
 
 Absorber A 0 19 20 20
 
-LeftFlipper LF92 225 2
-RightFlipper RF112 312 2
-LeftFlipper LF87 200 7
-RightFlipper RF137 362 7
+LeftFlipper LF92 9 2
+RightFlipper RF112 7837 2
+LeftFlipper LF87 8 7
+RightFlipper RF137 9087 7
 

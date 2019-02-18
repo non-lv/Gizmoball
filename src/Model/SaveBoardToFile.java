@@ -11,7 +11,7 @@ public class SaveBoardToFile {
 
         for(TriangleGizmo t : m.getTriangles()){
 
-            bw.write("Triangle " + t.getId() + " " + t.getXpos() + " " + t.getYpos());
+            bw.write("Triangle " + t.getId() + " " + t.getX() + " " + t.getY());
             bw.newLine();
             switch(t.getState()){
                 case "topright":
@@ -64,15 +64,14 @@ public class SaveBoardToFile {
         for(FlipperGizmo f : m.getFlippers()){
 
             if(f.left){
-                bw.write("LeftFlipper " + f.getId() + " " + f.getXpos() + " " + f.getYpos());
+                bw.write("LeftFlipper " + f.getId() + " " + f.getX() + " " + f.getY());
                 bw.newLine();
             }else{
-                bw.write("RightFlipper " + f.getId() + " " + f.getXpos() + " " + f.getYpos());
+                bw.write("RightFlipper " + f.getId() + " " + f.getX() + " " + f.getY());
                 bw.newLine();
             }
         }
         bw.newLine();
-
         bw.close();
     }
 }
