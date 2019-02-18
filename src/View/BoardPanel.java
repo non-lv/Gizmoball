@@ -16,6 +16,10 @@ import Model.Ball;
 
 public class BoardPanel extends JPanel implements Observer {
 
+    private static final int boardWidth = 20;
+    private static final int boardHeight = 20;
+    private static final int tileSize = 25;
+
     //private JPanel board;
     protected Model m;
 
@@ -27,7 +31,7 @@ public class BoardPanel extends JPanel implements Observer {
 
     public void init() {
 
-        this.setPreferredSize(new Dimension(LstoPx(20), LstoPx(20)));
+        this.setPreferredSize(new Dimension(LstoPx(boardWidth), LstoPx(boardHeight)));
         this.setBackground(new Color(255, 255, 255));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -42,17 +46,15 @@ public class BoardPanel extends JPanel implements Observer {
         for (CircleGizmo c : m.getCircles()) {
             int x = (LstoPx(c.getXpos()));
             int y = (LstoPx(c.getYpos()));
+
             g2.setColor(Color.ORANGE);
             g2.fillOval(x, y, LstoPx(1), LstoPx(1));
-
         }
 
         for (SquareGizmo s : m.getSquare()) {
             int x = (LstoPx(s.getXpos()));
             int y = (LstoPx(s.getYpos()));
 
-//            s.getCircles();
-//            s.getLines();
             g2.setColor(Color.RED);
             g2.fillRect(x, y, LstoPx(1), LstoPx(1));
         }
@@ -91,8 +93,11 @@ public class BoardPanel extends JPanel implements Observer {
             g2.fillRect(x, y, x2 - x, y2 - y);
         }
 
+        double quarterTile = ((double) tileSize) / 4;
+        int halfTile = (int) Math.round(((double) tileSize) / 2);
         for (FlipperGizmo f : m.getFlippers()) {
             int x;
+
             int y = LstoPx(f.getY());
             double angle = Math.toRadians(f.getAngle());
             g2.setColor(Color.green);
@@ -100,44 +105,48 @@ public class BoardPanel extends JPanel implements Observer {
             if (f.isLeft()) {
                 x = LstoPx(f.getX());
 
-                g2.rotate(-angle, x + 6, y + 6);
-                g2.fillRoundRect(x, y, 12, LstoPx(2), 50, 15);
-                g2.rotate(angle, x + 6, y + 6);
+                g2.rotate(-angle, x + quarterTile, y + quarterTile);
+                g2.fillRoundRect(x, y, halfTile, LstoPx(2), 50, 15);
+                g2.rotate(angle, x + quarterTile, y + quarterTile);
             } else {
                 x = LstoPx(f.getX() + 1 + 0.5);
 
-                g2.rotate(angle, x + 6, y + 6);
-                g2.fillRoundRect(x, y, 12, LstoPx(2), 50, 15);
-                g2.rotate(-angle, x + 6, y + 6);
+                g2.rotate(angle, x + quarterTile, y + quarterTile);
+                g2.fillRoundRect(x, y, halfTile, LstoPx(2), 50, 15);
+                g2.rotate(-angle, x + quarterTile, y + quarterTile);
             }
         }
 
         for (Ball b : m.getBalls()) {
             if (b != null) {
                 g2.setColor(Color.black);
-                double x = (b.getX() * 25 - .25 * 25);
-                double y = (b.getY() * 25 - .25 * 25);
-                int width = (int) (2 * .25 * 25);
-                //g2.fillOval(x, y, width, width);
+
+                double x = (LstoPxDouble(b.getX()) - LstoPxDouble(b.getRadius()));
+                double y = (LstoPxDouble(b.getY()) - LstoPxDouble(b.getRadius()));
+                double width = LstoPxDouble(2 * b.getRadius());
+
                 Ellipse2D.Double shape = new Ellipse2D.Double(x, y, width, width);
                 g2.fill(shape);
-
             }
         }
 
     }
 
 
-    public int LstoPx(double a) {
-        return (int) Math.round(a * 25);
+    public int LstoPx(int a) {
+        return a * tileSize;
     }
 
-    public int LstoPx(int a) {
-        return a * 25;
+    public int LstoPx(double a) {
+        return (int) Math.round(LstoPxDouble(a));
+    }
+
+    public double LstoPxDouble(double a) {
+        return a * tileSize;
     }
 
     public int PxtoLs(int a) {
-        return a / 25;
+        return a / tileSize;
     }
 
 
