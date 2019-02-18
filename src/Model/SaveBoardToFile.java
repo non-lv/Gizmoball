@@ -63,7 +63,7 @@ public class SaveBoardToFile {
 
         for(FlipperGizmo f : m.getFlippers()){
 
-            if(f.left == 1){
+            if(f.left){
                 bw.write("LeftFlipper " + f.getId() + " " + f.getXpos() + " " + f.getYpos());
                 bw.newLine();
             }else{

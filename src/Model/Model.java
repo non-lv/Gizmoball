@@ -116,6 +116,7 @@ public class Model extends Observable {
         double moveTime = this.moveTime;
 
         for (Ball ball : balls) {
+            System.out.println(ball.getSpeed());
             if(ball.isMoving()) {
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();

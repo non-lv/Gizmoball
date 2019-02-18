@@ -50,20 +50,26 @@ public class Ball {
         return ypos;
     }
 
-    public double getRadius(){
+    public double getRadius() {
         return .25;
     }
 
-    public void stop(){
+    public void stop() {
         moving = false;
     }
 
-    public void move(){
+    public void move() {
         moving = true;
     }
 
-    public boolean isMoving(){
+    public boolean isMoving() {
         return moving;
+    }
+
+    public double getSpeed() {
+        if (moving)
+            return Math.sqrt(Math.pow(velocity.x(), 2) + Math.pow(velocity.y(), 2));
+        else return 0.0D;
     }
 }
 
