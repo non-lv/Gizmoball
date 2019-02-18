@@ -11,12 +11,13 @@ import java.util.Observable;
 
 public class Model extends Observable {
 
-    private static double mu = 0.025;
-    private static double mu2 = 0.025;
-    private static double gravity = 25;
-    private static double moveTime = 0.05;
-    private static int gridSizeX = 20;
-    private static int gridSizeY = 20;
+    private static final double mu = 0.025;
+    private static final double mu2 = 0.025;
+    private static final double gravity = 25;
+    private static final double moveTime = 0.05;
+    private static final int gridSizeX = 20;
+    private static final int gridSizeY = 20;
+
     private List<IGizmo> iGizmos;
     private List<LineSegment> walls;
     private List<Ball> balls;
@@ -82,32 +83,8 @@ public class Model extends Observable {
         return balls;
     }
 
-    public void addCircle(CircleGizmo c) {
-        iGizmos.add(c);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public void addSquare(SquareGizmo s) {
-        iGizmos.add(s);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public void addTriangle(TriangleGizmo t) {
-        iGizmos.add(t);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public void addAbsorber(AbsorberGizmo a) {
-        iGizmos.add(a);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public void addFlipper(FlipperGizmo f) {
-        iGizmos.add(f);
+    public void addGizmo(IGizmo gizmo){
+        iGizmos.add(gizmo);
         this.setChanged();
         this.notifyObservers();
     }

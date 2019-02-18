@@ -10,7 +10,7 @@ import java.util.List;
 public class TriangleGizmo implements IGizmo {
 
     // the right angle corner in triangle
-    private enum Rotation {
+    public enum Rotation {
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     }
 
@@ -21,24 +21,12 @@ public class TriangleGizmo implements IGizmo {
     private Rotation rotation;
     private String name;
 
-    public TriangleGizmo(String id, int x, int y, String s) {
+    public TriangleGizmo(String id, int x, int y, Rotation r) {
         this.xpos = x;
         this.ypos = y;
         colour = Color.blue;
 
-        switch (s) {
-            case "topleft":
-                rotation = Rotation.TOP_LEFT;
-                break;
-            case "topright":
-                rotation = Rotation.TOP_RIGHT;
-                break;
-            case "bottomleft":
-                rotation = Rotation.BOTTOM_LEFT;
-                break;
-            default:
-                rotation = Rotation.BOTTOM_RIGHT;
-        }
+        rotation = r;
 
         this.id = id;
     }
@@ -187,17 +175,8 @@ public class TriangleGizmo implements IGizmo {
         }
     }
 
-    public String getState() {
-        switch (rotation) {
-            case TOP_LEFT:
-                return "topleft";
-            case TOP_RIGHT:
-                return "topright";
-            case BOTTOM_LEFT:
-                return "bottomleft";
-            default:
-                return "bottomright";
-        }
+    public Rotation getState() {
+        return rotation;
     }
 
 }

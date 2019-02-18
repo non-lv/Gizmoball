@@ -27,7 +27,7 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addSquare(new SquareGizmo(id, x, y));
+                            m.addGizmo(new SquareGizmo(id, x, y));
 
                         } else {
                             System.out.println("Incorrect format : " + line);
@@ -38,7 +38,7 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addCircle(new CircleGizmo(id, x, y));
+                            m.addGizmo(new CircleGizmo(id, x, y));
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -48,7 +48,7 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addTriangle(new TriangleGizmo(id, x, y, "topleft"));
+                            m.addGizmo(new TriangleGizmo(id, x, y, TriangleGizmo.Rotation.TOP_LEFT));
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -60,7 +60,7 @@ public class LoadBoardFromFile {
                             int y1 = Integer.parseInt(tokens[3]);
                             int x2 = Integer.parseInt(tokens[4]);
                             int y2 = Integer.parseInt(tokens[5]);
-                            m.addAbsorber(new AbsorberGizmo(id, x1, y1, x2, y2));
+                            m.addGizmo(new AbsorberGizmo(id, x1, y1, x2, y2));
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -70,7 +70,7 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addFlipper(new FlipperGizmo(id, x, y, true));
+                            m.addGizmo(new FlipperGizmo(id, x, y, true));
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -80,7 +80,7 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addFlipper(new FlipperGizmo(id, x, y, false));
+                            m.addGizmo(new FlipperGizmo(id, x, y, false));
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }

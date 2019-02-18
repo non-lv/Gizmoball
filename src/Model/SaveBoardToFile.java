@@ -14,28 +14,27 @@ public class SaveBoardToFile {
             bw.write("Triangle " + t.getId() + " " + t.getX() + " " + t.getY());
             bw.newLine();
             switch(t.getState()){
-                case "topright":
+                case TOP_RIGHT:
                     bw.write("Rotate " + t.getId());
                     bw.newLine();
                     bw.newLine();
                     break;
-                case "bottomright":
-                    bw.write("Rotate " + t.getId());
-                    bw.newLine();
-                    bw.write("Rotate " + t.getId());
-                    bw.newLine();
-                    bw.newLine();
-                    break;
-                case "bottomleft" :
-                    bw.write("Rotate " + t.getId());
-                    bw.newLine();
+                case BOTTOM_RIGHT:
                     bw.write("Rotate " + t.getId());
                     bw.newLine();
                     bw.write("Rotate " + t.getId());
                     bw.newLine();
                     bw.newLine();
                     break;
-
+                case BOTTOM_LEFT:
+                    bw.write("Rotate " + t.getId());
+                    bw.newLine();
+                    bw.write("Rotate " + t.getId());
+                    bw.newLine();
+                    bw.write("Rotate " + t.getId());
+                    bw.newLine();
+                    bw.newLine();
+                    break;
             }
         }
         bw.newLine();

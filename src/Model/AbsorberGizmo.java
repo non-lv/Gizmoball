@@ -78,7 +78,7 @@ public class AbsorberGizmo implements IGizmo {
 
     public void fire() {
         if (ball != null) {
-            ball.setVelocity(0, -40);
+            ball.setVelocity(0, -50);
             ball.move();
             ball = null;
         }

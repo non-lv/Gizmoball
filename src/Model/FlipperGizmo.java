@@ -7,20 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlipperGizmo implements IGizmo {
+    private static final double angularVelocity = 90;
 
     private String id;
     private int xpos;
     private int ypos;
     private boolean left;
     private double angle;
-    private double angularVelocity;
 
     public FlipperGizmo(String id, int x, int y, boolean isLeft) {
         this.id = id;
         xpos = x;
         ypos = y;
         left = isLeft;
-        angularVelocity = 90;
     }
 
     @Override
