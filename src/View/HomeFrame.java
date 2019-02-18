@@ -15,6 +15,7 @@ import Model.Model;
 import Model.Ball;
 import Model.AbsorberGizmo;
 
+
 public class HomeFrame implements Observer {
 
 
@@ -31,6 +32,7 @@ public class HomeFrame implements Observer {
     private JPanel boardContainer;
     private KeyPressedController k;
     private Model m;
+
 
     public HomeFrame(JPanel menuPanelLeft, JPanel optionsPanelTop, JPanel boardPanel, JPanel notificationPanel, Model m) {
         this.menuPanelLeft = menuPanelLeft;

@@ -3,6 +3,8 @@ import Model.LoadBoardFromFile;
 import View.*;
 import Model.Model;
 import Model.SaveBoardToFile;
+import Model.AbsorberGizmo;
+import Model.Ball;
 
 
 public class Driver {
@@ -11,19 +13,19 @@ public class Driver {
         Model m = new Model();
 
 
-        try{
-            LoadBoardFromFile.readFromFile("src/Model/inputFile.txt",m);
+//        try{
+//            LoadBoardFromFile.readFromFile("src/Model/inputFile.txt",m);
+//
+//
+//        } catch (Exception ex){
+//            System.out.println("cant read");
+//        }
 
-
-        } catch (Exception ex){
-            System.out.println("cant read");
-        }
-
-        try{
-            SaveBoardToFile.saveToFile("src/Model/outputFile.txt", m);
-        }catch (Exception ex){
-            System.out.println("cannot save file");
-        }
+//        try{
+////            SaveBoardToFile.saveToFile("src/Model/outputFile.txt", m);
+////        }catch (Exception ex){
+////            System.out.println("cannot save file");
+////        }
 
         OptionsPanel optionsPanel = new OptionsPanel();
         RunModePanel playModePanel = new RunModePanel(m);
@@ -47,9 +49,11 @@ public class Driver {
 //        m.addSquare(new SquareGizmo(6,18));
 //        m.addTriangle(new TriangleGizmo(3,3));
 //        m.addTriangle(new TriangleGizmo(20,20));
-//        m.addAbsorber(new AbsorberGizmo(15,15,9,17));
+           m.addAbsorber(new AbsorberGizmo("A",1,19,15,20));
 //        m.addFlipper(new FlipperGizmo(8,8, 1));
 //        m.addFlipper(new FlipperGizmo(8,8, 0));
+            m.addBall(new Ball(1.0,1.0,5.0,5.0));
+
 
     }
 }

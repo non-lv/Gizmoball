@@ -70,6 +70,7 @@ public class AbsorberGizmo implements IGizmo {
     public void trigger(Ball ball) {
         this.ball = ball;
 
+
         ball.setX(x2pos - .5);
         ball.setY(y2pos - .5);
 
@@ -78,7 +79,7 @@ public class AbsorberGizmo implements IGizmo {
 
     public void fire() {
         if (ball != null) {
-            ball.setVelocity(0, -40);
+            ball.setVelocity(0, -50);
             ball.move();
             ball = null;
         }

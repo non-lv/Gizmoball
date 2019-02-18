@@ -25,6 +25,7 @@ public class KeyPressedController implements KeyListener {
         model.fireAbsorbers();
         int key = e.getKeyCode();
         if (key == KeyEvent.VK_LEFT) {
+
             job = "fire";
         }
 

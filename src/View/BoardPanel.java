@@ -3,6 +3,7 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.util.Deque;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -18,10 +19,13 @@ public class BoardPanel extends JPanel implements Observer {
 
     //private JPanel board;
     protected Model m;
+    private double speed = 0;
+    JLabel speed1;
 
     public BoardPanel(Model m) {
         this.m = m;
         this.m.addObserver(this);
+
         init();
     }
 
@@ -30,6 +34,8 @@ public class BoardPanel extends JPanel implements Observer {
         this.setPreferredSize(new Dimension(LstoPx(20), LstoPx(20)));
         this.setBackground(new Color(255, 255, 255));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        speed1 = new JLabel("velocity");
+        this.add(speed1);
 
     }
 
@@ -127,9 +133,21 @@ public class BoardPanel extends JPanel implements Observer {
         return a / 25;
     }
 
+    public void setCurSpeed(double a){
+        speed = a;
+    }
+
+    public double getCurSpeed(){
+        return speed;
+    }
 
     @Override
     public void update(Observable o, Object arg) {
+        double xvel = m.getCurSpeed();
+        //xvel = xvel/25;
+
+        String s = Double.toString(Math.round(xvel*1000)/1000);
+        speed1.setText("velocity " + s);
         repaint();
     }
 }

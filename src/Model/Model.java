@@ -20,6 +20,7 @@ public class Model extends Observable {
     private List<IGizmo> iGizmos;
     private List<LineSegment> walls;
     private List<Ball> balls;
+    private double curSpeed;
 
     public Model() {
         iGizmos = new ArrayList<>();
@@ -112,11 +113,19 @@ public class Model extends Observable {
             ag.fire();
     }
 
+    public void setCurSpeed(double a){
+        curSpeed = a;
+    }
+
+    public double getCurSpeed(){
+        return curSpeed;
+    }
+
     public void moveBalls() {
         double moveTime = this.moveTime;
 
         for (Ball ball : balls) {
-            System.out.println(ball.getSpeed());
+            setCurSpeed(ball.getSpeed());
             if(ball.isMoving()) {
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
