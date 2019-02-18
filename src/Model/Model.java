@@ -21,15 +21,21 @@ public class Model extends Observable {
     private List<LineSegment> walls;
     private List<Ball> balls;
 
+    private int rightFlipperFlippin;
+    private int leftFlipperFlippin;
+
     public Model() {
         iGizmos = new ArrayList<>();
         walls = new ArrayList<>();
         balls = new ArrayList<>();
-        //balls.add(new Ball(3, 1, 25, 20));
+
         walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
         walls.add(new LineSegment(gridSizeX, 0, gridSizeX, gridSizeY));
         walls.add(new LineSegment(0, gridSizeY, gridSizeX, gridSizeY));
+
+        rightFlipperFlippin = -1;
+        leftFlipperFlippin = -1;
     }
 
     public List<CircleGizmo> getCircles() {
@@ -119,25 +125,25 @@ public class Model extends Observable {
         return null;
     }
 
-    public void fireAbsorbers(){
-        for(AbsorberGizmo ag : this.getAbsorber())
+    public void fireAbsorbers() {
+        for (AbsorberGizmo ag : this.getAbsorber())
             ag.fire();
     }
 
     public void moveBalls() {
-        double moveTime = this.moveTime;
+        double moveTime = Model.moveTime;
 
         for (Ball ball : balls) {
             System.out.println(ball.getSpeed());
-            if(ball.isMoving()) {
+            if (ball.isMoving()) {
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
 
                 if (tuc > moveTime) {
-                    ball = moveBallForTime(ball, moveTime);
+                    moveBallForTime(ball, moveTime);
 
-                    ball = friction(ball, moveTime);
-                    ball = gravity(ball, moveTime);
+                    friction(ball, moveTime);
+                    gravity(ball, moveTime);
                 } else {
 
                     if (cd.getGizmo() instanceof AbsorberGizmo) {
@@ -145,20 +151,23 @@ public class Model extends Observable {
                         break;
                     }
 
-                    ball = moveBallForTime(ball, tuc);
+                    moveBallForTime(ball, tuc);
 
                     ball.setVelocity(cd.getVelo());
 
-                    ball = friction(ball, tuc);
-                    ball = gravity(ball, tuc);
+                    friction(ball, tuc);
+                    gravity(ball, tuc);
+
+                    moveTime = tuc;
                 }
             }
         }
 
+        moveFlippersForTime(moveTime);
+
         this.setChanged();
         this.notifyObservers();
     }
-
 
 
     private CollisionDetails timeUntilCollision(Ball ball) {
@@ -209,6 +218,25 @@ public class Model extends Observable {
 
     }
 
+    private void moveFlippersForTime(double delta_t) {
+        for (FlipperGizmo f : this.getFlippers())
+            if (f.isLeft())
+                moveFlipperForTime(f, delta_t, leftFlipperFlippin);
+            else moveFlipperForTime(f, delta_t, rightFlipperFlippin);
+    }
+
+    private FlipperGizmo moveFlipperForTime(FlipperGizmo flipper, double delta_t, double modifier) {
+        double newAngle = flipper.getAngle() + flipper.getAngularVelocity() * delta_t * modifier;
+
+        if (newAngle > 90)
+            newAngle = 90;
+        else if (newAngle < 0)
+            newAngle = 0;
+
+        flipper.setAngle(newAngle);
+        return flipper;
+    }
+
     private Ball moveBallForTime(Ball ball, double time) {
         double newX = 0.D;
         double newY = 0.D;
@@ -238,4 +266,19 @@ public class Model extends Observable {
         return ball;
     }
 
+    public void rightFlipperMove() {
+        rightFlipperFlippin = 1;
+    }
+
+    public void rightFlipperStop() {
+        rightFlipperFlippin = -1;
+    }
+
+    public void leftFlipperMove() {
+        leftFlipperFlippin = 1;
+    }
+
+    public void leftFlipperStop() {
+        leftFlipperFlippin = -1;
+    }
 }

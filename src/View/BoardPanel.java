@@ -55,8 +55,6 @@ public class BoardPanel extends JPanel implements Observer {
 //            s.getLines();
             g2.setColor(Color.RED);
             g2.fillRect(x, y, LstoPx(1), LstoPx(1));
-
-
         }
 
         for (TriangleGizmo s : m.getTriangles()) {
@@ -71,8 +69,6 @@ public class BoardPanel extends JPanel implements Observer {
             int npoints = 3;
             g2.setColor(Color.blue);
             g2.fillPolygon(xpoints, ypoints, npoints);
-
-
         }
 
         for (AbsorberGizmo a : m.getAbsorber()) {
@@ -96,19 +92,32 @@ public class BoardPanel extends JPanel implements Observer {
         }
 
         for (FlipperGizmo f : m.getFlippers()) {
-            int x = (f.getXpos());
-            int y = (LstoPx(f.getYpos()));
+            int x;
+            int y = LstoPx(f.getY());
+            double angle = Math.toRadians(f.getAngle());
             g2.setColor(Color.green);
-            g2.fillRoundRect(x, y, 12, LstoPx(2), 50, 15);
 
+            if (f.isLeft()) {
+                x = LstoPx(f.getX());
+
+                g2.rotate(-angle, x + 6, y + 6);
+                g2.fillRoundRect(x, y, 12, LstoPx(2), 50, 15);
+                g2.rotate(angle, x + 6, y + 6);
+            } else {
+                x = LstoPx(f.getX() + 1 + 0.5);
+
+                g2.rotate(angle, x + 6, y + 6);
+                g2.fillRoundRect(x, y, 12, LstoPx(2), 50, 15);
+                g2.rotate(-angle, x + 6, y + 6);
+            }
         }
 
         for (Ball b : m.getBalls()) {
             if (b != null) {
                 g2.setColor(Color.black);
-                double x = (b.getX()*25 - .25*25);
-                double y = (b.getY()*25 - .25*25);
-                int width = (int) (2 * .25*25);
+                double x = (b.getX() * 25 - .25 * 25);
+                double y = (b.getY() * 25 - .25 * 25);
+                int width = (int) (2 * .25 * 25);
                 //g2.fillOval(x, y, width, width);
                 Ellipse2D.Double shape = new Ellipse2D.Double(x, y, width, width);
                 g2.fill(shape);
@@ -118,6 +127,10 @@ public class BoardPanel extends JPanel implements Observer {
 
     }
 
+
+    public int LstoPx(double a) {
+        return (int) Math.round(a * 25);
+    }
 
     public int LstoPx(int a) {
         return a * 25;

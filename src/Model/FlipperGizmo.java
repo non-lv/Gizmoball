@@ -11,15 +11,16 @@ public class FlipperGizmo implements IGizmo {
     private String id;
     private int xpos;
     private int ypos;
-    boolean left;
-    double angle;
+    private boolean left;
+    private double angle;
+    private double angularVelocity;
 
     public FlipperGizmo(String id, int x, int y, boolean isLeft) {
         this.id = id;
         xpos = x;
         ypos = y;
         left = isLeft;
-
+        angularVelocity = 90;
     }
 
     @Override
@@ -47,15 +48,6 @@ public class FlipperGizmo implements IGizmo {
         return id;
     }
 
-    public int getXpos(){
-        if(left) {
-            return xpos *25;
-        }else{
-            return ((xpos*25)+37);
-        }
-
-    }
-
     public int getX(){
         return xpos;
     }
@@ -64,7 +56,19 @@ public class FlipperGizmo implements IGizmo {
         return ypos;
     }
 
-    public int getYpos(){
-        return ypos;
+    public double getAngle() {
+        return angle;
+    }
+
+    public double getAngularVelocity(){
+        return angularVelocity;
+    }
+
+    public void setAngle(double newAngle){
+        angle = newAngle;
+    }
+
+    public boolean isLeft() {
+        return left;
     }
 }
