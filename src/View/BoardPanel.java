@@ -31,7 +31,7 @@ public class BoardPanel extends JPanel implements Observer {
 
     public void init() {
 
-        this.setPreferredSize(new Dimension(LstoPx(boardWidth), LstoPx(boardHeight)));
+        this.setPreferredSize(new Dimension(LstoPx(boardWidth) + 1, LstoPx(boardHeight) + 1));
         this.setBackground(new Color(255, 255, 255));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
