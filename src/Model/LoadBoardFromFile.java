@@ -10,6 +10,7 @@ public class LoadBoardFromFile {
 
         File file = new File(fileName);
         List<IGizmo> iGizmos = new ArrayList<>();
+        m = new Model();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -94,11 +95,20 @@ public class LoadBoardFromFile {
                             double yv = Double.parseDouble(tokens[5]);
                             m.addBall(new Ball(id, x, y, xv, yv));
                         } else {
+
                             System.out.println("Incorrect Format : " + line);
                         }
                         break;
                     case "rotate":
                         TriangleGizmo t = m.getTrianglebyName(tokens[1]);
+                        if(t == null){
+                            FlipperGizmo f = m.getFlipperByName(tokens[1]);
+                            if(f == null){
+                                break;
+                            }
+                            f.rotate();
+                            break;
+                        }
                         t.rotate();
                         break;
                 }
