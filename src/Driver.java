@@ -31,7 +31,7 @@ public class Driver {
 
         HomeFrame homeFrame = new HomeFrame(playModePanel, optionsPanel, boardPanel, notificationPanel,m);
 
-        OptionPanelController o = new OptionPanelController(optionsPanel, homeFrame);
+ //       OptionPanelController o = new OptionPanelController(optionsPanel, homeFrame);
 
 //        JFrame f = new JFrame();
 //        f.add(boardPanel);

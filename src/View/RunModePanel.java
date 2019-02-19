@@ -27,29 +27,22 @@ public class RunModePanel extends JPanel {
 
         runModeController = new RunModeController(model);
 
-        box = new JPanel(new GridLayout(4, 1));
+        box = new JPanel(new GridLayout(3, 1));
         startStop = new JButton("Start/Stop");
         tick = new JButton("Tick");
-        reload = new JButton("Save");
-        quit = new JButton("Load");
+        reload = new JButton("Reload");
 
         startStop.addActionListener(runModeController);
         tick.addActionListener(runModeController);
         reload.addActionListener(runModeController);
-        quit.addActionListener(runModeController);
 
         box.setPreferredSize(new Dimension(150, 500));
 
         box.add(startStop);
         box.add(tick);
         box.add(reload);
-        box.add(quit);
 
         this.add(box);
 
-        startStop.setFocusable(false);
-        tick.setFocusable(false);
-        reload.setFocusable(false);
-        quit.setFocusable(false);
     }
 }

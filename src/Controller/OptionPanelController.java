@@ -8,14 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class OptionPanelController implements ActionListener {
-    
-    private final OptionsPanel panel;
+
     private final HomeFrame home;
 
-    public OptionPanelController(OptionsPanel panel, HomeFrame home){
-        this.panel = panel;
+    public OptionPanelController(HomeFrame home){
         this.home = home;
-        panel.addActionListener(this);
     }
     
     @Override
