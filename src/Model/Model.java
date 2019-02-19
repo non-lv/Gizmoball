@@ -5,6 +5,7 @@ import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -24,6 +25,7 @@ public class Model extends Observable {
 
     private int rightFlipperFlippin;
     private int leftFlipperFlippin;
+    private int stopFrames;
 
     public Model() {
         iGizmos = new ArrayList<>();
@@ -37,6 +39,8 @@ public class Model extends Observable {
 
         rightFlipperFlippin = -1;
         leftFlipperFlippin = -1;
+
+        stopFrames = 0;
     }
 
     public List<CircleGizmo> getCircles() {
@@ -110,8 +114,12 @@ public class Model extends Observable {
     public void moveBalls() {
         double moveTime = Model.moveTime;
 
+        if(stopFrames>0){
+            stopFrames--;
+        }
+
         for (Ball ball : balls) {
-            System.out.println(ball.getSpeed());
+            //System.out.println(ball.getSpeed());
             if (ball.isMoving()) {
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
@@ -128,7 +136,9 @@ public class Model extends Observable {
                         break;
                     }
 
+
                     moveBallForTime(ball, tuc);
+                    stopFrames = 4;
 
                     ball.setVelocity(cd.getVelo());
 
@@ -166,7 +176,10 @@ public class Model extends Observable {
                 if (time < shortestTime) {
                     gizmo = iIGizmo;
                     shortestTime = time;
+
                     newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ballVelocity);
+
+
                 }
             }
 
@@ -215,6 +228,8 @@ public class Model extends Observable {
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
+        if(stopFrames>0)
+            return ball;
         double newX = 0.D;
         double newY = 0.D;
         double xVel = ball.getVelocity().x();
