@@ -1,14 +1,16 @@
 import Controller.OptionPanelController;
-import Model.LoadBoardFromFile;
+import Model.FlipperGizmo;
 import View.*;
 import Model.Model;
-import Model.SaveBoardToFile;
 
 
 public class Driver {
 
     public static void main(String[] args) {
         Model m = new Model();
+
+        m.addGizmo(new FlipperGizmo("F1", 9,9, true));
+        m.addGizmo(new FlipperGizmo("F1", 11,9, false));
 
 
 

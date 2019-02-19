@@ -53,10 +53,10 @@ public class HomeFrame implements Observer {
 
         border.add(menuPanelLeft, BorderLayout.LINE_START);
 
-        leftAlignment.setPreferredSize(new Dimension(700, 80));
-        leftAlignment.add(optionsPanelTop);
+        //leftAlignment.setPreferredSize(new Dimension(700, 80));
+        //leftAlignment.add(optionsPanelTop);
 
-        border.add(leftAlignment, BorderLayout.PAGE_START);
+        //border.add(leftAlignment, BorderLayout.PAGE_START);
 
         boardContainer.add(boardPanel);
         boardAndNotificationBarContainer.add(boardContainer, BorderLayout.CENTER);
