@@ -3,26 +3,13 @@ import Model.LoadBoardFromFile;
 import View.*;
 import Model.Model;
 import Model.SaveBoardToFile;
+import Model.*;
 
 
 public class Driver {
 
     public static void main(String[] args) {
         Model m = new Model();
-
-
-
-        try{
-            LoadBoardFromFile.readFromFile("src/Model/inputFile.txt", m);
-        }catch (Exception ex){
-            System.out.println("cannot save file");
-        }
-
-        try{
-            SaveBoardToFile.saveToFile("src/Model/outputFile.txt", m);
-        }catch (Exception ex){
-            System.out.println("cannot save file");
-        }
 
         OptionsPanel optionsPanel = new OptionsPanel();
         RunModePanel playModePanel = new RunModePanel(m);
@@ -33,22 +20,44 @@ public class Driver {
 
         OptionPanelController o = new OptionPanelController(optionsPanel, homeFrame);
 
-//        JFrame f = new JFrame();
-//        f.add(boardPanel);
-//        f.pack();
-//        f.setVisible(true);
+        m.addBall(new Ball("B",1.5,0.5,0,0));
+        m.addGizmo(new TriangleGizmo("T1", 1,1, TriangleGizmo.Rotation.BOTTOM_LEFT));
 
+        m.addGizmo(new SquareGizmo("S",0,2));
+        m.addGizmo(new SquareGizmo("S",1,2));
+        m.addGizmo(new SquareGizmo("S",2,2));
+        m.addGizmo(new SquareGizmo("S",3,2));
+        m.addGizmo(new SquareGizmo("S",4,2));
+        m.addGizmo(new SquareGizmo("S",5,2));
+        m.addGizmo(new SquareGizmo("S",6,2));
+        m.addGizmo(new SquareGizmo("S",7,2));
+        m.addGizmo(new SquareGizmo("S",8,2));
+        m.addGizmo(new SquareGizmo("S",13,2));
+        m.addGizmo(new SquareGizmo("S",14,2));
+        m.addGizmo(new SquareGizmo("S",15,2));
+        m.addGizmo(new SquareGizmo("S",16,2));
+        m.addGizmo(new SquareGizmo("S",17,2));
+        m.addGizmo(new SquareGizmo("S",18,2));
 
-//        m.addCircle(new CircleGizmo(15,10));
-//        m.addCircle(new CircleGizmo(18,18));
-//        m.addCircle(new CircleGizmo(2, 2));
-//        m.addSquare(new SquareGizmo(5,5));
-//        m.addSquare(new SquareGizmo(6,18));
-//        m.addTriangle(new TriangleGizmo(3,3));
-//        m.addTriangle(new TriangleGizmo(20,20));
-//        m.addAbsorber(new AbsorberGizmo(15,15,9,17));
-//        m.addFlipper(new FlipperGizmo(8,8, 1));
-//        m.addFlipper(new FlipperGizmo(8,8, 0));
+        m.addGizmo(new CircleGizmo("C", 4, 3));
+        m.addGizmo(new CircleGizmo("C", 5, 4));
+        m.addGizmo(new CircleGizmo("C", 6, 5));
+        m.addGizmo(new CircleGizmo("C", 7, 6));
+        m.addGizmo(new CircleGizmo("C", 9, 9));
+        m.addGizmo(new CircleGizmo("C", 10, 9));
+        m.addGizmo(new CircleGizmo("C", 11, 10));
+        m.addGizmo(new CircleGizmo("C", 12, 9));
+        m.addGizmo(new CircleGizmo("C", 13, 9));
+        m.addGizmo(new CircleGizmo("C", 15, 6));
+        m.addGizmo(new CircleGizmo("C", 16, 5));
+        m.addGizmo(new CircleGizmo("C", 17, 4));
+        m.addGizmo(new CircleGizmo("C", 18, 3));
+
+        m.addGizmo(new TriangleGizmo("T", 2, 19, TriangleGizmo.Rotation.BOTTOM_LEFT));
+        m.addGizmo(new TriangleGizmo("T", 4, 19, TriangleGizmo.Rotation.TOP_LEFT));
+        m.addGizmo(new TriangleGizmo("T", 6, 19, TriangleGizmo.Rotation.BOTTOM_LEFT));
+        m.addGizmo(new TriangleGizmo("T", 8, 19, TriangleGizmo.Rotation.TOP_LEFT));
+        m.addGizmo(new TriangleGizmo("T", 12, 19, TriangleGizmo.Rotation.TOP_LEFT));
 
     }
 }

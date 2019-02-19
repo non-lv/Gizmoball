@@ -87,7 +87,7 @@ public class Model extends Observable {
         return balls;
     }
 
-    public void addGizmo(IGizmo gizmo){
+    public void addGizmo(IGizmo gizmo) {
         iGizmos.add(gizmo);
         this.setChanged();
         this.notifyObservers();
@@ -114,41 +114,42 @@ public class Model extends Observable {
     public void moveBalls() {
         double moveTime = Model.moveTime;
 
-        if(stopFrames>0){
-            stopFrames--;
-        }
+        if (stopFrames == 0)
+            for (Ball ball : balls) {
+                //System.out.println(ball.getSpeed());
+                if (ball.isMoving()) {
+                    CollisionDetails cd = timeUntilCollision(ball);
+                    double tuc = cd.getTuc();
 
-        for (Ball ball : balls) {
-            //System.out.println(ball.getSpeed());
-            if (ball.isMoving()) {
-                CollisionDetails cd = timeUntilCollision(ball);
-                double tuc = cd.getTuc();
+                    if (tuc > moveTime) {
+                        moveBallForTime(ball, moveTime);
 
-                if (tuc > moveTime) {
-                    moveBallForTime(ball, moveTime);
+                        friction(ball, moveTime);
+                        gravity(ball, moveTime);
+                    } else {
 
-                    friction(ball, moveTime);
-                    gravity(ball, moveTime);
-                } else {
+                        if (cd.getGizmo() instanceof AbsorberGizmo) {
+                            ((AbsorberGizmo) cd.getGizmo()).trigger(ball);
+                            break;
+                        }
 
-                    if (cd.getGizmo() instanceof AbsorberGizmo) {
-                        ((AbsorberGizmo) cd.getGizmo()).trigger(ball);
-                        break;
+
+                        moveBallForTime(ball, tuc);
+
+                        ball.setVelocity(cd.getVelo());
+
+                        friction(ball, tuc);
+                        gravity(ball, tuc);
+
+                        moveTime = tuc;
+
+                        if (stopFrames == 0)
+                            stopFrames = 4;
                     }
-
-
-                    moveBallForTime(ball, tuc);
-                    stopFrames = 4;
-
-                    ball.setVelocity(cd.getVelo());
-
-                    friction(ball, tuc);
-                    gravity(ball, tuc);
-
-                    moveTime = tuc;
                 }
             }
-        }
+        else
+            stopFrames--;
 
         moveFlippersForTime(moveTime);
 
@@ -228,8 +229,6 @@ public class Model extends Observable {
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
-        if(stopFrames>0)
-            return ball;
         double newX = 0.D;
         double newY = 0.D;
         double xVel = ball.getVelocity().x();
