@@ -42,6 +42,20 @@ public class BoardPanel extends JPanel implements Observer {
 
         Graphics2D g2 = (Graphics2D) g;
 
+        for (Ball b : m.getBalls()) {
+            if (b != null) {
+                g2.setColor(Color.black);
+
+                double x = (LstoPxDouble(b.getX()) - LstoPxDouble(b.getRadius()));
+                double y = (LstoPxDouble(b.getY()) - LstoPxDouble(b.getRadius()));
+                double width = LstoPxDouble(2 * b.getRadius());
+
+                Ellipse2D.Double shape = new Ellipse2D.Double(x, y, width, width);
+                g2.fill(shape);
+                g2.draw(shape);
+            }
+        }
+
         // Draw all the vertical lines
         for (CircleGizmo c : m.getCircles()) {
             int x = (LstoPx(c.getXpos()));
@@ -114,19 +128,6 @@ public class BoardPanel extends JPanel implements Observer {
                 g2.rotate(angle, x + quarterTile, y + quarterTile);
                 g2.fillRoundRect(x, y, halfTile, LstoPx(2), 50, 15);
                 g2.rotate(-angle, x + quarterTile, y + quarterTile);
-            }
-        }
-
-        for (Ball b : m.getBalls()) {
-            if (b != null) {
-                g2.setColor(Color.black);
-
-                double x = (LstoPxDouble(b.getX()) - LstoPxDouble(b.getRadius()));
-                double y = (LstoPxDouble(b.getY()) - LstoPxDouble(b.getRadius()));
-                double width = LstoPxDouble(2 * b.getRadius());
-
-                Ellipse2D.Double shape = new Ellipse2D.Double(x, y, width, width);
-                g2.fill(shape);
             }
         }
 
