@@ -40,8 +40,8 @@ public class RunModePanel extends JPanel {
 
         box.setPreferredSize(new Dimension(150, 500));
 
-        box.add(startStop);
-        box.add(tick);
+        //box.add(startStop);
+        //box.add(tick);
         box.add(reload);
         box.add(quit);
 
