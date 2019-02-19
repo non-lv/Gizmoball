@@ -42,8 +42,8 @@ public class RunModePanel extends JPanel {
 
         box.add(startStop);
         box.add(tick);
-        box.add(reload);
-        box.add(quit);
+        //box.add(reload);
+        //box.add(quit);
 
         this.add(box);
 
