@@ -10,7 +10,6 @@ public class LoadBoardFromFile {
 
         File file = new File(fileName);
         List<IGizmo> iGizmos = new ArrayList<>();
-        m = new Model();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 

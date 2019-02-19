@@ -10,17 +10,7 @@ public class Driver {
     public static void main(String[] args) {
         Model m = new Model();
 
-        try{
-            LoadBoardFromFile.readFromFile("src/Model/inputFile.txt", m);
-        }catch (Exception ex){
-            System.out.println("cannot save file");
-        }
 
-        try{
-            SaveBoardToFile.saveToFile("src/Model/outputFile.txt", m);
-        }catch (Exception ex){
-            System.out.println("cannot save file");
-        }
 
         OptionsPanel optionsPanel = new OptionsPanel();
         RunModePanel playModePanel = new RunModePanel(m);
