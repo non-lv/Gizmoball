@@ -71,6 +71,7 @@ public class HomeFrame implements Observer {
 
         window.addKeyListener(k);
         window.setFocusable(true);
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void swapToBuild() {
