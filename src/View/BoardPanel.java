@@ -96,24 +96,57 @@ public class BoardPanel extends JPanel implements Observer {
         double quarterTile = ((double) tileSize) / 4;
         int halfTile = (int) Math.round(((double) tileSize) / 2);
         for (FlipperGizmo f : m.getFlippers()) {
-            int x;
-
+            int x = LstoPx(f.getX());
             int y = LstoPx(f.getY());
             double angle = Math.toRadians(f.getAngle());
             g2.setColor(Color.green);
 
             if (f.isLeft()) {
-                x = LstoPx(f.getX());
-
-                g2.rotate(-angle, x + quarterTile, y + quarterTile);
-                g2.fillRoundRect(x, y, halfTile, LstoPx(2), 50, 15);
-                g2.rotate(angle, x + quarterTile, y + quarterTile);
+                switch (f.getState()) {
+                    case TOP_LEFT:
+                        g2.rotate(-angle, x + quarterTile, y + quarterTile);
+                        g2.fillRoundRect(x, y, halfTile, LstoPx(2), 50, 15);
+                        g2.rotate(angle, x + quarterTile, y + quarterTile);
+                        break;
+                    case TOP_RIGHT:
+                        g2.rotate(-angle, x + 2 * tileSize - quarterTile, y + quarterTile);
+                        g2.fillRoundRect(x, y, LstoPx(2), halfTile, 15, 50);
+                        g2.rotate(angle, x + 2 * tileSize - quarterTile, y + quarterTile);
+                        break;
+                    case BOTTOM_RIGHT:
+                        g2.rotate(-angle, x + 2 * tileSize - quarterTile, y + 2 * tileSize - quarterTile);
+                        g2.fillRoundRect(x + tileSize + halfTile, y, halfTile, LstoPx(2), 50, 15);
+                        g2.rotate(angle, x + 2 * tileSize - quarterTile, y + 2 * tileSize - quarterTile);
+                        break;
+                    case BOTTOM_LEFT:
+                        g2.rotate(-angle, x +  quarterTile, y + 2 * tileSize - quarterTile);
+                        g2.fillRoundRect(x, y + tileSize + halfTile, LstoPx(2), halfTile, 15, 50);
+                        g2.rotate(angle, x + quarterTile, y + 2 * tileSize - quarterTile);
+                        break;
+                }
             } else {
-                x = LstoPx(f.getX() + 1 + 0.5);
-
-                g2.rotate(angle, x + quarterTile, y + quarterTile);
-                g2.fillRoundRect(x, y, halfTile, LstoPx(2), 50, 15);
-                g2.rotate(-angle, x + quarterTile, y + quarterTile);
+                switch (f.getState()) {
+                    case TOP_RIGHT:
+                        g2.rotate(angle, x + 2 * tileSize - quarterTile, y + quarterTile);
+                        g2.fillRoundRect(x + tileSize + halfTile, y, halfTile, LstoPx(2), 50, 15);
+                        g2.rotate(-angle, x + 2 * tileSize - quarterTile, y + quarterTile);
+                        break;
+                    case BOTTOM_RIGHT:
+                        g2.rotate(angle, x + 2 * tileSize - quarterTile, y + 2 * tileSize - quarterTile);
+                        g2.fillRoundRect(x, y + tileSize + halfTile, LstoPx(2), halfTile, 15, 50);
+                        g2.rotate(-angle, x + 2 * tileSize - quarterTile, y + 2 * tileSize - quarterTile);
+                        break;
+                    case BOTTOM_LEFT:
+                        g2.rotate(angle, x +  quarterTile, y + 2 * tileSize - quarterTile);
+                        g2.fillRoundRect(x, y, halfTile, LstoPx(2), 50, 15);
+                        g2.rotate(-angle, x +  quarterTile, y + 2 * tileSize - quarterTile);
+                        break;
+                    case TOP_LEFT:
+                        g2.rotate(angle, x + quarterTile, y + quarterTile);
+                        g2.fillRoundRect(x, y, LstoPx(2), halfTile, 15, 50);
+                        g2.rotate(-angle, x + quarterTile, y + quarterTile);
+                        break;
+                }
             }
         }
 

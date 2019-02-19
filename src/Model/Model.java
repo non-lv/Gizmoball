@@ -102,6 +102,14 @@ public class Model extends Observable {
         return null;
     }
 
+    public FlipperGizmo getFlipperByName(String name) {
+        for (FlipperGizmo f : getFlippers())
+            if (name.equals(f.getId()))
+                return f;
+        return null;
+    }
+
+
     public void fireAbsorbers() {
         for (AbsorberGizmo ag : this.getAbsorber())
             ag.fire();
