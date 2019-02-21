@@ -72,5 +72,9 @@ public class Ball {
             return Math.sqrt(Math.pow(velocity.x(), 2) + Math.pow(velocity.y(), 2));
         else return 0.0D;
     }
+
+    public String getId(){
+        return id;
+    }
 }
 
