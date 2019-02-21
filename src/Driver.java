@@ -1,16 +1,12 @@
 import Controller.OptionPanelController;
-import Model.LoadBoardFromFile;
 import View.*;
 import Model.Model;
-import Model.SaveBoardToFile;
 
 
 public class Driver {
 
     public static void main(String[] args) {
         Model m = new Model();
-
-
 
         OptionsPanel optionsPanel = new OptionsPanel();
         RunModePanel playModePanel = new RunModePanel(m);
