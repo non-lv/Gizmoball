@@ -48,8 +48,8 @@ public class FlipperGizmo implements IGizmo {
                 case TOP_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
                     y = ypos + flipperWidth / 2;
-                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
-                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     break;
                 case BOTTOM_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
@@ -60,8 +60,8 @@ public class FlipperGizmo implements IGizmo {
                 case BOTTOM_LEFT:
                     x = xpos + flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
-                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
-                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     break;
             }
         } else {
@@ -75,8 +75,8 @@ public class FlipperGizmo implements IGizmo {
                 case BOTTOM_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
-                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
-                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     break;
                 case BOTTOM_LEFT:
                     x = xpos + flipperWidth / 2;
@@ -87,8 +87,8 @@ public class FlipperGizmo implements IGizmo {
                 case TOP_LEFT:
                     x = xpos + flipperWidth / 2;
                     y = ypos + flipperWidth / 2;
-                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
-                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     break;
             }
         }
@@ -102,9 +102,7 @@ public class FlipperGizmo implements IGizmo {
         List<LineSegment> l = new ArrayList<>();
         double x = 0, y = 0, x2 = 0, y2 = 0;
         double x_line_, y_line_, x_line_2, y_line_2;
-        double x_change, y_change;
-        x_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
-        y_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
+        double x_change = 0, y_change = 0;
 
         if (left) {
             switch (rotation) {
@@ -113,24 +111,32 @@ public class FlipperGizmo implements IGizmo {
                     y = ypos + flipperWidth / 2;
                     x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
                     break;
                 case TOP_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
                     y = ypos + flipperWidth / 2;
-                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
-                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
                     break;
                 case BOTTOM_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
                     x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
                     break;
                 case BOTTOM_LEFT:
                     x = xpos + flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
-                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
-                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
                     break;
             }
         } else {
@@ -140,24 +146,32 @@ public class FlipperGizmo implements IGizmo {
                     y = ypos + flipperWidth / 2;
                     x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
                     break;
                 case BOTTOM_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
-                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
-                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
                     break;
                 case BOTTOM_LEFT:
                     x = xpos + flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
                     x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
                     break;
                 case TOP_LEFT:
                     x = xpos + flipperWidth / 2;
                     y = ypos + flipperWidth / 2;
-                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
-                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
                     break;
             }
         }
