@@ -13,6 +13,7 @@ public class FlipperGizmo implements IGizmo {
     }
 
     private static final double angularVelocity = 90;
+    private static final double flipperWidth = .5;
 
     private String id;
     private int xpos;
@@ -35,88 +36,173 @@ public class FlipperGizmo implements IGizmo {
     @Override
     public List<Circle> getCircles() {
         List<Circle> l = new ArrayList<>();
-        double x, y, x2, y2;
+        double x = 0, y = 0, x2 = 0, y2 = 0;
         if (left) {
             switch (rotation) {
                 case TOP_LEFT:
-                    x = xpos + .25;
-                    y = ypos + .25;
-                    x2 = x + 1.5 * Math.sin(Math.toRadians(90 - angle));
-                    y2 = y + 1.5 * Math.sin(Math.toRadians(angle));
+                    x = xpos + flipperWidth / 2;
+                    y = ypos + flipperWidth / 2;
+                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
 
-                    l.add(new Circle(x, y, .25));
-                    l.add(new Circle(x2, y2, .25));
+                    l.add(new Circle(x, y, flipperWidth / 2));
+                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case TOP_RIGHT:
-                    x = xpos + 1.75;
-                    y = ypos + .25;
-                    x2 = x - 1.5 * Math.sin(Math.toRadians(90 - angle));
-                    y2 = y + 1.5 * Math.sin(Math.toRadians(angle));
+                    x = xpos + 2 - flipperWidth / 2;
+                    y = ypos + flipperWidth / 2;
+                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
 
-                    l.add(new Circle(x, y, .25));
-                    l.add(new Circle(x2, y2, .25));
+                    l.add(new Circle(x, y, flipperWidth / 2));
+                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case BOTTOM_RIGHT:
-                    x = xpos + 1.75;
-                    y = ypos + 1.75;
-                    x2 = x - 1.5 * Math.sin(Math.toRadians(90 - angle));
-                    y2 = y - 1.5 * Math.sin(Math.toRadians(angle));
+                    x = xpos + 2 - flipperWidth / 2;
+                    y = ypos + 2 - flipperWidth / 2;
+                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
 
-                    l.add(new Circle(x, y, .25));
-                    l.add(new Circle(x2, y2, .25));
+                    l.add(new Circle(x, y, flipperWidth / 2));
+                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case BOTTOM_LEFT:
-                    x = xpos + .25;
-                    y = ypos + 1.75;
-                    x2 = x + 1.5 * Math.sin(Math.toRadians(90 - angle));
-                    y2 = y - 1.5 * Math.sin(Math.toRadians(angle));
+                    x = xpos + flipperWidth / 2;
+                    y = ypos + 2 - flipperWidth / 2;
+                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
 
-                    l.add(new Circle(x, y, .25));
-                    l.add(new Circle(x2, y2, .25));
+                    l.add(new Circle(x, y, flipperWidth / 2));
+                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
             }
         } else {
             switch (rotation) {
                 case TOP_RIGHT:
-                    x = xpos + 1.75;
-                    y = ypos + .25;
-                    x2 = x - 1.5 * Math.sin(Math.toRadians(90 - angle));
-                    y2 = y + 1.5 * Math.sin(Math.toRadians(angle));
+                    x = xpos + 2 - flipperWidth / 2;
+                    y = ypos + flipperWidth / 2;
+                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
 
-                    l.add(new Circle(x, y, .25));
-                    l.add(new Circle(x2, y2, .25));
+                    l.add(new Circle(x, y, flipperWidth / 2));
+                    l.add(new Circle(x2, y2, flipperWidth / 2));
+                    break;
                 case BOTTOM_RIGHT:
-                    x = xpos + 1.75;
-                    y = ypos + 1.75;
-                    x2 = x - 1.5 * Math.sin(Math.toRadians(90 - angle));
-                    y2 = y - 1.5 * Math.sin(Math.toRadians(angle));
+                    x = xpos + 2 - flipperWidth / 2;
+                    y = ypos + 2 - flipperWidth / 2;
+                    x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
 
-                    l.add(new Circle(x, y, .25));
-                    l.add(new Circle(x2, y2, .25));
+                    l.add(new Circle(x, y, flipperWidth / 2));
+                    l.add(new Circle(x2, y2, flipperWidth / 2));
+                    break;
                 case BOTTOM_LEFT:
-                    x = xpos + .25;
-                    y = ypos + 1.75;
-                    x2 = x + 1.5 * Math.sin(Math.toRadians(90 - angle));
-                    y2 = y - 1.5 * Math.sin(Math.toRadians(angle));
+                    x = xpos + flipperWidth / 2;
+                    y = ypos + 2 - flipperWidth / 2;
+                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
 
-                    l.add(new Circle(x, y, .25));
-                    l.add(new Circle(x2, y2, .25));
+                    l.add(new Circle(x, y, flipperWidth / 2));
+                    l.add(new Circle(x2, y2, flipperWidth / 2));
+                    break;
                 case TOP_LEFT:
-                    x = xpos + .25;
-                    y = ypos + .25;
-                    x2 = x + 1.5 * Math.sin(Math.toRadians(90 - angle));
-                    y2 = y + 1.5 * Math.sin(Math.toRadians(angle));
+                    x = xpos + flipperWidth / 2;
+                    y = ypos + flipperWidth / 2;
+                    x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
+                    y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
 
-                    l.add(new Circle(x, y, .25));
-                    l.add(new Circle(x2, y2, .25));
+                    l.add(new Circle(x, y, flipperWidth / 2));
+                    l.add(new Circle(x2, y2, flipperWidth / 2));
+                    break;
             }
         }
+        System.out.println(left + ":" + rotation + " " + x + " " + y + " " + " | " + x2 + " " + y2);
         return l;
     }
 
     @Override
     public List<LineSegment> getLines() {
-        return new ArrayList<>();
+        List<LineSegment> l = new ArrayList<>();
+        double x, y, x2, y2;
+        double x_line_, y_line_, x_line_2, y_line_2;
+        double x_change, y_change;
+        if (left) {
+            switch (rotation) {
+                case TOP_LEFT:
+                    /*
+                    x = xpos + flipperWidth / 2;
+                    y = ypos + flipperWidth / 2;
+                    x2 = x + (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y + (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(angle));
+
+                    x_change = flipperWidth / 2 * Math.sin(Math.toRadians(angle));
+                    y_change = flipperWidth / 2 * Math.sin(Math.toRadians(90 - angle));
+
+                    x_line_ = x + x_change;
+                    y_line_ = y - y_change;
+                    x_line_2 = x2 + x_change;
+                    y_line_2 = y2 - y_change;
+                    l.add(new LineSegment(x_line_, y_line_, x_line_2, y_line_2));
+                    System.out.println(x_line_ + " " + y_line_ + " " + x_line_2 + " " + y_line_2);
+                    x_line_ = x - x_change;
+                    y_line_ = y + y_change;
+                    x_line_2 = x2 - x_change;
+                    y_line_2 = y2 + y_change;
+                    l.add(new LineSegment(x_line_, y_line_, x_line_2, y_line_2));
+                    System.out.println(x_line_ + " " + y_line_ + " " + x_line_2 + " " + y_line_2);
+                    */
+                    break;
+                case TOP_RIGHT:
+                    x = xpos + 2 - flipperWidth / 2;
+                    y = ypos + flipperWidth / 2;
+                    x2 = x - (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y + (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(angle));
+
+                    break;
+                case BOTTOM_RIGHT:
+                    x = xpos + 2 - flipperWidth / 2;
+                    y = ypos + 2 - flipperWidth / 2;
+                    x2 = x - (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y - (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(angle));
+
+                    break;
+                case BOTTOM_LEFT:
+                    x = xpos + flipperWidth / 2;
+                    y = ypos + 2 - flipperWidth / 2;
+                    x2 = x + (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y - (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(angle));
+
+                    break;
+            }
+        } else {
+            switch (rotation) {
+                case TOP_RIGHT:
+                    x = xpos + 2 - flipperWidth / 2;
+                    y = ypos + flipperWidth / 2;
+                    x2 = x - (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y + (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(angle));
+
+                case BOTTOM_RIGHT:
+                    x = xpos + 2 - flipperWidth / 2;
+                    y = ypos + 2 - flipperWidth / 2;
+                    x2 = x - (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y - (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(angle));
+
+                case BOTTOM_LEFT:
+                    x = xpos + flipperWidth / 2;
+                    y = ypos + 2 - flipperWidth / 2;
+                    x2 = x + (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y - (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(angle));
+
+                case TOP_LEFT:
+                    x = xpos + flipperWidth / 2;
+                    y = ypos + flipperWidth / 2;
+                    x2 = x + (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(90 - angle));
+                    y2 = y + (2 - 2 * flipperWidth) * Math.sin(Math.toRadians(angle));
+
+            }
+        }
+        return l;
     }
 
     @Override

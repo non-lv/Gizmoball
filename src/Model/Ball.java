@@ -5,6 +5,8 @@ import physics.Vect;
 
 public class Ball {
 
+    private static final double radius = .25;
+
     private String id;
     private Vect velocity;
     private double xpos;
@@ -24,7 +26,7 @@ public class Ball {
     }
 
     public Circle getCircle() {
-        return new Circle(xpos, ypos, .25);
+        return new Circle(xpos, ypos, radius);
     }
 
     public void setX(double x) {
@@ -52,7 +54,7 @@ public class Ball {
     }
 
     public double getRadius() {
-        return .25;
+        return radius;
     }
 
     public void stop() {
