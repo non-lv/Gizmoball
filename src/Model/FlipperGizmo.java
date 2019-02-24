@@ -44,36 +44,24 @@ public class FlipperGizmo implements IGizmo {
                     y = ypos + flipperWidth / 2;
                     x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
-
-                    l.add(new Circle(x, y, flipperWidth / 2));
-                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case TOP_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
                     y = ypos + flipperWidth / 2;
                     x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
-
-                    l.add(new Circle(x, y, flipperWidth / 2));
-                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case BOTTOM_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
                     x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
-
-                    l.add(new Circle(x, y, flipperWidth / 2));
-                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case BOTTOM_LEFT:
                     x = xpos + flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
                     x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
-
-                    l.add(new Circle(x, y, flipperWidth / 2));
-                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
             }
         } else {
@@ -83,39 +71,29 @@ public class FlipperGizmo implements IGizmo {
                     y = ypos + flipperWidth / 2;
                     x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
-
-                    l.add(new Circle(x, y, flipperWidth / 2));
-                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case BOTTOM_RIGHT:
                     x = xpos + 2 - flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
                     x2 = x - (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
-
-                    l.add(new Circle(x, y, flipperWidth / 2));
-                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case BOTTOM_LEFT:
                     x = xpos + flipperWidth / 2;
                     y = ypos + 2 - flipperWidth / 2;
                     x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y - (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
-
-                    l.add(new Circle(x, y, flipperWidth / 2));
-                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
                 case TOP_LEFT:
                     x = xpos + flipperWidth / 2;
                     y = ypos + flipperWidth / 2;
                     x2 = x + (2 - flipperWidth) * Math.sin(Math.toRadians(angle));
                     y2 = y + (2 - flipperWidth) * Math.sin(Math.toRadians(90 - angle));
-
-                    l.add(new Circle(x, y, flipperWidth / 2));
-                    l.add(new Circle(x2, y2, flipperWidth / 2));
                     break;
             }
         }
+        l.add(new Circle(x, y, flipperWidth / 2));
+        l.add(new Circle(x2, y2, flipperWidth / 2));
         return l;
     }
 
