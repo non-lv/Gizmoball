@@ -65,34 +65,57 @@ public class SaveBoardToFile {
             if(f.isLeft()){
                 bw.write("LeftFlipper " + f.getId() + " " + f.getX() + " " + f.getY());
                 bw.newLine();
+                switch(f.getState()) {
+                    case TOP_RIGHT:
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        break;
+                    case BOTTOM_RIGHT:
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        break;
+                    case BOTTOM_LEFT:
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        break;
+                }
             }else{
                 bw.write("RightFlipper " + f.getId() + " " + f.getX() + " " + f.getY());
                 bw.newLine();
+                switch(f.getState()) {
+                    case BOTTOM_RIGHT:
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        break;
+                    case BOTTOM_LEFT:
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        break;
+                    case TOP_LEFT:
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        bw.write("Rotate " + f.getId());
+                        bw.newLine();
+                        break;
+                }
             }
-            switch(f.getState()) {
-                case TOP_RIGHT:
-                    bw.write("Rotate " + f.getId());
-                    bw.newLine();
-                    bw.newLine();
-                    break;
-                case BOTTOM_RIGHT:
-                    bw.write("Rotate " + f.getId());
-                    bw.newLine();
-                    bw.write("Rotate " + f.getId());
-                    bw.newLine();
-                    bw.newLine();
-                    break;
-                case BOTTOM_LEFT:
-                    bw.write("Rotate " + f.getId());
-                    bw.newLine();
-                    bw.write("Rotate " + f.getId());
-                    bw.newLine();
-                    bw.write("Rotate " + f.getId());
-                    bw.newLine();
-                    bw.newLine();
-                    break;
-            }
+        }
         bw.newLine();
+
+        for(Ball b : m.getBalls()){
+
+            bw.write("Ball " + b.getId() + " " + b.getX() + " " + b.getY() + " " + b.getVelocity().x() + " " + b.getVelocity().y());
+            bw.newLine();
         }
         bw.newLine();
         bw.close();

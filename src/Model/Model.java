@@ -83,7 +83,7 @@ public class Model extends Observable {
         return balls;
     }
 
-    public void addGizmo(IGizmo gizmo){
+    public void addGizmo(IGizmo gizmo) {
         iGizmos.add(gizmo);
         this.setChanged();
         this.notifyObservers();
@@ -169,24 +169,50 @@ public class Model extends Observable {
             if (iIGizmo instanceof AbsorberGizmo && ((AbsorberGizmo) iIGizmo).isInside(ball))
                 continue;
 
-            for (Circle circle : iIGizmo.getCircles()) {
-                time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
-                if (time < shortestTime) {
-                    gizmo = iIGizmo;
-                    shortestTime = time;
-                    newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ballVelocity);
+            if (iIGizmo instanceof FlipperGizmo && isMoving((FlipperGizmo) iIGizmo)) {
+                // Moving Flipper physics
+                double angularVelocity = Math.toRadians(((FlipperGizmo) iIGizmo).getAngularVelocity());
+                if(((FlipperGizmo) iIGizmo).isLeft())
+                    angularVelocity *= -leftFlipperFlippin;
+                else
+                    angularVelocity *= rightFlipperFlippin;
+
+                Vect center = iIGizmo.getCircles().get(0).getCenter();
+                for (Circle circle : iIGizmo.getCircles()) {
+                    time = Geometry.timeUntilRotatingCircleCollision(circle, center, angularVelocity, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        gizmo = iIGizmo;
+                        shortestTime = time;
+                        newVelo = Geometry.reflectRotatingCircle(circle, center, angularVelocity, ballCircle, ballVelocity, .95D);
+                    }
                 }
-            }
 
-            for (LineSegment line : iIGizmo.getLines()) {
-
-                time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
-                if (time < shortestTime) {
-                    gizmo = iIGizmo;
-                    shortestTime = time;
-                    newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
+                for (LineSegment line : iIGizmo.getLines()) {
+                    time = Geometry.timeUntilRotatingWallCollision(line, center, angularVelocity, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        gizmo = iIGizmo;
+                        shortestTime = time;
+                        newVelo = Geometry.reflectRotatingWall(line, center, angularVelocity, ballCircle, ballVelocity, .95D);
+                    }
+                }
+            } else {
+                for (Circle circle : iIGizmo.getCircles()) {
+                    time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        gizmo = iIGizmo;
+                        shortestTime = time;
+                        newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ballVelocity);
+                    }
                 }
 
+                for (LineSegment line : iIGizmo.getLines()) {
+                    time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+                    if (time < shortestTime) {
+                        gizmo = iIGizmo;
+                        shortestTime = time;
+                        newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
+                    }
+                }
             }
         }
 
@@ -220,6 +246,13 @@ public class Model extends Observable {
 
         flipper.setAngle(newAngle);
         return flipper;
+    }
+
+    private boolean isMoving(FlipperGizmo flipperGizmo) {
+        if (flipperGizmo.isLeft())
+            return flipperGizmo.getAngle() < 90 && leftFlipperFlippin > 0 || flipperGizmo.getAngle() > 0 && leftFlipperFlippin < 0;
+        else
+            return flipperGizmo.getAngle() < 90 && rightFlipperFlippin > 0 || flipperGizmo.getAngle() > 0 && rightFlipperFlippin < 0;
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
