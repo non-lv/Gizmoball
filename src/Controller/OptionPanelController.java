@@ -20,6 +20,7 @@ public class OptionPanelController implements ActionListener {
     private Model model;
 
     public OptionPanelController(OptionsPanel panel, Model model){
+        this.model = model;
         this.panel = panel;
     }
 

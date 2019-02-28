@@ -41,6 +41,11 @@ public class OptionsPanel extends JPanel implements IView {
         right = new JPanel();
         top.setPreferredSize(new Dimension(500, 50));
 
+        switchToBuild.setFocusable(false);
+        save.setFocusable(false);
+        open.setFocusable(false);
+        quit.setFocusable(false);
+
         top.add(switchToBuild);
         top.add(save);
         top.add(open);
