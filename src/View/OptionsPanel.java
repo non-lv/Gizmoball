@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class OptionsPanel extends JPanel {
+public class OptionsPanel extends JPanel implements IView {
 
     private JPanel top;
     private JButton switchToBuild;
@@ -19,7 +19,7 @@ public class OptionsPanel extends JPanel {
         init();
     }
 
-    public void init() {
+    private void init() {
 
         top = new JPanel(new GridLayout(1, 4));
         switchToBuild = new JButton("Build Mode");
@@ -48,11 +48,25 @@ public class OptionsPanel extends JPanel {
         this.add(top);
     }
 
-    public void addActionListener(ActionListener listener){
+    @Override
+    public void addActionListeners(ActionListener listener){
         switchToBuild.addActionListener(listener);
         switchToRun.addActionListener(listener);
         save.addActionListener(listener);
         open.addActionListener(listener);
         quit.addActionListener(listener);
     }
+
+    void buildMode(){
+        top.remove(0);
+        top.add(switchToRun, 0);
+        top.revalidate();
+    }
+
+    void runMode(){
+        top.remove(0);
+        top.add(switchToBuild, 0);
+        top.revalidate();
+    }
+
 }

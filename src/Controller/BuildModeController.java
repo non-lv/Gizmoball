@@ -11,7 +11,6 @@ public class BuildModeController implements ActionListener {
 
     public BuildModeController(BuildModePanel panel){
         this.buildModePanel = panel;
-        panel.addActionListener(this);
     }
 
     @Override

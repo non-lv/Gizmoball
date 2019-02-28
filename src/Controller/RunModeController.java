@@ -37,36 +37,9 @@ public class RunModeController implements ActionListener {
                 case "Tick":
                     model.moveBalls();
                     break;
-                case "Save":
-                    JFileChooser jfc1 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                    int returnValue1 = jfc1.showOpenDialog(null);
-
-                    if(returnValue1 == JFileChooser.APPROVE_OPTION){
-                        File selectedFile = jfc1.getSelectedFile();
-                        String path = selectedFile.getAbsolutePath();
-
-                        try{
-                            SaveBoardToFile.saveToFile(path,model);
-                        } catch (Exception ex){
-                            System.out.println("cant read");
-                        }
-                    }
+                case "Reload":
                     break;
-                case "Load":
-                    JFileChooser jfc2 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                    int returnValue2 = jfc2.showOpenDialog(null);
 
-                    if(returnValue2 == JFileChooser.APPROVE_OPTION){
-                        File selectedFile = jfc2.getSelectedFile();
-                        String path = selectedFile.getAbsolutePath();
-
-                        try{
-                            LoadBoardFromFile.readFromFile(path,model);
-                        } catch (Exception ex){
-                            System.out.println("cant read");
-                        }
-                    }
-                    break;
             }
         }
     }

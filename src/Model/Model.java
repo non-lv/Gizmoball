@@ -299,4 +299,5 @@ public class Model extends Observable {
     public void leftFlipperStop() {
         leftFlipperFlippin = -1;
     }
+
 }

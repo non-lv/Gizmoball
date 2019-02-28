@@ -5,7 +5,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class BuildModePanel extends JPanel {
+public class BuildModePanel extends JPanel implements IView{
 
     private JPanel build;
     private JPanel gizmoAndBall;
@@ -38,7 +38,7 @@ public class BuildModePanel extends JPanel {
         init();
     }
 
-    public void init(){
+    private void init(){
         //IGizmo adding panel
         addGizmo = new JPanel(new GridLayout(2, 3));
 
@@ -189,23 +189,26 @@ public class BuildModePanel extends JPanel {
 
     }
 
-    public void addActionListener(ActionListener listener){
+    @Override
+    public void addActionListeners(ActionListener actionListener){
         //Gizmo Buttons
-        square.addActionListener(listener);
-        triangle.addActionListener(listener);
-        circle.addActionListener(listener);
-        lFlipper.addActionListener(listener);
-        rFlipper.addActionListener(listener);
-        absorber.addActionListener(listener);
+        square.addActionListener(actionListener);
+        triangle.addActionListener(actionListener);
+        circle.addActionListener(actionListener);
+        lFlipper.addActionListener(actionListener);
+        rFlipper.addActionListener(actionListener);
+        absorber.addActionListener(actionListener);
 
         //Edit Gizmos buttons
-        move.addActionListener(listener);
-        rotate.addActionListener(listener);
-        delete.addActionListener(listener);
-        clear.addActionListener(listener);
-        connect.addActionListener(listener);
-        disconnect.addActionListener(listener);
-        keyConnect.addActionListener(listener);
-        keyDisconnect.addActionListener(listener);
+        move.addActionListener(actionListener);
+        rotate.addActionListener(actionListener);
+        delete.addActionListener(actionListener);
+        clear.addActionListener(actionListener);
+        connect.addActionListener(actionListener);
+        disconnect.addActionListener(actionListener);
+        keyConnect.addActionListener(actionListener);
+        keyDisconnect.addActionListener(actionListener);
     }
+
+
 }
