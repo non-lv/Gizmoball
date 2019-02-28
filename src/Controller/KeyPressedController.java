@@ -18,6 +18,7 @@ public class KeyPressedController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        //System.out.println("pressed");
         switch (e.getKeyCode()){
             case KeyEvent.VK_LEFT:
                 model.leftFlipperMove();
