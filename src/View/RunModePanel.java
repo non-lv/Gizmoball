@@ -7,13 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class RunModePanel extends JPanel {
+public class RunModePanel extends JPanel implements IView{
 
     private JPanel box;
     private JButton startStop;
     private JButton tick;
     private JButton reload;
-    private JButton quit;
     private ActionListener runModeController;
     private Model model;
 
@@ -23,18 +22,15 @@ public class RunModePanel extends JPanel {
         init();
     }
 
-    public void init() {
+    private void init() {
 
         runModeController = new RunModeController(model);
 
-        box = new JPanel(new GridLayout(3, 1));
+        box = new JPanel(new GridLayout(4, 1));
         startStop = new JButton("Start/Stop");
         tick = new JButton("Tick");
         reload = new JButton("Reload");
 
-        startStop.addActionListener(runModeController);
-        tick.addActionListener(runModeController);
-        reload.addActionListener(runModeController);
 
         box.setPreferredSize(new Dimension(150, 500));
 
@@ -44,5 +40,15 @@ public class RunModePanel extends JPanel {
 
         this.add(box);
 
+        startStop.setFocusable(false);
+        tick.setFocusable(false);
+        reload.setFocusable(false);
+    }
+
+    @Override
+    public void addActionListeners(ActionListener actionListener) {
+        startStop.addActionListener(actionListener);
+        tick.addActionListener(actionListener);
+        reload.addActionListener(actionListener);
     }
 }

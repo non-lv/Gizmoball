@@ -20,8 +20,7 @@ public class BoardPanel extends JPanel implements Observer {
     private static final int boardHeight = 20;
     private static final int tileSize = 25;
 
-    //private JPanel board;
-    protected Model m;
+    private Model m;
 
     public BoardPanel(Model m) {
         this.m = m;
@@ -29,7 +28,7 @@ public class BoardPanel extends JPanel implements Observer {
         init();
     }
 
-    public void init() {
+    private void init() {
 
         this.setPreferredSize(new Dimension(LstoPx(boardWidth), LstoPx(boardHeight)));
         this.setBackground(new Color(255, 255, 255));

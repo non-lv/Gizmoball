@@ -1,15 +1,13 @@
 package Model;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class LoadBoardFromFile {
 
     public static void readFromFile(String fileName, Model m) throws IOException {
 
         File file = new File(fileName);
-        List<IGizmo> iGizmos = new ArrayList<>();
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -119,7 +117,6 @@ public class LoadBoardFromFile {
 
         }
     }
-
 
     private static boolean checkCount(String[] line, int count){
         return line.length == count;

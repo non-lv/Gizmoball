@@ -1,14 +1,11 @@
 package View;
 
-import Controller.OptionPanelController;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class OptionsPanel extends JPanel {
+public class OptionsPanel extends JPanel implements IView {
 
-//    private final HomeFrame homeFrame;
     private JPanel top;
     private JButton switchToBuild;
     private JButton switchToRun;
@@ -17,42 +14,37 @@ public class OptionsPanel extends JPanel {
     private JButton quit;
     private JPanel left;
     private JPanel right;
-    private ActionListener optionPanelController;
 
     public OptionsPanel() {
-     //   this.homeFrame = homeFrame;
         init();
     }
 
-    public void init() {
-        
-   //     optionPanelController = new OptionPanelController(homeFrame);
+    private void init() {
 
         top = new JPanel(new GridLayout(1, 4));
         switchToBuild = new JButton("Build Mode");
-   //     switchToBuild.setActionCommand("switchToBuild");
+        switchToBuild.setActionCommand("switchToBuild");
 
         switchToRun = new JButton("Run Mode");
-   //     switchToRun.setActionCommand("switchToRun");
+        switchToRun.setActionCommand("switchToRun");
 
         save = new JButton("Save");
-  //      save.setActionCommand("Save");
+        save.setActionCommand("Save");
 
         open = new JButton("Open");
-  //      open.setActionCommand("Open");
+        open.setActionCommand("Open");
 
         quit = new JButton("Quit");
-  //      quit.setActionCommand("Quit");
-        
-        switchToRun.addActionListener(optionPanelController);
-        switchToBuild.addActionListener(optionPanelController);
-        save.addActionListener(optionPanelController);
-        open.addActionListener(optionPanelController);
-        quit.addActionListener(optionPanelController);
+        quit.setActionCommand("Quit");
 
         left = new JPanel();
         right = new JPanel();
         top.setPreferredSize(new Dimension(500, 50));
+
+        switchToBuild.setFocusable(false);
+        save.setFocusable(false);
+        open.setFocusable(false);
+        quit.setFocusable(false);
 
         top.add(switchToBuild);
         top.add(save);
@@ -61,11 +53,25 @@ public class OptionsPanel extends JPanel {
         this.add(top);
     }
 
-    public void addActionListener(ActionListener listener){
+    @Override
+    public void addActionListeners(ActionListener listener){
         switchToBuild.addActionListener(listener);
         switchToRun.addActionListener(listener);
         save.addActionListener(listener);
         open.addActionListener(listener);
         quit.addActionListener(listener);
     }
+
+    void buildMode(){
+        top.remove(0);
+        top.add(switchToRun, 0);
+        top.revalidate();
+    }
+
+    void runMode(){
+        top.remove(0);
+        top.add(switchToBuild, 0);
+        top.revalidate();
+    }
+
 }

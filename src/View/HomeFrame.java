@@ -16,35 +16,35 @@ import Model.Model;
 import Model.Ball;
 import Model.AbsorberGizmo;
 
-public class HomeFrame implements Observer {
+public class HomeFrame {
 
-
-    public JPanel runMode;
     private JFrame window;
     private JPanel border;
     private JPanel menuPanelLeft;
     private JPanel leftAlignment;
-    public JPanel optionsPanelTop;
+    private OptionsPanel optionsPanelTop;
     private JPanel boardAndNotificationBarContainer;
     private JPanel notificationPanel;
     private JPanel boardPanel;
-    public JPanel buildMode;
     private JPanel boardContainer;
     private KeyPressedController k;
     private Model m;
 
-    public HomeFrame(JPanel menuPanelLeft, JPanel optionsPanelTop, JPanel boardPanel, JPanel notificationPanel, Model m) {
-        this.menuPanelLeft = menuPanelLeft;
-        this.optionsPanelTop = optionsPanelTop;
+    public HomeFrame(Model m, RunModePanel runModePanel, OptionsPanel optionsPanel, BoardPanel boardPanel, NotificationPanel notificationPanel) {
+
+        this.m = m;
+        this.menuPanelLeft = runModePanel;
+        this.optionsPanelTop = optionsPanel;
         this.boardPanel = boardPanel;
         this.notificationPanel = notificationPanel;
-        this.m = m;
-        this.k = new KeyPressedController(this.m);
+        k = new KeyPressedController(this.m);
+
         init();
     }
 
 
-    public void init() {
+    private void init() {
+
         window = new JFrame("Gizmoball");
         border = new JPanel(new BorderLayout());
         leftAlignment = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -75,18 +75,27 @@ public class HomeFrame implements Observer {
     }
 
     public void swapToBuild() {
-        border.remove(menuPanelLeft);
+        menuPanelLeft.removeAll();
         menuPanelLeft.add(new BuildModePanel());
-        border.add(menuPanelLeft, BorderLayout.LINE_START);
+
+        optionsPanelTop.buildMode();
+
+        window.pack();
+        window.revalidate();
     }
 
     public void swapToRun() {
-        border.remove(buildMode);
-        border.add(runMode, BorderLayout.LINE_START);
+        menuPanelLeft.removeAll();
+        menuPanelLeft.add(new RunModePanel(m));
+
+        optionsPanelTop.runMode();
+
+        window.pack();
+        window.revalidate();
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-
+    public JFrame getWindow(){
+        return window;
     }
+
 }

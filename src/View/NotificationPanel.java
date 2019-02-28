@@ -12,7 +12,7 @@ public class NotificationPanel extends JPanel {
         init();
     }
 
-    public void init(){
+    private void init(){
 
         container = new JPanel();
         text = new JLabel("Gizmoball");
@@ -21,5 +21,9 @@ public class NotificationPanel extends JPanel {
         container.setBackground(Color.white);
         container.add(text);
         this.add(container);
+    }
+
+    public void setText(String str){
+        text.setText(str);
     }
 }
