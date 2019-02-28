@@ -272,6 +272,47 @@ public class Model extends Observable {
         return ball;
     }
 
+    public List<CircleGizmo> getCircles() {
+        List<CircleGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof CircleGizmo)
+                l.add((CircleGizmo) g);
+        return l;
+    }
+
+    public List<SquareGizmo> getSquare() {
+        List<SquareGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof SquareGizmo)
+                l.add((SquareGizmo) g);
+        return l;
+    }
+
+    public List<TriangleGizmo> getTriangles() {
+        List<TriangleGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof TriangleGizmo)
+                l.add((TriangleGizmo) g);
+        return l;
+    }
+
+    public List<AbsorberGizmo> getAbsorber() {
+        List<AbsorberGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof AbsorberGizmo)
+                l.add((AbsorberGizmo) g);
+        return l;
+    }
+
+    public List<FlipperGizmo> getFlippers() {
+        List<FlipperGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof FlipperGizmo)
+                l.add((FlipperGizmo) g);
+        return l;
+    }
+
+
     public void rightFlipperMove() {
         rightFlipperFlippin = 1;
     }
