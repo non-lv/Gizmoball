@@ -76,6 +76,8 @@ public class HomeFrame {
 
     public void swapToBuild() {
         menuPanelLeft.removeAll();
+        boardContainer.removeAll();
+        boardContainer.add(new BoardPanel(m, true));
         menuPanelLeft.add(new BuildModePanel());
 
         optionsPanelTop.buildMode();
@@ -86,6 +88,8 @@ public class HomeFrame {
 
     public void swapToRun() {
         menuPanelLeft.removeAll();
+        boardContainer.removeAll();
+        boardContainer.add(new BoardPanel(m, false));
         menuPanelLeft.add(new RunModePanel(m));
 
         optionsPanelTop.runMode();

@@ -19,10 +19,12 @@ public class BoardPanel extends JPanel implements Observer {
     private static final int boardWidth = 20;
     private static final int boardHeight = 20;
     private static final int tileSize = 25;
+    private Boolean grid;
 
     private Model m;
 
-    public BoardPanel(Model m) {
+    public BoardPanel(Model m, Boolean grid) {
+        this.grid = grid;
         this.m = m;
         this.m.addObserver(this);
         init();
@@ -36,10 +38,26 @@ public class BoardPanel extends JPanel implements Observer {
 
     }
 
+    public void addGrid(Graphics2D g){
+        for ( int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1) ) {
+            for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
+                g.drawRect(x, y, LstoPx(1), LstoPx(1));
+            }
+        }
+    }
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
+        if(grid){
+            for ( int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1) ) {
+                for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
+                    g.drawRect(x, y, LstoPx(1), LstoPx(1));
+                }
+            }
+        }
 
         // Draw all the vertical lines
         for (CircleGizmo c : m.getCircles()) {
