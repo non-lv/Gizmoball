@@ -18,13 +18,13 @@ public class HomeController{
         runModePanel.addActionListeners(new RunModeController(m));
 
         buildModePanel = new BuildModePanel();
-        buildModePanel.addActionListeners(new BuildModeController(buildModePanel));
+        buildModePanel.addActionListeners(new BuildModeController(m, buildModePanel));
 
         optionsPanel = new OptionsPanel();
         OptionPanelController optionPanelController = new OptionPanelController(optionsPanel, m);
         optionsPanel.addActionListeners(optionPanelController);
 
-        boardPanel = new BoardPanel(m);
+        boardPanel = new BoardPanel(m, false);
 
         notificationPanel = new NotificationPanel();
 
@@ -32,7 +32,7 @@ public class HomeController{
 
         optionPanelController.setHomeFrame(home);
 
-        boardPanel = new BoardPanel(m);
+        boardPanel = new BoardPanel(m, false);
         notificationPanel = new NotificationPanel();
     }
 

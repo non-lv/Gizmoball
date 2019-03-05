@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Model;
 import View.BuildModePanel;
 
 import java.awt.event.ActionEvent;
@@ -8,8 +9,10 @@ import java.awt.event.ActionListener;
 public class BuildModeController implements ActionListener {
 
     private final BuildModePanel buildModePanel;
+    private Model model;
 
-    public BuildModeController(BuildModePanel panel){
+    public BuildModeController(Model m, BuildModePanel panel){
+        this.model = m;
         this.buildModePanel = panel;
     }
 

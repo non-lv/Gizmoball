@@ -244,7 +244,6 @@ public class FlipperGizmo implements IGizmo {
         }
     }
 
-
     public Rotation getState() {
         return rotation;
     }
