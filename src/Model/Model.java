@@ -39,87 +39,6 @@ public class Model extends Observable {
         leftFlipperFlippin = -1;
     }
 
-    public List<IGizmo> getGizmos() {
-        return iGizmos;
-    }
-    public List<CircleGizmo> getCircles() {
-        List<CircleGizmo> l = new ArrayList<>();
-        for (IGizmo g : iGizmos)
-            if (g instanceof CircleGizmo)
-                l.add((CircleGizmo) g);
-        return l;
-    }
-
-    public List<SquareGizmo> getSquares() {
-        List<SquareGizmo> l = new ArrayList<>();
-        for (IGizmo g : iGizmos)
-            if (g instanceof SquareGizmo)
-                l.add((SquareGizmo) g);
-        return l;
-    }
-
-    public List<TriangleGizmo> getTriangles() {
-        List<TriangleGizmo> l = new ArrayList<>();
-        for (IGizmo g : iGizmos)
-            if (g instanceof TriangleGizmo)
-                l.add((TriangleGizmo) g);
-        return l;
-    }
-
-    public void clear(){
-        iGizmos = new ArrayList<>();
-        balls = new ArrayList<>();
-    }
-
-    public List<AbsorberGizmo> getAbsorbers() {
-        List<AbsorberGizmo> l = new ArrayList<>();
-        for (IGizmo g : iGizmos)
-            if (g instanceof AbsorberGizmo)
-                l.add((AbsorberGizmo) g);
-        return l;
-    }
-
-    public void removeGizmo(IGizmo gizmo){
-        iGizmos.remove(gizmo);
-    }
-    public List<FlipperGizmo> getFlippers() {
-        List<FlipperGizmo> l = new ArrayList<>();
-        for (IGizmo g : iGizmos)
-            if (g instanceof FlipperGizmo)
-                l.add((FlipperGizmo) g);
-        return l;
-    }
-
-    public List<Ball> getBalls() {
-        return balls;
-    }
-
-    public void addGizmo(IGizmo gizmo) {
-        iGizmos.add(gizmo);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public void addBall(Ball b) {
-        balls.add(b);
-        this.setChanged();
-        this.notifyObservers();
-    }
-
-    public TriangleGizmo getTriangleByName(String name) {
-        for (TriangleGizmo t : getTriangles())
-            if (name.equals(t.getId()))
-                return t;
-        return null;
-    }
-
-    public FlipperGizmo getFlipperByName(String name) {
-        for (FlipperGizmo f : getFlippers())
-            if (name.equals(f.getId()))
-                return f;
-        return null;
-    }
-
     public void fireAbsorbers() {
         for (AbsorberGizmo ag : this.getAbsorbers())
             ag.fire();
@@ -238,13 +157,6 @@ public class Model extends Observable {
 
     }
 
-    private void moveFlippersForTime(double delta_t) {
-        for (FlipperGizmo f : this.getFlippers())
-            if (f.isLeft())
-                f.moveFlipperForTime(delta_t, leftFlipperFlippin);
-            else f.moveFlipperForTime(delta_t, rightFlipperFlippin);
-    }
-
     private Ball moveBallForTime(Ball ball, double time) {
         double newX = 0.D;
         double newY = 0.D;
@@ -274,6 +186,13 @@ public class Model extends Observable {
         return ball;
     }
 
+    private void moveFlippersForTime(double delta_t) {
+        for (FlipperGizmo f : this.getFlippers())
+            if (f.isLeft())
+                f.moveFlipperForTime(delta_t, leftFlipperFlippin);
+            else f.moveFlipperForTime(delta_t, rightFlipperFlippin);
+    }
+
     public void rightFlipperMove() {
         rightFlipperFlippin = 1;
     }
@@ -297,4 +216,86 @@ public class Model extends Observable {
         mu2 = newFriction;
     }
 
+    public List<IGizmo> getGizmos() {
+        return iGizmos;
+    }
+
+    public List<CircleGizmo> getCircles() {
+        List<CircleGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof CircleGizmo)
+                l.add((CircleGizmo) g);
+        return l;
+    }
+
+    public List<SquareGizmo> getSquares() {
+        List<SquareGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof SquareGizmo)
+                l.add((SquareGizmo) g);
+        return l;
+    }
+
+    public List<TriangleGizmo> getTriangles() {
+        List<TriangleGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof TriangleGizmo)
+                l.add((TriangleGizmo) g);
+        return l;
+    }
+
+    public List<AbsorberGizmo> getAbsorbers() {
+        List<AbsorberGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof AbsorberGizmo)
+                l.add((AbsorberGizmo) g);
+        return l;
+    }
+
+    public List<FlipperGizmo> getFlippers() {
+        List<FlipperGizmo> l = new ArrayList<>();
+        for (IGizmo g : iGizmos)
+            if (g instanceof FlipperGizmo)
+                l.add((FlipperGizmo) g);
+        return l;
+    }
+
+    public List<Ball> getBalls() {
+        return balls;
+    }
+
+    public TriangleGizmo getTriangleByName(String name) {
+        for (TriangleGizmo t : getTriangles())
+            if (name.equals(t.getId()))
+                return t;
+        return null;
+    }
+
+    public FlipperGizmo getFlipperByName(String name) {
+        for (FlipperGizmo f : getFlippers())
+            if (name.equals(f.getId()))
+                return f;
+        return null;
+    }
+
+    public void addGizmo(IGizmo gizmo) {
+        iGizmos.add(gizmo);
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public void addBall(Ball b) {
+        balls.add(b);
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    public void removeGizmo(IGizmo gizmo){
+        iGizmos.remove(gizmo);
+    }
+
+    public void clear(){
+        iGizmos = new ArrayList<>();
+        balls = new ArrayList<>();
+    }
 }
