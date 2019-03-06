@@ -26,6 +26,10 @@ public class TriangleGizmo implements IGizmo {
         this.ypos = y;
         colour = Color.blue;
 
+        if (r == null){
+            r = Rotation.TOP_LEFT;
+        }
+
         rotation = r;
 
         this.id = id;
@@ -70,8 +74,9 @@ public class TriangleGizmo implements IGizmo {
     }
 
     @Override
-    public void setPos() {
-
+    public void setPos(int x, int y) {
+        this.xpos = x;
+        this.ypos = y;
     }
 
     @Override

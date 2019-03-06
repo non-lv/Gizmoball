@@ -32,6 +32,8 @@ public class BuildModePanel extends JPanel implements IView{
     private JButton friction;
     private JButton gravity;
     private JPanel FrictionAndGravity;
+    private JTextArea frictionText;
+    private JTextArea gravityText;
 
 
     public BuildModePanel(){
@@ -49,7 +51,6 @@ public class BuildModePanel extends JPanel implements IView{
         square = new JButton();
         square.setText("Square");
         square.setActionCommand("Square");
-        square.setIcon(new ImageIcon());
         square.setPreferredSize(addGizmoDim);
 
         triangle = new JButton();
@@ -99,6 +100,7 @@ public class BuildModePanel extends JPanel implements IView{
 
         //Ball text windows and button
         ball = new JButton();
+        ball.setActionCommand("ball");
         Dimension ballButtonSize = new Dimension(80, 80);
         ball.setPreferredSize(ballButtonSize);
         ball.setText("<html>Add<br/>Ball</html>");
@@ -108,10 +110,12 @@ public class BuildModePanel extends JPanel implements IView{
 
         //Friction and Gravity
         friction = new JButton("Set Fiction");
+        friction.setActionCommand("friction");
         gravity = new JButton("Set Gravity");
-        JTextArea frictionText = new JTextArea();
+        gravity.setActionCommand("gravity");
+        frictionText = new JTextArea();
         frictionText.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        JTextArea gravityText = new JTextArea();
+        gravityText = new JTextArea();
         gravityText.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         FrictionAndGravity = new JPanel(new GridLayout(2, 2));
         FrictionAndGravity.add(friction);
@@ -189,6 +193,14 @@ public class BuildModePanel extends JPanel implements IView{
 
     }
 
+    public JTextArea getGravityText(){
+        return gravityText;
+    }
+
+    public JTextArea getFrictionText(){
+        return frictionText;
+    }
+
     @Override
     public void addActionListeners(ActionListener actionListener){
         //Gizmo Buttons
@@ -198,6 +210,7 @@ public class BuildModePanel extends JPanel implements IView{
         lFlipper.addActionListener(actionListener);
         rFlipper.addActionListener(actionListener);
         absorber.addActionListener(actionListener);
+        ball.addActionListener(actionListener);
 
         //Edit Gizmos buttons
         move.addActionListener(actionListener);
@@ -208,6 +221,9 @@ public class BuildModePanel extends JPanel implements IView{
         disconnect.addActionListener(actionListener);
         keyConnect.addActionListener(actionListener);
         keyDisconnect.addActionListener(actionListener);
+
+        friction.addActionListener(actionListener);
+        gravity.addActionListener(actionListener);
     }
 
 

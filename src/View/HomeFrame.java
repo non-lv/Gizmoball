@@ -1,5 +1,6 @@
 package View;
 
+import Controller.BuildModeController;
 import Controller.KeyPressedController;
 import Controller.OptionPanelController;
 import Controller.RunModeController;
@@ -24,16 +25,20 @@ public class HomeFrame {
     private JPanel leftAlignment;
     private OptionsPanel optionsPanelTop;
     private JPanel boardAndNotificationBarContainer;
-    private JPanel notificationPanel;
-    private JPanel boardPanel;
+    private NotificationPanel notificationPanel;
+    private BoardPanel boardPanel;
     private JPanel boardContainer;
+    private RunModePanel runModePanel;
+    private BuildModePanel buildModePanel;
     private KeyPressedController k;
     private Model m;
 
-    public HomeFrame(Model m, RunModePanel runModePanel, OptionsPanel optionsPanel, BoardPanel boardPanel, NotificationPanel notificationPanel) {
-
+    public HomeFrame(Model m, RunModePanel runModePanel, BuildModePanel buildModePanel, OptionsPanel optionsPanel, BoardPanel boardPanel, NotificationPanel notificationPanel) {
+        this.runModePanel = runModePanel;
+        this.buildModePanel = buildModePanel;
         this.m = m;
-        this.menuPanelLeft = runModePanel;
+        this.menuPanelLeft = new JPanel();
+        menuPanelLeft.add(runModePanel);
         this.optionsPanelTop = optionsPanel;
         this.boardPanel = boardPanel;
         this.notificationPanel = notificationPanel;
@@ -74,12 +79,20 @@ public class HomeFrame {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    public void showNotification(String notification){
+        boardAndNotificationBarContainer.remove(notificationPanel);
+        notificationPanel = new NotificationPanel();
+        notificationPanel.setText(notification);
+        boardAndNotificationBarContainer.add(notificationPanel, BorderLayout.PAGE_END);
+
+        window.pack();
+        window.revalidate();
+    }
+
     public void swapToBuild() {
         menuPanelLeft.removeAll();
-        boardContainer.removeAll();
-        boardContainer.add(new BoardPanel(m, true));
-        menuPanelLeft.add(new BuildModePanel());
-
+        boardPanel.addGrid();
+        menuPanelLeft.add(buildModePanel);
         optionsPanelTop.buildMode();
 
         window.pack();
@@ -88,9 +101,8 @@ public class HomeFrame {
 
     public void swapToRun() {
         menuPanelLeft.removeAll();
-        boardContainer.removeAll();
-        boardContainer.add(new BoardPanel(m, false));
-        menuPanelLeft.add(new RunModePanel(m));
+        boardPanel.removeGrid();
+        menuPanelLeft.add(runModePanel);
 
         optionsPanelTop.runMode();
 
@@ -100,6 +112,14 @@ public class HomeFrame {
 
     public JFrame getWindow(){
         return window;
+    }
+
+    public JPanel getBoardPanel(){
+        return boardPanel;
+    }
+
+    public BuildModePanel getBuildModePanel(){
+        return buildModePanel;
     }
 
 }

@@ -14,23 +14,25 @@ public class HomeController{
 
     public HomeController(Model m){
 
+        boardPanel = new BoardPanel(m, false);
+
         runModePanel = new RunModePanel(m);
         runModePanel.addActionListeners(new RunModeController(m));
 
         buildModePanel = new BuildModePanel();
-        buildModePanel.addActionListeners(new BuildModeController(m, buildModePanel));
+        BuildModeController buildModeController = new BuildModeController(m, buildModePanel, boardPanel);
+        buildModePanel.addActionListeners(buildModeController);
 
         optionsPanel = new OptionsPanel();
         OptionPanelController optionPanelController = new OptionPanelController(optionsPanel, m);
         optionsPanel.addActionListeners(optionPanelController);
 
-        boardPanel = new BoardPanel(m, false);
-
         notificationPanel = new NotificationPanel();
 
-        HomeFrame home = new HomeFrame(m, runModePanel, optionsPanel, boardPanel, notificationPanel);
+        HomeFrame home = new HomeFrame(m, runModePanel, buildModePanel, optionsPanel, boardPanel, notificationPanel);
 
         optionPanelController.setHomeFrame(home);
+        buildModeController.setHomeFrame(home);
 
         boardPanel = new BoardPanel(m, false);
         notificationPanel = new NotificationPanel();

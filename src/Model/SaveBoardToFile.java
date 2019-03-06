@@ -41,21 +41,21 @@ public class SaveBoardToFile {
 
         for(SquareGizmo s : m.getSquare()){
 
-            bw.write("Square " + s.getId() + " " + s.getXpos() + " " + s.getYpos());
+            bw.write("Square " + s.getId() + " " + s.getX() + " " + s.getY());
             bw.newLine();
         }
         bw.newLine();
 
         for(CircleGizmo c : m.getCircles()){
 
-            bw.write("Circle " + c.getId() + " " + c.getXpos() + " " + c.getYpos());
+            bw.write("Circle " + c.getId() + " " + c.getX() + " " + c.getY());
             bw.newLine();
         }
         bw.newLine();
 
         for(AbsorberGizmo a : m.getAbsorber()){
 
-            bw.write("Absorber " + a.getId() + " " + a.getXpos() + " " + a.getYpos() + " " + a.getXpos2() + " " + a.getYpos2());
+            bw.write("Absorber " + a.getId() + " " + a.getX() + " " + a.getY() + " " + a.getXpos2() + " " + a.getYpos2());
             bw.newLine();
         }
         bw.newLine();

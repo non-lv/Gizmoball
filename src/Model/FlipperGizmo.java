@@ -190,8 +190,9 @@ public class FlipperGizmo implements IGizmo {
     }
 
     @Override
-    public void setPos() {
-
+    public void setPos(int x, int y) {
+        this.xpos = x;
+        this.ypos = y;
     }
 
     @Override

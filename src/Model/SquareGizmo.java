@@ -40,8 +40,9 @@ public class SquareGizmo implements IGizmo {
     }
 
     @Override
-    public void setPos() {
-
+    public void setPos(int x, int y) {
+        this.xpos = x;
+        this.ypos = y;
     }
 
     @Override
@@ -54,11 +55,16 @@ public class SquareGizmo implements IGizmo {
         return id;
     }
 
-    public int getXpos() {
+    public int getX() {
         return xpos;
     }
 
-    public int getYpos() {
+    public int getY() {
         return ypos;
+    }
+
+    @Override
+    public void rotate() {
+
     }
 }

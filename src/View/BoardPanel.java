@@ -2,6 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
 import java.util.Observable;
 import java.util.Observer;
@@ -38,12 +40,12 @@ public class BoardPanel extends JPanel implements Observer {
 
     }
 
-    public void addGrid(Graphics2D g){
-        for ( int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1) ) {
-            for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
-                g.drawRect(x, y, LstoPx(1), LstoPx(1));
-            }
-        }
+    public void addGrid(){
+        grid = true;
+    }
+
+    public void removeGrid(){
+        grid = false;
     }
 
     public void paintComponent(Graphics g) {
@@ -51,26 +53,27 @@ public class BoardPanel extends JPanel implements Observer {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        if(grid){
-            for ( int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1) ) {
+        if(grid) {
+            for (int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1)) {
                 for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
-                    g.drawRect(x, y, LstoPx(1), LstoPx(1));
+                    g2.drawRect(x, y, LstoPx(1), LstoPx(1));
                 }
             }
         }
 
+
         // Draw all the vertical lines
         for (CircleGizmo c : m.getCircles()) {
-            int x = (LstoPx(c.getXpos()));
-            int y = (LstoPx(c.getYpos()));
+            int x = (LstoPx(c.getX()));
+            int y = (LstoPx(c.getY()));
 
             g2.setColor(Color.ORANGE);
             g2.fillOval(x, y, LstoPx(1), LstoPx(1));
         }
 
         for (SquareGizmo s : m.getSquare()) {
-            int x = (LstoPx(s.getXpos()));
-            int y = (LstoPx(s.getYpos()));
+            int x = (LstoPx(s.getX()));
+            int y = (LstoPx(s.getY()));
 
             g2.setColor(Color.RED);
             g2.fillRect(x, y, LstoPx(1), LstoPx(1));
@@ -91,8 +94,8 @@ public class BoardPanel extends JPanel implements Observer {
         }
 
         for (AbsorberGizmo a : m.getAbsorber()) {
-            int x = (LstoPx(a.getXpos()));
-            int y = (LstoPx(a.getYpos()));
+            int x = (LstoPx(a.getX()));
+            int y = (LstoPx(a.getY()));
             int x2 = (LstoPx(a.getXpos2()));
             int y2 = (LstoPx(a.getYpos2()));
             if (x2 < x) {
@@ -204,6 +207,7 @@ public class BoardPanel extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         repaint();
     }
+
 }
 
 

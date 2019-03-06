@@ -11,9 +11,9 @@ import java.util.Observable;
 
 public class Model extends Observable {
 
-    private static final double mu = 0.025;
-    private static final double mu2 = 0.025;
-    private static final double gravity = 25;
+    private static double mu = 0.025;
+    private static double mu2 = 0.025;
+    private static double gravity = 25;
     private static final double moveTime = 0.05;
     private static final int gridSizeX = 20;
     private static final int gridSizeY = 20;
@@ -39,13 +39,18 @@ public class Model extends Observable {
         leftFlipperFlippin = -1;
     }
 
-
-
     public List<IGizmo> getGizmos(){
         return iGizmos;
     }
 
+    public void clear(){
+        iGizmos = new ArrayList<>();
+        balls = new ArrayList<>();
+    }
 
+    public void removeGizmo(IGizmo gizmo){
+        iGizmos.remove(gizmo);
+    }
 
     public List<Ball> getBalls() {
         return balls;
@@ -327,6 +332,13 @@ public class Model extends Observable {
 
     public void leftFlipperStop() {
         leftFlipperFlippin = -1;
+    }
+
+    public void setGravity(int newGravity){ gravity = newGravity; }
+
+    public void setFriction(int newFriction){
+        mu = newFriction;
+        mu2 = newFriction;
     }
 
 }
