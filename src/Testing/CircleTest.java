@@ -1,0 +1,56 @@
+package Testing;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import Model.CircleGizmo;
+import physics.Circle;
+import physics.LineSegment;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class CircleTest {
+    CircleGizmo c = new CircleGizmo("Circle 1",10,10);
+    CircleGizmo c1 = new CircleGizmo("Circle 2",0,0);
+
+
+    @Test
+    public void testID() {
+        assertTrue(c.getId().equals("Circle 1"));
+        assertFalse(c.getId().equals(c1.getId()));
+    }
+    @Test
+    public void testXpos() {
+        assertEquals(c.getXpos(),10);
+        assertNotEquals(c.getXpos(),1);
+    }
+
+    @Test
+    public void testYpos() {
+        assertEquals(c.getYpos(),10);
+        assertNotEquals(c.getYpos(),1);
+    }
+
+    @Test
+    public void testCircles(){
+        List<Circle> l = new ArrayList<>();
+        l.add(new Circle(c.getXpos() + .5, c.getYpos() + .5, .5));
+        assertEquals(c.getCircles(),l);
+        assertNotEquals(c1.getCircles(),l);
+
+    }
+
+    @Test
+    public void testColour(){
+        assertEquals(c.getColour(), Color.BLACK);
+    }
+
+    @Test
+    public void equalTest(){
+        assertEquals(c,c);
+        assertTrue(c.equals(c));
+        assertFalse(c.equals(c1));
+
+    }
+
+}
