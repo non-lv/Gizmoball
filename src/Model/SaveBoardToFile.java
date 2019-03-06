@@ -39,7 +39,7 @@ public class SaveBoardToFile {
         }
         bw.newLine();
 
-        for(SquareGizmo s : m.getSquare()){
+        for(SquareGizmo s : m.getSquares()){
 
             bw.write("Square " + s.getId() + " " + s.getX() + " " + s.getY());
             bw.newLine();
@@ -53,7 +53,7 @@ public class SaveBoardToFile {
         }
         bw.newLine();
 
-        for(AbsorberGizmo a : m.getAbsorber()){
+        for(AbsorberGizmo a : m.getAbsorbers()){
 
             bw.write("Absorber " + a.getId() + " " + a.getX() + " " + a.getY() + " " + a.getXpos2() + " " + a.getYpos2());
             bw.newLine();

@@ -50,7 +50,7 @@ public class Model extends Observable {
         return l;
     }
 
-    public List<SquareGizmo> getSquare() {
+    public List<SquareGizmo> getSquares() {
         List<SquareGizmo> l = new ArrayList<>();
         for (IGizmo g : iGizmos)
             if (g instanceof SquareGizmo)
@@ -70,7 +70,8 @@ public class Model extends Observable {
         iGizmos = new ArrayList<>();
         balls = new ArrayList<>();
     }
-    public List<AbsorberGizmo> getAbsorber() {
+
+    public List<AbsorberGizmo> getAbsorbers() {
         List<AbsorberGizmo> l = new ArrayList<>();
         for (IGizmo g : iGizmos)
             if (g instanceof AbsorberGizmo)
@@ -105,7 +106,7 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
-    public TriangleGizmo getTrianglebyName(String name) {
+    public TriangleGizmo getTriangleByName(String name) {
         for (TriangleGizmo t : getTriangles())
             if (name.equals(t.getId()))
                 return t;
@@ -117,10 +118,10 @@ public class Model extends Observable {
             if (name.equals(f.getId()))
                 return f;
         return null;
-
     }
+
     public void fireAbsorbers() {
-        for (AbsorberGizmo ag : this.getAbsorber())
+        for (AbsorberGizmo ag : this.getAbsorbers())
             ag.fire();
     }
 
@@ -163,7 +164,6 @@ public class Model extends Observable {
         this.notifyObservers();
     }
 
-
     private CollisionDetails timeUntilCollision(Ball ball) {
         Circle ballCircle = ball.getCircle();
         Vect ballVelocity = ball.getVelocity();
@@ -178,10 +178,10 @@ public class Model extends Observable {
             if (iIGizmo instanceof AbsorberGizmo && ((AbsorberGizmo) iIGizmo).isInside(ball))
                 continue;
 
-            if (iIGizmo instanceof FlipperGizmo && isMoving((FlipperGizmo) iIGizmo)) {
+            if (iIGizmo instanceof FlipperGizmo && ((FlipperGizmo) iIGizmo).isMoving(leftFlipperFlippin,rightFlipperFlippin)) {
                 // Moving Flipper physics
                 double angularVelocity = Math.toRadians(((FlipperGizmo) iIGizmo).getAngularVelocity());
-                if(((FlipperGizmo) iIGizmo).isLeft())
+                if (((FlipperGizmo) iIGizmo).isLeft())
                     angularVelocity *= -leftFlipperFlippin;
                 else
                     angularVelocity *= rightFlipperFlippin;
@@ -241,27 +241,8 @@ public class Model extends Observable {
     private void moveFlippersForTime(double delta_t) {
         for (FlipperGizmo f : this.getFlippers())
             if (f.isLeft())
-                moveFlipperForTime(f, delta_t, leftFlipperFlippin);
-            else moveFlipperForTime(f, delta_t, rightFlipperFlippin);
-    }
-
-    private FlipperGizmo moveFlipperForTime(FlipperGizmo flipper, double delta_t, double modifier) {
-        double newAngle = flipper.getAngle() + flipper.getAngularVelocity() * delta_t * modifier;
-
-        if (newAngle > 90)
-            newAngle = 90;
-        else if (newAngle < 0)
-            newAngle = 0;
-
-        flipper.setAngle(newAngle);
-        return flipper;
-    }
-
-    private boolean isMoving(FlipperGizmo flipperGizmo) {
-        if (flipperGizmo.isLeft())
-            return flipperGizmo.getAngle() < 90 && leftFlipperFlippin > 0 || flipperGizmo.getAngle() > 0 && leftFlipperFlippin < 0;
-        else
-            return flipperGizmo.getAngle() < 90 && rightFlipperFlippin > 0 || flipperGizmo.getAngle() > 0 && rightFlipperFlippin < 0;
+                f.moveFlipperForTime(delta_t, leftFlipperFlippin);
+            else f.moveFlipperForTime(delta_t, rightFlipperFlippin);
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -292,8 +273,6 @@ public class Model extends Observable {
         ball.setVelocity(xVel, yVel);
         return ball;
     }
-
-
 
     public void rightFlipperMove() {
         rightFlipperFlippin = 1;

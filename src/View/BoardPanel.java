@@ -61,7 +61,6 @@ public class BoardPanel extends JPanel implements Observer {
             }
         }
 
-
         // Draw all the vertical lines
         for (CircleGizmo c : m.getCircles()) {
             int x = (LstoPx(c.getX()));
@@ -71,7 +70,7 @@ public class BoardPanel extends JPanel implements Observer {
             g2.fillOval(x, y, LstoPx(1), LstoPx(1));
         }
 
-        for (SquareGizmo s : m.getSquare()) {
+        for (SquareGizmo s : m.getSquares()) {
             int x = (LstoPx(s.getX()));
             int y = (LstoPx(s.getY()));
 
@@ -93,7 +92,7 @@ public class BoardPanel extends JPanel implements Observer {
             g2.fillPolygon(xpoints, ypoints, npoints);
         }
 
-        for (AbsorberGizmo a : m.getAbsorber()) {
+        for (AbsorberGizmo a : m.getAbsorbers()) {
             int x = (LstoPx(a.getX()));
             int y = (LstoPx(a.getY()));
             int x2 = (LstoPx(a.getXpos2()));
@@ -207,7 +206,6 @@ public class BoardPanel extends JPanel implements Observer {
     public void update(Observable o, Object arg) {
         repaint();
     }
-
 }
 
 

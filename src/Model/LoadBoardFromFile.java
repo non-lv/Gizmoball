@@ -97,7 +97,7 @@ public class LoadBoardFromFile {
                         }
                         break;
                     case "rotate":
-                        TriangleGizmo t = (TriangleGizmo)m.getTrianglebyName(tokens[1]);
+                        TriangleGizmo t = (TriangleGizmo)m.getTriangleByName(tokens[1]);
                         if(t == null){
                             FlipperGizmo f = (FlipperGizmo)m.getFlipperByName(tokens[1]);
                             if(f == null){
