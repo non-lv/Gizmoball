@@ -22,14 +22,14 @@ public class AbsorberTest {
 
     @Test
     public void testXpos() {
-        assertEquals(a.getXpos(),1);
-        assertNotEquals(a.getXpos(),0);
+        assertEquals(a.getX(),1);
+        assertNotEquals(a.getX(),0);
     }
 
     @Test
     public void testYpos() {
-        assertEquals(a.getYpos(),1);
-        assertNotEquals(a.getYpos(),11);
+        assertEquals(a.getY(),1);
+        assertNotEquals(a.getY(),11);
     }
 
     @Test
@@ -47,10 +47,10 @@ public class AbsorberTest {
     @Test
     public void testCircleList(){
         List l = new ArrayList<>();
-        l.add(new Circle(a.getXpos(), a.getYpos(), 0));
-        l.add(new Circle(a.getXpos() + (a.getXpos2() - a.getXpos() + 1), a.getYpos(), 0));
-        l.add(new Circle(a.getXpos(), a.getYpos() + (a.getYpos2() - a.getYpos() + 1), 0));
-        l.add(new Circle(a.getXpos() + (a.getXpos2() - a.getXpos() + 1), a.getYpos() + (a.getYpos2() - a.getYpos() + 1), 0));
+        l.add(new Circle(a.getX(), a.getY(), 0));
+        l.add(new Circle(a.getX() + (a.getXpos2() - a.getX() + 1), a.getY(), 0));
+        l.add(new Circle(a.getX(), a.getY() + (a.getYpos2() - a.getY() + 1), 0));
+        l.add(new Circle(a.getX() + (a.getXpos2() - a.getX() + 1), a.getY() + (a.getYpos2() - a.getY() + 1), 0));
 
         assertEquals(a.getCircles(), l);
 
@@ -60,22 +60,22 @@ public class AbsorberTest {
     @Test
     public void testAbsorberList(){
         List<LineSegment> l = new ArrayList<>();
-        l.add(new LineSegment(a.getXpos(),
-                a.getYpos(),
+        l.add(new LineSegment(a.getX(),
+                a.getY(),
                 a.getXpos2() + 1,
-                a.getYpos()
+                a.getY()
         ));
-        l.add(new LineSegment(a.getXpos(),
-                a.getYpos(),
-                a.getXpos(),
+        l.add(new LineSegment(a.getX(),
+                a.getY(),
+                a.getX(),
                 a.getYpos2() + 1
         ));
         l.add(new LineSegment(a.getXpos2() + 1,
-                a.getYpos(),
+                a.getY(),
                 a.getXpos2() + 1,
                 a.getYpos2() + 1
         ));
-        l.add(new LineSegment(a.getXpos(),
+        l.add(new LineSegment(a.getX(),
                 a.getXpos2() + 1,
                 a.getXpos2() + 1,
                 a.getYpos2() + 1
@@ -94,11 +94,11 @@ public class AbsorberTest {
     @Test
     public void testTrigger(){
         a.trigger(ball);
-        double x = a.getXpos() - 0.5;
+        double x = a.getX() - 0.5;
         double xb = ball.getX();
         assertEquals(x,22d/7d, xb);
         assertNotEquals(xb,15.0);
-        double y = a.getYpos() - 0.5;
+        double y = a.getY() - 0.5;
         double yb = ball.getY();
         assertEquals(y,22d/7d, yb);
         assertNotEquals(yb,15.0);

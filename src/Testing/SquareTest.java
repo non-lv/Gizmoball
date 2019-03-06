@@ -21,23 +21,23 @@ public class SquareTest {
     }
     @Test
     public void testXpos() {
-        assertEquals(s.getXpos(),10);
-        assertNotEquals(s.getXpos(),1);
+        assertEquals(s.getX(),10);
+        assertNotEquals(s.getX(),1);
     }
 
     @Test
     public void testYpos() {
-        assertEquals(s.getYpos(),10);
-        assertNotEquals(s.getYpos(),1);
+        assertEquals(s.getY(),10);
+        assertNotEquals(s.getY(),1);
     }
 
     @Test
     public void testCircleList(){
         List l = new ArrayList<>();
-        l.add(new Circle(s.getXpos(), s.getYpos(), 0));
-        l.add(new Circle(s.getXpos() + 1, s.getYpos(), 0));
-        l.add(new Circle(s.getXpos(), s.getYpos() + 1, 0));
-        l.add(new Circle(s.getXpos() + 1, s.getYpos() + 1, 0));
+        l.add(new Circle(s.getX(), s.getY(), 0));
+        l.add(new Circle(s.getX() + 1, s.getY(), 0));
+        l.add(new Circle(s.getX(), s.getY() + 1, 0));
+        l.add(new Circle(s.getX() + 1, s.getY() + 1, 0));
 
         assertEquals(s.getCircles(), l);
 
@@ -47,10 +47,10 @@ public class SquareTest {
     @Test
     public void testLinesList(){
         List<LineSegment> l = new ArrayList<>();
-        l.add(new LineSegment(s.getXpos(), s.getYpos(), s.getXpos() + 1, s.getYpos()));
-        l.add(new LineSegment(s.getXpos(), s.getYpos(), s.getXpos(), s.getYpos() + 1));
-        l.add(new LineSegment(s.getXpos() + 1, s.getYpos(), s.getXpos() + 1, s.getYpos() + 1));
-        l.add(new LineSegment(s.getXpos(), s.getYpos() + 1, s.getXpos() + 1, s.getYpos() + 1));
+        l.add(new LineSegment(s.getX(), s.getY(), s.getX() + 1, s.getY()));
+        l.add(new LineSegment(s.getX(), s.getY(), s.getX(), s.getY() + 1));
+        l.add(new LineSegment(s.getX() + 1, s.getY(), s.getX() + 1, s.getY() + 1));
+        l.add(new LineSegment(s.getX(), s.getY() + 1, s.getX() + 1, s.getY() + 1));
         assertEquals(s.getLines(), l);
 
         assertNotEquals(s1.getLines(),l);

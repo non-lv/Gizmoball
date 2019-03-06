@@ -21,20 +21,20 @@ public class CircleTest {
     }
     @Test
     public void testXpos() {
-        assertEquals(c.getXpos(),10);
-        assertNotEquals(c.getXpos(),1);
+        assertEquals(c.getX(),10);
+        assertNotEquals(c.getX(),1);
     }
 
     @Test
     public void testYpos() {
-        assertEquals(c.getYpos(),10);
-        assertNotEquals(c.getYpos(),1);
+        assertEquals(c.getY(),10);
+        assertNotEquals(c.getY(),1);
     }
 
     @Test
     public void testCircles(){
         List<Circle> l = new ArrayList<>();
-        l.add(new Circle(c.getXpos() + .5, c.getYpos() + .5, .5));
+        l.add(new Circle(c.getX() + .5, c.getY() + .5, .5));
         assertEquals(c.getCircles(),l);
         assertNotEquals(c1.getCircles(),l);
 

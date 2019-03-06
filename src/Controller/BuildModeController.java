@@ -46,8 +46,8 @@ public class BuildModeController implements ActionListener {
                             Random random = new Random();
                             String id;
                             ArrayList<String> taken = new ArrayList<>();
-                            for (int i = 0; i < model.getSquare().size(); i++){
-                                taken.add(model.getSquare().get(i).getId());
+                            for (int i = 0; i < model.getSquares().size(); i++){
+                                taken.add(model.getSquares().get(i).getId());
                             }
                             do {
                                 id = "S" + random.nextInt(90);
