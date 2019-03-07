@@ -6,6 +6,7 @@ import physics.LineSegment;
 import physics.Vect;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
@@ -22,6 +23,8 @@ public class Model extends Observable {
     private List<LineSegment> walls;
     private List<Ball> balls;
 
+    private HashMap<IGizmo, Connection> connections;
+
     private int rightFlipperFlippin;
     private int leftFlipperFlippin;
 
@@ -29,6 +32,8 @@ public class Model extends Observable {
         iGizmos = new ArrayList<>();
         walls = new ArrayList<>();
         balls = new ArrayList<>();
+
+        connections = new HashMap<>();
 
         walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
@@ -82,6 +87,7 @@ public class Model extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+
 
     private CollisionDetails timeUntilCollision(Ball ball) {
         Circle ballCircle = ball.getCircle();
@@ -142,6 +148,11 @@ public class Model extends Observable {
                     }
                 }
             }
+        }
+
+        if(gizmo != null && connections.get(gizmo) != null){
+
+            connections.get(gizmo).triggered();
         }
 
 
