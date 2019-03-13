@@ -35,7 +35,7 @@ public class Model extends Observable {
 
         connections = new HashMap<>();
 
-        walls.add(new LineSegment(0, 0, gridSizeX, 0));
+         walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
         walls.add(new LineSegment(gridSizeX, 0, gridSizeX, gridSizeY));
         walls.add(new LineSegment(0, gridSizeY, gridSizeX, gridSizeY));

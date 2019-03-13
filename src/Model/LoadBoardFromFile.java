@@ -5,6 +5,7 @@ import java.io.*;
 
 public class LoadBoardFromFile {
 
+
     public static void readFromFile(String fileName, Model m) throws IOException {
 
         File file = new File(fileName);
@@ -110,15 +111,20 @@ public class LoadBoardFromFile {
                         break;
                 }
 
+
+
             } catch (NumberFormatException ex){
                 System.out.println("Types Incorrect : " + line);
             }
 
 
         }
+
     }
 
     private static boolean checkCount(String[] line, int count){
         return line.length == count;
     }
+
+
 }

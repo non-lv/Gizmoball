@@ -13,11 +13,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-public class OptionPanelController implements ActionListener {
+public class OptionPanelController implements ActionListener,Cloneable {
     
     private final OptionsPanel panel;
     private HomeFrame home;
     private Model model;
+
 
     public OptionPanelController(OptionsPanel panel, Model model){
         this.model = model;
@@ -66,14 +67,20 @@ public class OptionPanelController implements ActionListener {
                 if(returnValue2 == JFileChooser.APPROVE_OPTION){
                     File selectedFile = jfc2.getSelectedFile();
                     String path = selectedFile.getAbsolutePath();
+                    RunModeController.setPath(path);
+
 
                     try{
                         LoadBoardFromFile.readFromFile(path,model);
 
+
+
                     } catch (Exception ex){
                         System.out.println("cant read");
                     }
+
                 }
+
                 break;
             case "Quit":
                 if(JOptionPane.showConfirmDialog(
@@ -87,5 +94,9 @@ public class OptionPanelController implements ActionListener {
                 break;
         }
     }
+
+
+
+
 
 }
