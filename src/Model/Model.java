@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
-public class Model extends Observable {
+public class Model extends Observable implements Cloneable {
 
     private static double mu = 0.025;
     private static double mu2 = 0.025;
@@ -331,5 +331,14 @@ public class Model extends Observable {
     public void clear(){
         iGizmos = new ArrayList<>();
         balls = new ArrayList<>();
+    }
+    @Override
+    public Model clone() {
+        try {
+            return (Model) super.clone();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

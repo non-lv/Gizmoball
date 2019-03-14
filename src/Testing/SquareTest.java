@@ -64,5 +64,4 @@ public class SquareTest {
         assertTrue(s.equals(s));
         assertFalse(s.equals(s1));
     }
-
 }
