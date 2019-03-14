@@ -40,4 +40,11 @@ public class RunModeController implements ActionListener {
         }
     }
 
+    public void stopTime(){
+        timer.stop();
+    }
+
+    public void startTime(){
+        timer.start();
+    }
 }

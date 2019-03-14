@@ -20,7 +20,7 @@ public class BoardPanel extends JPanel implements Observer {
 
     private static final int boardWidth = 20;
     private static final int boardHeight = 20;
-    private static final int tileSize = 25;
+    public static final int tileSize = 25;
     private Boolean grid;
 
     private Model m;
@@ -38,6 +38,10 @@ public class BoardPanel extends JPanel implements Observer {
         this.setBackground(new Color(255, 255, 255));
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+    }
+
+    public int getTileSize(){
+        return tileSize;
     }
 
     public void addGrid(){

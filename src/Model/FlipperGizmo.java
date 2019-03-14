@@ -27,10 +27,11 @@ public class FlipperGizmo implements IGizmo {
         xpos = x;
         ypos = y;
         left = isLeft;
-        if (left)
+        if (left){
             rotation = Rotation.TOP_LEFT;
-        else
+    }else {
             rotation = Rotation.TOP_RIGHT;
+        }
     }
 
     @Override
