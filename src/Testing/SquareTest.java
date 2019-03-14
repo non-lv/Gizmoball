@@ -2,10 +2,7 @@ package Testing;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-/*import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertTrue;
-import static org.testng.AssertJUnit.assertEquals;*/
+
 
 import Model.SquareGizmo;
 import physics.Circle;
