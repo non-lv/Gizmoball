@@ -24,6 +24,7 @@ public class Model extends Observable {
     private List<Ball> balls;
 
     private HashMap<IGizmo, Connection> connections;
+    private HashMap<Integer, KeyConnection> keyConnections;
 
     private int rightFlipperFlippin;
     private int leftFlipperFlippin;
@@ -34,6 +35,7 @@ public class Model extends Observable {
         balls = new ArrayList<>();
 
         connections = new HashMap<>();
+        keyConnections = new HashMap<>();
 
         walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
@@ -231,6 +233,15 @@ public class Model extends Observable {
         return iGizmos;
     }
 
+    public IGizmo getGizmoByName(String name){
+        for(IGizmo gizmo : iGizmos){
+            if(gizmo.getId().equals(name)){
+                return gizmo;
+            }
+        }
+        return null;
+    }
+
     public List<CircleGizmo> getCircles() {
         List<CircleGizmo> l = new ArrayList<>();
         for (IGizmo g : iGizmos)
@@ -289,6 +300,10 @@ public class Model extends Observable {
         return null;
     }
 
+    public HashMap<Integer, KeyConnection> getKeyConnections() {
+        return keyConnections;
+    }
+
     public void addGizmo(IGizmo gizmo) {
         iGizmos.add(gizmo);
         this.setChanged();
@@ -299,6 +314,14 @@ public class Model extends Observable {
         balls.add(b);
         this.setChanged();
         this.notifyObservers();
+    }
+
+    public void addConnection(Connection c){
+        connections.put(c.getTrigger(), c);
+    }
+
+    public void addKeyConnection(KeyConnection kc){
+        keyConnections.put(kc.getKey(), kc);
     }
 
     public void removeGizmo(IGizmo gizmo){

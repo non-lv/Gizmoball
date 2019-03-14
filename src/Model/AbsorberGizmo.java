@@ -65,7 +65,7 @@ public class AbsorberGizmo implements IGizmo {
 
     @Override
     public void trigger() {
-
+        fire();
     }
 
     public void trigger(Ball ball) {

@@ -108,6 +108,31 @@ public class LoadBoardFromFile {
                         }
                         t.rotate();
                         break;
+                    case "connect":
+                        if(checkCount(tokens, 3)){
+
+                            IGizmo trigger = null;
+                            IGizmo action = null;
+
+                            if((trigger = m.getGizmoByName(tokens[1])) != null && (action = m.getGizmoByName(tokens[2])) != null){
+                                Connection connection = new Connection(trigger, action);
+                                m.addConnection(connection);
+
+                            }
+                        }
+                        break;
+                    case "keyconnect" :
+                        if(checkCount(tokens, 5)){
+
+                            IGizmo action = null;
+                            int key = Integer.parseInt(tokens[2]);
+
+                            if((action = m.getGizmoByName(tokens[4])) != null){
+                                KeyConnection keyConnection = new KeyConnection(action, key);
+                                m.addKeyConnection(keyConnection);
+                            }
+                        }
+
                 }
 
             } catch (NumberFormatException ex){

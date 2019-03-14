@@ -197,7 +197,7 @@ public class FlipperGizmo implements IGizmo {
 
     @Override
     public void trigger() {
-
+        this.moveFlipperForTime(20,1);
     }
 
     @Override
