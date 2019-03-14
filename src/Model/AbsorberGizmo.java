@@ -13,6 +13,7 @@ public class AbsorberGizmo implements IGizmo {
     private int ypos;
     private int x2pos;
     private int y2pos;
+    private List<List<Integer>> occupiedSpace = new ArrayList<>();
     private Ball ball;
 
     public AbsorberGizmo(String id, int x, int y, int x2, int y2) {
@@ -21,6 +22,7 @@ public class AbsorberGizmo implements IGizmo {
         ypos = y;
         x2pos = x2;
         y2pos = y2;
+        setOccupiedSpace(xpos, ypos, x2pos, y2pos);
     }
 
     public List<Circle> getCircles() {
@@ -61,6 +63,13 @@ public class AbsorberGizmo implements IGizmo {
     public void setPos(int x, int y) {
         this.xpos = x;
         this.ypos = y;
+        setOccupiedSpace(xpos, ypos, x2pos, y2pos);
+    }
+
+    public void setPos2(int x, int y){
+        this.x2pos = x;
+        this.y2pos = y;
+        setOccupiedSpace(xpos, ypos, x2pos, y2pos);
     }
 
     @Override
@@ -115,4 +124,20 @@ public class AbsorberGizmo implements IGizmo {
     public boolean isInside(Ball ball) {
         return (ball.getX() >= xpos && ball.getY() >= ypos && ball.getX() <= x2pos && ball.getY() <= y2pos);
     }
+
+    public List<List<Integer>> getOccupiedSpace(){
+        return occupiedSpace;
+    }
+
+    public void setOccupiedSpace(int x, int y, int x2, int y2){
+        for (int i = x; i < x2; i++){
+            for (int j = y; j < y2; j++){
+                List<Integer> contain = new ArrayList<>();
+                contain.add(i);
+                contain.add(j);
+                occupiedSpace.add(contain);
+            }
+        }
+    }
+
 }

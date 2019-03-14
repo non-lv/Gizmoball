@@ -34,6 +34,8 @@ public class BuildModePanel extends JPanel implements IView{
     private JPanel FrictionAndGravity;
     private JTextArea frictionText;
     private JTextArea gravityText;
+    private JTextArea xV;
+    private JTextArea yV;
 
 
     public BuildModePanel(){
@@ -85,22 +87,22 @@ public class BuildModePanel extends JPanel implements IView{
         addGizmo.add(rFlipper);
         addGizmo.add(absorber);
 
-        JTextArea x = new JTextArea();
-        JTextArea y = new JTextArea();
+        xV = new JTextArea("X Velocity");
+        yV = new JTextArea("Y Velocity");
 
         //Border for text input
         Border border = BorderFactory.createLineBorder(Color.BLACK);
-        x.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        y.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        xV.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        yV.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         //Velocity input
         velocities = new JPanel(new GridLayout(0, 1));
-        velocities.add(x);
-        velocities.add(y);
+        velocities.add(xV);
+        velocities.add(yV);
 
         //Ball text windows and button
         ball = new JButton();
-        ball.setActionCommand("ball");
+        ball.setActionCommand("Ball");
         Dimension ballButtonSize = new Dimension(80, 80);
         ball.setPreferredSize(ballButtonSize);
         ball.setText("<html>Add<br/>Ball</html>");
@@ -200,6 +202,10 @@ public class BuildModePanel extends JPanel implements IView{
     public JTextArea getFrictionText(){
         return frictionText;
     }
+
+    public JTextArea getxV(){ return xV;}
+
+    public JTextArea getyV(){ return yV;}
 
     @Override
     public void addActionListeners(ActionListener actionListener){
