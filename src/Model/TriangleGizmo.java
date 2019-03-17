@@ -20,6 +20,7 @@ public class TriangleGizmo implements IGizmo {
     private Color colour;
     private Rotation rotation;
     private String name;
+    public List<List<Integer>> occupiedSpace;
 
     public TriangleGizmo(String id, int x, int y, Rotation r) {
         this.x = x;
@@ -33,6 +34,8 @@ public class TriangleGizmo implements IGizmo {
         rotation = r;
 
         this.id = id;
+
+        setOccupiedSpace();
     }
 
     @Override
@@ -77,6 +80,7 @@ public class TriangleGizmo implements IGizmo {
     public void setPos(int x, int y) {
         this.x = x;
         this.y = y;
+        setOccupiedSpace();
     }
 
     @Override
@@ -87,6 +91,19 @@ public class TriangleGizmo implements IGizmo {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public List<List<Integer>> getOccupiedSpace() {
+        return occupiedSpace;
+    }
+
+    private void setOccupiedSpace(){
+        occupiedSpace = new ArrayList<>();
+        ArrayList<Integer> triangle = new ArrayList<>();
+        triangle.add(x);
+        triangle.add(y);
+        occupiedSpace.add(triangle);
     }
 
     public int getXpos() {

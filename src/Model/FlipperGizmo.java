@@ -8,6 +8,8 @@ import java.util.List;
 
 public class FlipperGizmo implements IGizmo {
 
+    private List<List<Integer>> occupiedSpace;
+
     public enum Rotation {
         TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT
     }
@@ -30,6 +32,31 @@ public class FlipperGizmo implements IGizmo {
         left = isLeft;
         flipped = false;
         rotation = left ? Rotation.TOP_LEFT : Rotation.TOP_RIGHT;
+        setOccupiedSpace();
+    }
+
+    public void setOccupiedSpace() {
+        occupiedSpace = new ArrayList<>();
+        ArrayList<Integer> origin = new ArrayList<>();
+        origin.add(x);
+        origin.add(y);
+
+        ArrayList<Integer> second = new ArrayList<>();
+        second.add(x);
+        second.add(y+1);
+
+        ArrayList<Integer> third = new ArrayList<>();
+        third.add(x+1);
+        third.add(y);
+
+        ArrayList<Integer> fourth = new ArrayList<>();
+        fourth.add(x+1);
+        fourth.add(y+1);
+
+        occupiedSpace.add(origin);
+        occupiedSpace.add(second);
+        occupiedSpace.add(third);
+        occupiedSpace.add(fourth);
     }
 
     @Override
@@ -192,6 +219,7 @@ public class FlipperGizmo implements IGizmo {
     public void setPos(int x, int y) {
         this.x = x;
         this.y = y;
+        setOccupiedSpace();
     }
 
     @Override
@@ -202,6 +230,11 @@ public class FlipperGizmo implements IGizmo {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public List<List<Integer>> getOccupiedSpace() {
+        return occupiedSpace;
     }
 
     public int getX() {

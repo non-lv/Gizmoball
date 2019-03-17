@@ -3,16 +3,11 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import Model.Model;
-import Model.CircleGizmo;
-import Model.SquareGizmo;
-import Model.FlipperGizmo;
-import Model.AbsorberGizmo;
-import Model.TriangleGizmo;
-import Model.Ball;
+import Model.*;
 
 public class BoardPanel extends JPanel implements Observer {
 
@@ -53,7 +48,46 @@ public class BoardPanel extends JPanel implements Observer {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j <20 ; j++) {
+               /* if(grid[i][j])
+
+                if(spaces[i][j]){
+                g.setColor(new Color(2,2,2));
+                }else{
+                g.setColor(new Color(3,3,3));
+                }
+                g.drawSquare(i*constant,j*constant,25/2,25/2)
+                */
+            }
+
+        }
+
         Graphics2D g2 = (Graphics2D) g;
+
+        if(grid) {
+            for (int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1)) {
+                for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
+                    boolean occupied = false;
+                    for (IGizmo gizmo:m.getGizmos()) {
+                        for (List<Integer> list:gizmo.getOccupiedSpace()) {
+                            if (PxtoLs(x) == list.get(0) && PxtoLs(y) == list.get(1)) {
+                                occupied = true;
+                            }
+                        }
+                    }
+                    if (occupied){
+                        g2.setColor(new Color(255, 14, 21));
+                    } else {
+                        g2.setColor(new Color(157, 255, 158));
+                    }
+                    g2.fillRect(x, y, LstoPx(1), LstoPx(1));
+                    g2.setColor(Color.black);
+                    g2.drawRect(x, y, LstoPx(1), LstoPx(1));
+                }
+            }
+        }
 
         if(grid) {
             for (int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1)) {

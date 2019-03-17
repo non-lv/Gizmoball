@@ -35,18 +35,18 @@ public class OptionPanelController implements ActionListener,Cloneable {
             case "switchToBuild":
                 System.out.println("swap to build");
                 home.swapToBuild();
+                home.showNotification("Welcome to build mode");
                 break;
             case "switchToRun":
                 System.out.println("swap to run");
                 home.swapToRun();
+                home.showNotification("Gizmoball");
                 break;
             case "Save":
                 JFileChooser jfc1 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
                 FileNameExtensionFilter filter1 = new FileNameExtensionFilter(".txt only!", "txt");
                 jfc1.setFileFilter(filter1);
                 int returnValue1 = jfc1.showDialog( this.panel, "save");
-
-
                 if(returnValue1 == JFileChooser.APPROVE_OPTION){
                     File selectedFile = jfc1.getSelectedFile();
                     String path = selectedFile.getAbsolutePath();

@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.*;
+import java.util.List;
 
 
 public class LoadBoardFromFile {
@@ -47,6 +48,13 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
+                            for (IGizmo gizmos:m.getGizmos()) {
+                                for (List<Integer> list:gizmos.getOccupiedSpace()) {
+                                    if (list.get(0)==x || list.get(1)==y){
+                                        System.out.println("Space is occupied");
+                                    }
+                                }
+                            }
                             m.addGizmo(new TriangleGizmo(id, x, y, TriangleGizmo.Rotation.TOP_LEFT));
                         } else {
                             System.out.println("Incorrect Format : " + line);

@@ -11,6 +11,7 @@ public interface IGizmo {
     void setPos(int x, int y);
     void trigger(Ball ball);
     String getId();
+    List<List<Integer>> getOccupiedSpace();
     int getX();
     int getY();
     void rotate();
