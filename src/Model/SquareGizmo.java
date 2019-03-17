@@ -63,11 +63,11 @@ public class SquareGizmo implements IGizmo {
         return occupiedSpace;
     }
 
-    public void setOccupiedSpace(){
+    public void setOccupiedSpace() {
         occupiedSpace = new ArrayList<>();
         ArrayList<Integer> square = new ArrayList<>();
-        square.add(xpos);
-        square.add(ypos);
+        square.add(x);
+        square.add(y);
         occupiedSpace.add(square);
     }
 

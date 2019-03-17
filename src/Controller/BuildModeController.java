@@ -418,8 +418,8 @@ public class BuildModeController implements ActionListener {
                                     if (abMoving != null){
                                         int XAway = Math.abs(abMoving.getX() - ogX);
                                         int YAway = Math.abs(abMoving.getY() - ogy);
-                                        int X2Away = Math.abs(abMoving.getXpos2() - ogX);
-                                        int Y2Away = Math.abs(abMoving.getYpos2() - ogy);
+                                        int X2Away = Math.abs(abMoving.getX2() - ogX);
+                                        int Y2Away = Math.abs(abMoving.getY2() - ogy);
                                         abMoving.setPos(x+XAway, y+YAway);
                                         abMoving.setPos2(x+X2Away, y+Y2Away);
                                         boardPanel.repaint();
