@@ -6,7 +6,6 @@ import physics.Circle;
 import physics.LineSegment;
 import Model.Ball;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 public class AbsorberTest {
@@ -34,23 +33,23 @@ public class AbsorberTest {
 
     @Test
     public void testX2pos() {
-        assertEquals(a.getXpos2(),10);
-        assertNotEquals(a.getXpos2(),1);
+        assertEquals(a.getX2(),10);
+        assertNotEquals(a.getX2(),1);
     }
 
     @Test
     public void testY2pos() {
-        assertEquals(a.getYpos2(),10);
-        assertNotEquals(a.getYpos2(),1);
+        assertEquals(a.getY2(),10);
+        assertNotEquals(a.getY2(),1);
     }
 
     @Test
     public void testCircleList(){
         List l = new ArrayList<>();
         l.add(new Circle(a.getX(), a.getY(), 0));
-        l.add(new Circle(a.getX() + (a.getXpos2() - a.getX() + 1), a.getY(), 0));
-        l.add(new Circle(a.getX(), a.getY() + (a.getYpos2() - a.getY() + 1), 0));
-        l.add(new Circle(a.getX() + (a.getXpos2() - a.getX() + 1), a.getY() + (a.getYpos2() - a.getY() + 1), 0));
+        l.add(new Circle(a.getX() + (a.getX2() - a.getX() + 1), a.getY(), 0));
+        l.add(new Circle(a.getX(), a.getY() + (a.getY2() - a.getY() + 1), 0));
+        l.add(new Circle(a.getX() + (a.getX2() - a.getX() + 1), a.getY() + (a.getY2() - a.getY() + 1), 0));
 
         assertEquals(a.getCircles(), l);
 
@@ -62,23 +61,23 @@ public class AbsorberTest {
         List<LineSegment> l = new ArrayList<>();
         l.add(new LineSegment(a.getX(),
                 a.getY(),
-                a.getXpos2() + 1,
+                a.getX2() + 1,
                 a.getY()
         ));
         l.add(new LineSegment(a.getX(),
                 a.getY(),
                 a.getX(),
-                a.getYpos2() + 1
+                a.getY2() + 1
         ));
-        l.add(new LineSegment(a.getXpos2() + 1,
+        l.add(new LineSegment(a.getX2() + 1,
                 a.getY(),
-                a.getXpos2() + 1,
-                a.getYpos2() + 1
+                a.getX2() + 1,
+                a.getY2() + 1
         ));
         l.add(new LineSegment(a.getX(),
-                a.getXpos2() + 1,
-                a.getXpos2() + 1,
-                a.getYpos2() + 1
+                a.getX2() + 1,
+                a.getX2() + 1,
+                a.getY2() + 1
         ));
         assertEquals(a.getLines(), l);
 

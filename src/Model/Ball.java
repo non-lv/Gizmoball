@@ -9,14 +9,14 @@ public class Ball {
 
     private String id;
     private Vect velocity;
-    private double xpos;
-    private double ypos;
+    private double x;
+    private double y;
     private boolean moving;
 
     public Ball(String id, double x, double y, double xv, double yv) {
         this.id = id;
-        xpos = x;
-        ypos = y;
+        this.x = x;
+        this.y = y;
         velocity = new Vect(xv, yv);
         moving = true;
     }
@@ -26,15 +26,15 @@ public class Ball {
     }
 
     public Circle getCircle() {
-        return new Circle(xpos, ypos, radius);
+        return new Circle(x, y, radius);
     }
 
     public void setX(double x) {
-        xpos = x;
+        this.x = x;
     }
 
     public void setY(double y) {
-        ypos = y;
+        this.y = y;
     }
 
     public void setVelocity(double xv, double yv) {
@@ -46,11 +46,11 @@ public class Ball {
     }
 
     public double getX() {
-        return xpos;
+        return x;
     }
 
     public double getY() {
-        return ypos;
+        return y;
     }
 
     public double getRadius() {

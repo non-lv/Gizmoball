@@ -43,15 +43,15 @@ public class KeyPressedController implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch (e.getKeyCode()){
-            case KeyEvent.VK_LEFT:
-                model.leftFlipperStop();
-                break;
-            case KeyEvent.VK_RIGHT:
-                model.rightFlipperStop();
-                break;
-            default:
-        }
+//        switch (e.getKeyCode()){
+//            case KeyEvent.VK_LEFT:
+//                model.leftFlipperStop();
+//                break;
+//            case KeyEvent.VK_RIGHT:
+//                model.rightFlipperStop();
+//                break;
+//            default:
+//        }
     }
 
 }

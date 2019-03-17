@@ -2,8 +2,6 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
 import java.util.Observable;
 import java.util.Observer;
@@ -87,8 +85,8 @@ public class BoardPanel extends JPanel implements Observer {
             int y = (LstoPx(s.getYpos()));
             int x2 = LstoPx(s.getX2());
             int x3 = LstoPx(s.getX3());
-            int y2 = LstoPx(s.gety2());
-            int y3 = LstoPx(s.gety3());
+            int y2 = LstoPx(s.getY2());
+            int y3 = LstoPx(s.getY3());
             int xpoints[] = {x, x2, x3};
             int ypoints[] = {y, y2, y3};
             int npoints = 3;
@@ -99,8 +97,8 @@ public class BoardPanel extends JPanel implements Observer {
         for (AbsorberGizmo a : m.getAbsorbers()) {
             int x = (LstoPx(a.getX()));
             int y = (LstoPx(a.getY()));
-            int x2 = (LstoPx(a.getXpos2()));
-            int y2 = (LstoPx(a.getYpos2()));
+            int x2 = (LstoPx(a.getX2()));
+            int y2 = (LstoPx(a.getY2()));
             if (x2 < x) {
                 int temp = x;
                 x = x2;

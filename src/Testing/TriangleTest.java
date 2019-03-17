@@ -2,7 +2,7 @@ package Testing;
 import Model.TriangleGizmo;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import Model.TriangleGizmo;
+
 import physics.Circle;
 import physics.LineSegment;
 
@@ -49,17 +49,17 @@ public class TriangleTest {
 
     @Test
     public void testY2(){
-        assertEquals(t.gety2(),t.getYpos()+1);
+        assertEquals(t.getY2(),t.getYpos()+1);
         t.rotate();
-        assertEquals(t.gety2(),t.getYpos());
+        assertEquals(t.getY2(),t.getYpos());
 
     }
 
     @Test
     public void testY3(){
-        assertEquals(t.gety3(),t.getYpos());
+        assertEquals(t.getY3(),t.getYpos());
         t.rotate();
-        assertEquals(t.gety3(),t.getYpos()+1);
+        assertEquals(t.getY3(),t.getYpos()+1);
 
     }
 

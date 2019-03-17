@@ -144,11 +144,6 @@ public class Model extends Observable implements Cloneable {
             }
         }
 
-//        if (gizmo != null && connections.get(gizmo) != null) {
-//            connections.get(gizmo).triggered();
-//        }
-
-
         for (LineSegment line : walls) {
             time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
             if (time < shortestTime) {
@@ -161,12 +156,10 @@ public class Model extends Observable implements Cloneable {
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
-        double newX = 0.D;
-        double newY = 0.D;
         double xVel = ball.getVelocity().x();
         double yVel = ball.getVelocity().y();
-        newX = ball.getX() + (xVel * time);
-        newY = ball.getY() + (yVel * time);
+        double newX = ball.getX() + (xVel * time);
+        double newY = ball.getY() + (yVel * time);
         ball.setX(newX);
         ball.setY(newY);
         return ball;
@@ -194,22 +187,6 @@ public class Model extends Observable implements Cloneable {
             if (f.isLeft())
                 f.moveFlipperForTime(delta_t, leftFlipperFlippin);
             else f.moveFlipperForTime(delta_t, rightFlipperFlippin);
-    }
-
-    public void rightFlipperMove() {
-        rightFlipperFlippin = 1;
-    }
-
-    public void rightFlipperStop() {
-        rightFlipperFlippin = -1;
-    }
-
-    public void leftFlipperMove() {
-        leftFlipperFlippin = 1;
-    }
-
-    public void leftFlipperStop() {
-        leftFlipperFlippin = -1;
     }
 
     public void setGravity(int newGravity) {

@@ -10,20 +10,20 @@ import java.util.ArrayList;
 public class CircleGizmo implements IGizmo {
 
     private String id;
-    private int xpos;
-    private int ypos;
+    private int x;
+    private int y;
     private Color colour;
 
     public CircleGizmo(String id, int x, int y) {
-        xpos = x;
-        ypos = y;
+        this.x = x;
+        this.y = y;
         colour = Color.BLACK;
         this.id = id;
     }
 
     public List<Circle> getCircles() {
         List<Circle> l = new ArrayList<>();
-        l.add(new Circle(xpos + .5, ypos + .5, .5));
+        l.add(new Circle(x + .5, y + .5, .5));
         return l;
     }
 
@@ -33,8 +33,8 @@ public class CircleGizmo implements IGizmo {
 
     @Override
     public void setPos(int x, int y) {
-        this.xpos = x;
-        this.ypos = y;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -52,11 +52,11 @@ public class CircleGizmo implements IGizmo {
     }
 
     public int getX() {
-        return xpos;
+        return x;
     }
 
     public int getY() {
-        return ypos;
+        return y;
     }
 
     @Override

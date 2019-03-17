@@ -55,7 +55,7 @@ public class SaveBoardToFile {
 
         for(AbsorberGizmo a : m.getAbsorbers()){
 
-            bw.write("Absorber " + a.getId() + " " + a.getX() + " " + a.getY() + " " + a.getXpos2() + " " + a.getYpos2());
+            bw.write("Absorber " + a.getId() + " " + a.getX() + " " + a.getY() + " " + a.getX2() + " " + a.getY2());
             bw.newLine();
         }
         bw.newLine();

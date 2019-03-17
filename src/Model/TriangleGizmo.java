@@ -15,15 +15,15 @@ public class TriangleGizmo implements IGizmo {
     }
 
     private String id;
-    private int xpos;
-    private int ypos;
+    private int x;
+    private int y;
     private Color colour;
     private Rotation rotation;
     private String name;
 
     public TriangleGizmo(String id, int x, int y, Rotation r) {
-        this.xpos = x;
-        this.ypos = y;
+        this.x = x;
+        this.y = y;
         colour = Color.blue;
 
         if (r == null) {
@@ -39,16 +39,16 @@ public class TriangleGizmo implements IGizmo {
     public List<Circle> getCircles() {
         List<Circle> l = new ArrayList<>();
         if (rotation != Rotation.BOTTOM_RIGHT)
-            l.add(new Circle(xpos, ypos, 0));
+            l.add(new Circle(x, y, 0));
 
         if (rotation != Rotation.BOTTOM_LEFT)
-            l.add(new Circle(xpos + 1, ypos, 0));
+            l.add(new Circle(x + 1, y, 0));
 
         if (rotation != Rotation.TOP_RIGHT)
-            l.add(new Circle(xpos, ypos + 1, 0));
+            l.add(new Circle(x, y + 1, 0));
 
         if (rotation != Rotation.TOP_LEFT)
-            l.add(new Circle(xpos + 1, ypos + 1, 0));
+            l.add(new Circle(x + 1, y + 1, 0));
 
         return l;
     }
@@ -57,26 +57,26 @@ public class TriangleGizmo implements IGizmo {
     public List<LineSegment> getLines() {
         List<LineSegment> l = new ArrayList<>();
         if (rotation == Rotation.TOP_LEFT || rotation == Rotation.TOP_RIGHT)
-            l.add(new LineSegment(xpos, ypos, xpos + 1, ypos));
+            l.add(new LineSegment(x, y, x + 1, y));
         else
-            l.add(new LineSegment(xpos, ypos + 1, xpos + 1, ypos + 1));
+            l.add(new LineSegment(x, y + 1, x + 1, y + 1));
 
         if (rotation == Rotation.TOP_LEFT || rotation == Rotation.BOTTOM_LEFT)
-            l.add(new LineSegment(xpos, ypos, xpos, ypos + 1));
+            l.add(new LineSegment(x, y, x, y + 1));
         else
-            l.add(new LineSegment(xpos + 1, ypos, xpos + 1, ypos + 1));
+            l.add(new LineSegment(x + 1, y, x + 1, y + 1));
 
         if (rotation == Rotation.TOP_LEFT || rotation == Rotation.BOTTOM_RIGHT)
-            l.add(new LineSegment(xpos + 1, ypos, xpos, ypos + 1));
+            l.add(new LineSegment(x + 1, y, x, y + 1));
         else
-            l.add(new LineSegment(xpos, ypos, xpos + 1, ypos + 1));
+            l.add(new LineSegment(x, y, x + 1, y + 1));
         return l;
     }
 
     @Override
     public void setPos(int x, int y) {
-        this.xpos = x;
-        this.ypos = y;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -97,28 +97,28 @@ public class TriangleGizmo implements IGizmo {
         switch (rotation) {
             case TOP_LEFT:
             case BOTTOM_LEFT:
-                return xpos;
+                return x;
             default:
-                return xpos + 1;
+                return x + 1;
         }
-    }
-
-    public int getX() {
-        return xpos;
-    }
-
-    public int getY() {
-        return ypos;
     }
 
     public int getYpos() {
         switch (rotation) {
             case TOP_LEFT:
             case TOP_RIGHT:
-                return ypos;
+                return y;
             default:
-                return ypos + 1;
+                return y + 1;
         }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     // Left dot
@@ -126,19 +126,19 @@ public class TriangleGizmo implements IGizmo {
         switch (rotation) {
             case TOP_LEFT:
             case TOP_RIGHT:
-                return xpos;
+                return x;
             default:
-                return xpos + 1;
+                return x + 1;
         }
     }
 
-    public int gety2() {
+    public int getY2() {
         switch (rotation) {
             case TOP_RIGHT:
             case BOTTOM_RIGHT:
-                return ypos;
+                return y;
             default:
-                return ypos + 1;
+                return y + 1;
         }
     }
 
@@ -147,19 +147,19 @@ public class TriangleGizmo implements IGizmo {
         switch (rotation) {
             case BOTTOM_LEFT:
             case BOTTOM_RIGHT:
-                return xpos;
+                return x;
             default:
-                return xpos + 1;
+                return x + 1;
         }
     }
 
-    public int gety3() {
+    public int getY3() {
         switch (rotation) {
             case TOP_LEFT:
             case BOTTOM_LEFT:
-                return ypos;
+                return y;
             default:
-                return ypos + 1;
+                return y + 1;
         }
     }
 
@@ -186,6 +186,5 @@ public class TriangleGizmo implements IGizmo {
     public Rotation getState() {
         return rotation;
     }
-
 }
 

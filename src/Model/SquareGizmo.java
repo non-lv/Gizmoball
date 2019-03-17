@@ -10,39 +10,39 @@ import java.util.ArrayList;
 public class SquareGizmo implements IGizmo {
 
     private String id;
-    private int xpos;
-    private int ypos;
+    private int x;
+    private int y;
     private Color colour;
 
     public SquareGizmo(String id, int x, int y) {
         this.id = id;
-        xpos = x;
-        ypos = y;
+        this.x = x;
+        this.y = y;
         colour = Color.BLUE;
     }
 
     public List<Circle> getCircles() {
         List l = new ArrayList<>();
-        l.add(new Circle(xpos, ypos, 0));
-        l.add(new Circle(xpos + 1, ypos, 0));
-        l.add(new Circle(xpos, ypos + 1, 0));
-        l.add(new Circle(xpos + 1, ypos + 1, 0));
+        l.add(new Circle(x, y, 0));
+        l.add(new Circle(x + 1, y, 0));
+        l.add(new Circle(x, y + 1, 0));
+        l.add(new Circle(x + 1, y + 1, 0));
         return l;
     }
 
     public List<LineSegment> getLines() {
         List<LineSegment> l = new ArrayList<>();
-        l.add(new LineSegment(xpos, ypos, xpos + 1, ypos));
-        l.add(new LineSegment(xpos, ypos, xpos, ypos + 1));
-        l.add(new LineSegment(xpos + 1, ypos, xpos + 1, ypos + 1));
-        l.add(new LineSegment(xpos, ypos + 1, xpos + 1, ypos + 1));
+        l.add(new LineSegment(x, y, x + 1, y));
+        l.add(new LineSegment(x, y, x, y + 1));
+        l.add(new LineSegment(x + 1, y, x + 1, y + 1));
+        l.add(new LineSegment(x, y + 1, x + 1, y + 1));
         return l;
     }
 
     @Override
     public void setPos(int x, int y) {
-        this.xpos = x;
-        this.ypos = y;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
@@ -60,11 +60,11 @@ public class SquareGizmo implements IGizmo {
     }
 
     public int getX() {
-        return xpos;
+        return x;
     }
 
     public int getY() {
-        return ypos;
+        return y;
     }
 
     @Override
