@@ -6,7 +6,6 @@ public class Connection {
     private IGizmo action;
 
     public Connection(IGizmo trigger, IGizmo action){
-
         this.trigger = trigger;
         this.action = action;
     }

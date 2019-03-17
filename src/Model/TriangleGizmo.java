@@ -26,7 +26,7 @@ public class TriangleGizmo implements IGizmo {
         this.ypos = y;
         colour = Color.blue;
 
-        if (r == null){
+        if (r == null) {
             r = Rotation.TOP_LEFT;
         }
 
@@ -80,6 +80,10 @@ public class TriangleGizmo implements IGizmo {
     }
 
     @Override
+    public void hit(Ball ball) {
+    }
+
+    @Override
     public void trigger() {
 
     }
@@ -99,11 +103,11 @@ public class TriangleGizmo implements IGizmo {
         }
     }
 
-    public int getX(){
+    public int getX() {
         return xpos;
     }
 
-    public int getY(){
+    public int getY() {
         return ypos;
     }
 
@@ -137,7 +141,6 @@ public class TriangleGizmo implements IGizmo {
                 return ypos + 1;
         }
     }
-
 
     // Right dot
     public int getX3() {

@@ -6,12 +6,13 @@ import physics.LineSegment;
 import java.util.List;
 
 public interface IGizmo {
-    public List<Circle> getCircles();
-    public List<LineSegment> getLines();
-    public void setPos(int x, int y);
-    public void trigger();
-    public String getId();
-    public int getX();
-    public int getY();
-    public void rotate();
+    List<Circle> getCircles();
+    List<LineSegment> getLines();
+    void setPos(int x, int y);
+    void hit(Ball ball);
+    void trigger();
+    String getId();
+    int getX();
+    int getY();
+    void rotate();
 }

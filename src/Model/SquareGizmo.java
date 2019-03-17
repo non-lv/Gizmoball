@@ -46,6 +46,10 @@ public class SquareGizmo implements IGizmo {
     }
 
     @Override
+    public void hit(Ball ball) {
+    }
+
+    @Override
     public void trigger() {
 
     }

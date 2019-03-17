@@ -12,12 +12,12 @@ import java.util.Observable;
 
 public class Model extends Observable implements Cloneable {
 
-    private static double mu = 0.025;
-    private static double mu2 = 0.025;
-    private static double gravity = 25;
     private static final double moveTime = 0.05;
     private static final int gridSizeX = 20;
     private static final int gridSizeY = 20;
+    private static double mu = 0.025;
+    private static double mu2 = 0.025;
+    private static double gravity = 25;
 
     private List<IGizmo> iGizmos;
     private List<LineSegment> walls;
@@ -37,7 +37,7 @@ public class Model extends Observable implements Cloneable {
         connections = new HashMap<>();
         keyConnections = new HashMap<>();
 
-         walls.add(new LineSegment(0, 0, gridSizeX, 0));
+        walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
         walls.add(new LineSegment(gridSizeX, 0, gridSizeX, gridSizeY));
         walls.add(new LineSegment(0, gridSizeY, gridSizeX, gridSizeY));
@@ -46,16 +46,10 @@ public class Model extends Observable implements Cloneable {
         leftFlipperFlippin = -1;
     }
 
-    public void fireAbsorbers() {
-        for (AbsorberGizmo ag : this.getAbsorbers())
-            ag.fire();
-    }
-
     public void moveBalls() {
         double moveTime = Model.moveTime;
 
         for (Ball ball : balls) {
-            System.out.println(ball.getSpeed());
             if (ball.isMoving()) {
                 CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
@@ -66,12 +60,6 @@ public class Model extends Observable implements Cloneable {
                     friction(ball, moveTime);
                     gravity(ball, moveTime);
                 } else {
-
-                    if (cd.getGizmo() instanceof AbsorberGizmo) {
-                        ((AbsorberGizmo) cd.getGizmo()).trigger(ball);
-                        break;
-                    }
-
                     moveBallForTime(ball, tuc);
 
                     ball.setVelocity(cd.getVelo());
@@ -80,6 +68,12 @@ public class Model extends Observable implements Cloneable {
                     gravity(ball, tuc);
 
                     moveTime = tuc;
+
+                    if(cd.getGizmo() != null) {
+                        cd.getGizmo().hit(ball);
+                        if (connections.containsKey(cd.getGizmo()))
+                            connections.get(cd.getGizmo()).triggered();
+                    }
                 }
             }
         }
@@ -97,7 +91,7 @@ public class Model extends Observable implements Cloneable {
         Vect newVelo = new Vect(0.0D, 0.0D);
 
         double shortestTime = Double.MAX_VALUE;
-        double time = 0.0D;
+        double time;
         IGizmo gizmo = null;
 
         for (IGizmo iIGizmo : iGizmos) {
@@ -105,13 +99,10 @@ public class Model extends Observable implements Cloneable {
             if (iIGizmo instanceof AbsorberGizmo && ((AbsorberGizmo) iIGizmo).isInside(ball))
                 continue;
 
-            if (iIGizmo instanceof FlipperGizmo && ((FlipperGizmo) iIGizmo).isMoving(leftFlipperFlippin,rightFlipperFlippin)) {
+            if (iIGizmo instanceof FlipperGizmo && ((FlipperGizmo) iIGizmo).isMoving(leftFlipperFlippin, rightFlipperFlippin)) {
                 // Moving Flipper physics
                 double angularVelocity = Math.toRadians(((FlipperGizmo) iIGizmo).getAngularVelocity());
-                if (((FlipperGizmo) iIGizmo).isLeft())
-                    angularVelocity *= -leftFlipperFlippin;
-                else
-                    angularVelocity *= rightFlipperFlippin;
+                angularVelocity *= ((FlipperGizmo) iIGizmo).isLeft() ? -leftFlipperFlippin : rightFlipperFlippin;
 
                 Vect center = iIGizmo.getCircles().get(0).getCenter();
                 for (Circle circle : iIGizmo.getCircles()) {
@@ -132,6 +123,7 @@ public class Model extends Observable implements Cloneable {
                     }
                 }
             } else {
+                // Static Physics
                 for (Circle circle : iIGizmo.getCircles()) {
                     time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
                     if (time < shortestTime) {
@@ -152,10 +144,9 @@ public class Model extends Observable implements Cloneable {
             }
         }
 
-        if(gizmo != null && connections.get(gizmo) != null){
-
-            connections.get(gizmo).triggered();
-        }
+//        if (gizmo != null && connections.get(gizmo) != null) {
+//            connections.get(gizmo).triggered();
+//        }
 
 
         for (LineSegment line : walls) {
@@ -167,7 +158,6 @@ public class Model extends Observable implements Cloneable {
         }
 
         return new CollisionDetails(shortestTime, newVelo, gizmo);
-
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -222,9 +212,11 @@ public class Model extends Observable implements Cloneable {
         leftFlipperFlippin = -1;
     }
 
-    public void setGravity(int newGravity){ gravity = newGravity; }
+    public void setGravity(int newGravity) {
+        gravity = newGravity;
+    }
 
-    public void setFriction(int newFriction){
+    public void setFriction(int newFriction) {
         mu = newFriction;
         mu2 = newFriction;
     }
@@ -233,9 +225,9 @@ public class Model extends Observable implements Cloneable {
         return iGizmos;
     }
 
-    public IGizmo getGizmoByName(String name){
-        for(IGizmo gizmo : iGizmos){
-            if(gizmo.getId().equals(name)){
+    public IGizmo getGizmoByName(String name) {
+        for (IGizmo gizmo : iGizmos) {
+            if (gizmo.getId().equals(name)) {
                 return gizmo;
             }
         }
@@ -316,22 +308,23 @@ public class Model extends Observable implements Cloneable {
         this.notifyObservers();
     }
 
-    public void addConnection(Connection c){
+    public void addConnection(Connection c) {
         connections.put(c.getTrigger(), c);
     }
 
-    public void addKeyConnection(KeyConnection kc){
+    public void addKeyConnection(KeyConnection kc) {
         keyConnections.put(kc.getKey(), kc);
     }
 
-    public void removeGizmo(IGizmo gizmo){
+    public void removeGizmo(IGizmo gizmo) {
         iGizmos.remove(gizmo);
     }
 
-    public void clear(){
+    public void clear() {
         iGizmos = new ArrayList<>();
         balls = new ArrayList<>();
     }
+
     @Override
     public Model clone() {
         try {

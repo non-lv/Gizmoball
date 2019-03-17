@@ -70,12 +70,10 @@ public class Ball {
     }
 
     public double getSpeed() {
-        if (moving)
-            return Math.sqrt(Math.pow(velocity.x(), 2) + Math.pow(velocity.y(), 2));
-        else return 0.0D;
+        return moving ? Math.sqrt(Math.pow(velocity.x(), 2) + Math.pow(velocity.y(), 2)) : 0.0D;
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 }

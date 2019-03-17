@@ -66,27 +66,26 @@ public class AbsorberGizmo implements IGizmo {
         setOccupiedSpace(xpos, ypos, x2pos, y2pos);
     }
 
-    public void setPos2(int x, int y){
+    public void setPos2(int x, int y) {
         this.x2pos = x;
         this.y2pos = y;
         setOccupiedSpace(xpos, ypos, x2pos, y2pos);
     }
 
     @Override
+    public void hit(Ball ball) {
+        if (ball != null) {
+            this.ball = ball;
+
+            ball.setX(x2pos - .5);
+            ball.setY(y2pos - .5);
+
+            ball.stop();
+        }
+    }
+
+    @Override
     public void trigger() {
-        fire();
-    }
-
-    public void trigger(Ball ball) {
-        this.ball = ball;
-
-        ball.setX(x2pos - .5);
-        ball.setY(y2pos - .5);
-
-        ball.stop();
-    }
-
-    public void fire() {
         if (ball != null) {
             ball.setVelocity(0, -50);
             ball.move();
@@ -109,13 +108,11 @@ public class AbsorberGizmo implements IGizmo {
 
     @Override
     public void rotate() {
-
     }
 
     public int getXpos2() {
         return x2pos;
     }
-
 
     public int getYpos2() {
         return y2pos;
@@ -125,13 +122,13 @@ public class AbsorberGizmo implements IGizmo {
         return (ball.getX() >= xpos && ball.getY() >= ypos && ball.getX() <= x2pos && ball.getY() <= y2pos);
     }
 
-    public List<List<Integer>> getOccupiedSpace(){
+    public List<List<Integer>> getOccupiedSpace() {
         return occupiedSpace;
     }
 
-    public void setOccupiedSpace(int x, int y, int x2, int y2){
-        for (int i = x; i < x2; i++){
-            for (int j = y; j < y2; j++){
+    public void setOccupiedSpace(int x, int y, int x2, int y2) {
+        for (int i = x; i < x2; i++) {
+            for (int j = y; j < y2; j++) {
                 List<Integer> contain = new ArrayList<>();
                 contain.add(i);
                 contain.add(j);

@@ -93,7 +93,7 @@ public class AbsorberTest {
 
     @Test
     public void testTrigger(){
-        a.trigger(ball);
+        a.trigger();
         double x = a.getX() - 0.5;
         double xb = ball.getX();
         assertEquals(x,22d/7d, xb);
