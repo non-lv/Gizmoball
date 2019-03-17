@@ -21,12 +21,14 @@ public class FlipperGizmo implements IGizmo {
     private boolean left;
     private double angle;
     private Rotation rotation;
+    private boolean flipped;
 
     public FlipperGizmo(String id, int x, int y, boolean isLeft) {
         this.id = id;
         this.x = x;
         this.y = y;
         left = isLeft;
+        flipped = false;
         rotation = left ? Rotation.TOP_LEFT : Rotation.TOP_RIGHT;
     }
 
@@ -198,7 +200,7 @@ public class FlipperGizmo implements IGizmo {
 
     @Override
     public void trigger() {
-        this.moveFlipperForTime(20, 1);
+        flipped = !flipped;
     }
 
     @Override
@@ -219,7 +221,7 @@ public class FlipperGizmo implements IGizmo {
     }
 
     public double getAngularVelocity() {
-        return angularVelocity;
+        return (flipped && left || !flipped && !left) ? angularVelocity : -angularVelocity;
     }
 
     public void setAngle(double newAngle) {
@@ -246,14 +248,15 @@ public class FlipperGizmo implements IGizmo {
         }
     }
 
-    public void moveFlipperForTime(double delta_t, double modifier) {
-        double newAngle = angle + angularVelocity * delta_t * modifier;
+    public void moveFlipperForTime(double delta_t) {
+        double newAngle;
+        newAngle = flipped ? angle + angularVelocity * delta_t : angle - angularVelocity * delta_t;
 
         angle = newAngle > 90 ? 90 : newAngle < 0 ? 0 : newAngle;
     }
 
-    public boolean isMoving(int leftFlipperFlippin, int rightFlipperFlippin) {
-        return left ? angle < 90 && leftFlipperFlippin > 0 || angle > 0 && leftFlipperFlippin < 0 : angle < 90 && rightFlipperFlippin > 0 || angle > 0 && rightFlipperFlippin < 0;
+    public boolean isMoving() {
+        return flipped ? angle < 90 : angle > 0;
     }
 
     public Rotation getState() {

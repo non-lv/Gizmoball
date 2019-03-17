@@ -26,9 +26,6 @@ public class Model extends Observable implements Cloneable {
     private HashMap<IGizmo, Connection> connections;
     private HashMap<Integer, KeyConnection> keyConnections;
 
-    private int rightFlipperFlippin;
-    private int leftFlipperFlippin;
-
     public Model() {
         iGizmos = new ArrayList<>();
         walls = new ArrayList<>();
@@ -41,9 +38,6 @@ public class Model extends Observable implements Cloneable {
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
         walls.add(new LineSegment(gridSizeX, 0, gridSizeX, gridSizeY));
         walls.add(new LineSegment(0, gridSizeY, gridSizeX, gridSizeY));
-
-        rightFlipperFlippin = -1;
-        leftFlipperFlippin = -1;
     }
 
     public void moveBalls() {
@@ -99,10 +93,9 @@ public class Model extends Observable implements Cloneable {
             if (iIGizmo instanceof AbsorberGizmo && ((AbsorberGizmo) iIGizmo).isInside(ball))
                 continue;
 
-            if (iIGizmo instanceof FlipperGizmo && ((FlipperGizmo) iIGizmo).isMoving(leftFlipperFlippin, rightFlipperFlippin)) {
+            if (iIGizmo instanceof FlipperGizmo && ((FlipperGizmo) iIGizmo).isMoving()) {
                 // Moving Flipper physics
                 double angularVelocity = Math.toRadians(((FlipperGizmo) iIGizmo).getAngularVelocity());
-                angularVelocity *= ((FlipperGizmo) iIGizmo).isLeft() ? -leftFlipperFlippin : rightFlipperFlippin;
 
                 Vect center = iIGizmo.getCircles().get(0).getCenter();
                 for (Circle circle : iIGizmo.getCircles()) {
@@ -184,9 +177,7 @@ public class Model extends Observable implements Cloneable {
 
     private void moveFlippersForTime(double delta_t) {
         for (FlipperGizmo f : this.getFlippers())
-            if (f.isLeft())
-                f.moveFlipperForTime(delta_t, leftFlipperFlippin);
-            else f.moveFlipperForTime(delta_t, rightFlipperFlippin);
+            f.moveFlipperForTime(delta_t);
     }
 
     public void setGravity(int newGravity) {
