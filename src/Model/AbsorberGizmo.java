@@ -73,7 +73,13 @@ public class AbsorberGizmo implements IGizmo {
     }
 
     @Override
-    public void hit(Ball ball) {
+    public void trigger(Ball ball) {
+        if (this.ball != null) {
+            this.ball.setVelocity(0, -50);
+            this.ball.move();
+            this.ball = null;
+        }
+
         if (ball != null) {
             this.ball = ball;
 
@@ -81,15 +87,6 @@ public class AbsorberGizmo implements IGizmo {
             ball.setY(y2 - .5);
 
             ball.stop();
-        }
-    }
-
-    @Override
-    public void trigger() {
-        if (ball != null) {
-            ball.setVelocity(0, -50);
-            ball.move();
-            ball = null;
         }
     }
 

@@ -38,11 +38,7 @@ public class CircleGizmo implements IGizmo {
     }
 
     @Override
-    public void hit(Ball ball) {
-    }
-
-    @Override
-    public void trigger() {
+    public void trigger(Ball ball) {
 
     }
 

@@ -64,9 +64,9 @@ public class Model extends Observable implements Cloneable {
                     moveTime = tuc;
 
                     if(cd.getGizmo() != null) {
-                        cd.getGizmo().hit(ball);
+                        cd.getGizmo().trigger(ball);
                         if (connections.containsKey(cd.getGizmo()))
-                            connections.get(cd.getGizmo()).triggered();
+                            connections.get(cd.getGizmo()).triggered(ball);
                     }
                 }
             }
