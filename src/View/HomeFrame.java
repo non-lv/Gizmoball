@@ -38,7 +38,7 @@ public class HomeFrame {
         this.buildModePanel = buildModePanel;
         this.m = m;
         this.menuPanelLeft = new JPanel();
-        menuPanelLeft.add(runModePanel);
+        menuPanelLeft.add(this.runModePanel);
         this.optionsPanelTop = optionsPanel;
         this.boardPanel = boardPanel;
         this.notificationPanel = notificationPanel;
@@ -102,6 +102,7 @@ public class HomeFrame {
     public void swapToRun() {
         menuPanelLeft.removeAll();
         boardPanel.removeGrid();
+        runModePanel.refreshTriggers();
         menuPanelLeft.add(runModePanel);
 
         optionsPanelTop.runMode();

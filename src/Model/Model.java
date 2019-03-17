@@ -320,6 +320,14 @@ public class Model extends Observable implements Cloneable {
         connections.put(c.getTrigger(), c);
     }
 
+    public HashMap<IGizmo, Connection> getConnections(){
+        return connections;
+    }
+
+    public void removeConnection(Connection remove){
+        connections.remove(remove.getTrigger(), remove);
+    }
+
     public void addKeyConnection(KeyConnection kc){
         keyConnections.put(kc.getKey(), kc);
     }

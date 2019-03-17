@@ -13,12 +13,14 @@ public class SquareGizmo implements IGizmo {
     private int xpos;
     private int ypos;
     private Color colour;
+    public List<List<Integer>> occupiedSpace;
 
     public SquareGizmo(String id, int x, int y) {
         this.id = id;
         xpos = x;
         ypos = y;
         colour = Color.BLUE;
+        setOccupiedSpace();
     }
 
     public List<Circle> getCircles() {
@@ -43,6 +45,7 @@ public class SquareGizmo implements IGizmo {
     public void setPos(int x, int y) {
         this.xpos = x;
         this.ypos = y;
+        setOccupiedSpace();
     }
 
     @Override
@@ -53,6 +56,19 @@ public class SquareGizmo implements IGizmo {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    public List<List<Integer>> getOccupiedSpace() {
+        return occupiedSpace;
+    }
+    
+    public void setOccupiedSpace(){
+        occupiedSpace = new ArrayList<>();
+        ArrayList<Integer> square = new ArrayList<>();
+        square.add(xpos);
+        square.add(ypos);
+        occupiedSpace.add(square);
     }
 
     public int getX() {

@@ -40,9 +40,6 @@ public class RunModeController implements ActionListener {
                     model.clear();
                     try{
                         LoadBoardFromFile.readFromFile(path,model);
-
-
-
                     } catch (Exception ex){
                         System.out.println("cant read");
                     }
@@ -60,6 +57,7 @@ public class RunModeController implements ActionListener {
     public void startTime(){
         timer.start();
     }
+
     public static void setPath(String p){
         path = p;
     }
