@@ -44,15 +44,15 @@ public class FlipperGizmo implements IGizmo {
 
         ArrayList<Integer> second = new ArrayList<>();
         second.add(x);
-        second.add(y+1);
+        second.add(y + 1);
 
         ArrayList<Integer> third = new ArrayList<>();
-        third.add(x+1);
+        third.add(x + 1);
         third.add(y);
 
         ArrayList<Integer> fourth = new ArrayList<>();
-        fourth.add(x+1);
-        fourth.add(y+1);
+        fourth.add(x + 1);
+        fourth.add(y + 1);
 
         occupiedSpace.add(origin);
         occupiedSpace.add(second);
@@ -216,8 +216,8 @@ public class FlipperGizmo implements IGizmo {
         return l;
     }
 
-    public Vect getRotationCenter(){
-        switch(rotation){
+    public Vect getRotationCenter() {
+        switch (rotation) {
             case TOP_LEFT:
                 return new Vect(x + flipperWidth / 2, y + flipperWidth / 2);
             case TOP_RIGHT:
@@ -226,7 +226,7 @@ public class FlipperGizmo implements IGizmo {
                 return new Vect(x + 2 - flipperWidth / 2, y + 2 - flipperWidth / 2);
             case BOTTOM_LEFT:
             default:
-                return  new Vect(x + flipperWidth / 2, y + 2 - flipperWidth / 2);
+                return new Vect(x + flipperWidth / 2, y + 2 - flipperWidth / 2);
         }
     }
 
