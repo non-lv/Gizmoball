@@ -265,7 +265,7 @@ public class FlipperGizmo implements IGizmo {
     }
 
     public double getAngularVelocity() {
-        return (flipped && left || !flipped && !left) ? angularVelocity : -angularVelocity;
+        return (!flipped && left || flipped && !left) ? angularVelocity : -angularVelocity;
     }
 
     public void setAngle(double newAngle) {
