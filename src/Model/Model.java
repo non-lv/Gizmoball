@@ -22,6 +22,7 @@ public class Model extends Observable implements Cloneable {
     private static double mu2 = 0.025;
     private static double gravity = 25;
 
+
     private List<IGizmo> iGizmos;
     private List<LineSegment> walls;
     private List<Ball> balls;

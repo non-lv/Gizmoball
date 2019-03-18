@@ -1,5 +1,6 @@
 package View;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -55,32 +56,52 @@ public class BuildModePanel extends JPanel implements IView{
 
         //Add gizmo button declarations
         square = new JButton();
+        square.setIcon(new ImageIcon("src/Icons/square.png"));
         square.setText("Square");
+        square.setVerticalTextPosition(SwingConstants.BOTTOM);
+        square.setHorizontalTextPosition(SwingConstants.CENTER);
         square.setActionCommand("Square");
         square.setPreferredSize(addGizmoDim);
 
+
+
         triangle = new JButton();
+        triangle.setIcon(new ImageIcon("src/Icons/triangle.png"));
         triangle.setText("Triangle");
+        triangle.setVerticalTextPosition(SwingConstants.BOTTOM);
+        triangle.setHorizontalTextPosition(SwingConstants.CENTER);
         triangle.setActionCommand("Triangle");
         triangle.setPreferredSize(addGizmoDim);
 
         circle = new JButton();
+        circle.setIcon(new ImageIcon("src/Icons/circle.png"));
         circle.setText("Circle");
+        circle.setVerticalTextPosition(SwingConstants.BOTTOM);
+        circle.setHorizontalTextPosition(SwingConstants.CENTER);
         circle.setActionCommand("Circle");
         circle.setPreferredSize(addGizmoDim);
 
         lFlipper = new JButton();
-        lFlipper.setText("<html>Left<br/>Flipper</html>");
+        lFlipper.setIcon(new ImageIcon("src/Icons/leftFlipper.png"));
+        lFlipper.setText("Left Flipper");
+        lFlipper.setVerticalTextPosition(SwingConstants.BOTTOM);
+        lFlipper.setHorizontalTextPosition(SwingConstants.CENTER);
         lFlipper.setActionCommand("lFlipper");
         lFlipper.setPreferredSize(addGizmoDim);
 
         rFlipper = new JButton();
-        rFlipper.setText("<html>Right<br/>Flipper</html>");
+        rFlipper.setIcon(new ImageIcon("src/Icons/rightFlipper.png"));
+        rFlipper.setText("Right Flipper");
+        rFlipper.setVerticalTextPosition(SwingConstants.BOTTOM);
+        rFlipper.setHorizontalTextPosition(SwingConstants.CENTER);
         rFlipper.setPreferredSize(addGizmoDim);
         rFlipper.setActionCommand("rFlipper");
 
         absorber = new JButton();
+        absorber.setIcon(new ImageIcon("src/Icons/absorber.png"));
         absorber.setText("Absorber");
+        absorber.setVerticalTextPosition(SwingConstants.BOTTOM);
+        absorber.setHorizontalTextPosition(SwingConstants.CENTER);
         absorber.setActionCommand("Absorber");
         absorber.setPreferredSize(addGizmoDim);
 
