@@ -15,6 +15,8 @@ public class LoadBoardFromFile {
 
         String line;
 
+        m.clear();
+
         while((line = br.readLine()) != null){
 
             String[] tokens = line.split(" ");

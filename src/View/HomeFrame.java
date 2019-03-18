@@ -1,9 +1,6 @@
 package View;
 
-import Controller.BuildModeController;
-import Controller.KeyPressedController;
-import Controller.OptionPanelController;
-import Controller.RunModeController;
+import Controller.*;
 
 import java.awt.event.KeyEvent;
 import javax.swing.*;
@@ -30,7 +27,7 @@ public class HomeFrame {
     private JPanel boardContainer;
     private RunModePanel runModePanel;
     private BuildModePanel buildModePanel;
-    private KeyPressedController k;
+    private MagicKeyListener magic;
     private Model m;
 
     public HomeFrame(Model m, RunModePanel runModePanel, BuildModePanel buildModePanel, OptionsPanel optionsPanel, BoardPanel boardPanel, NotificationPanel notificationPanel) {
@@ -42,7 +39,11 @@ public class HomeFrame {
         this.optionsPanelTop = optionsPanel;
         this.boardPanel = boardPanel;
         this.notificationPanel = notificationPanel;
-        k = new KeyPressedController(this.m);
+
+        //k = new KeyPressedController(this.m);
+        magic = new MagicKeyListener(new KeyPressedController(this.m));
+
+
 
         init();
     }
@@ -74,7 +75,7 @@ public class HomeFrame {
         window.setLocationRelativeTo(null);
         window.setVisible(true);
 
-        window.addKeyListener(k);
+        window.addKeyListener(magic);
         window.setFocusable(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

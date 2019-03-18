@@ -34,7 +34,6 @@ public class KeyPressedController implements KeyListener {
 //        model.fireAbsorbers();
 
         if(model.getKeyConnections().containsKey(e.getKeyCode())){
-            System.out.println("hi");
 
             KeyConnection action = model.getKeyConnections().get(e.getKeyCode());
             action.doAction();
@@ -52,6 +51,12 @@ public class KeyPressedController implements KeyListener {
 //                break;
 //            default:
 //        }
+
+        if(model.getKeyConnections().containsKey(e.getKeyCode())){
+
+            KeyConnection action = model.getKeyConnections().get(e.getKeyCode());
+            action.doAction();
+        }
     }
 
 }
