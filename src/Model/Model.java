@@ -65,7 +65,7 @@ public class Model extends Observable implements Cloneable {
                 } else {
                     if (cd.hasCollision(ball)) {
                         if (cd.isBallToBallCollision()) {
-                            if (cd.getBall_().getId().equals(ball.getId()))
+                            if (cd.getBall_().equals(ball))
                                 continue;
                             Ball ball_ = cd.getBall_();
                             moveBallForTime(ball, tuc);
@@ -180,7 +180,7 @@ public class Model extends Observable implements Cloneable {
         Ball ball_ = null;
         VectPair newVelo_ = null;
         for (Ball b : balls) {
-            if (!b.getId().equals(ball.getId())) {
+            if (!b.equals(ball)) {
                 time = timeUntilBallBallCollision(ballCircle, ballVelocity, b.getCircle(), b.getVelocity());
                 if (time < shortestTime) {
                     ball_ = b;

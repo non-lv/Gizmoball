@@ -76,5 +76,18 @@ public class Ball {
     public String getId() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof Ball))
+            return false;
+
+        if(o == this)
+            return true;
+
+        Ball ball = (Ball) o;
+
+        return ball.getX() == x && ball.getY() == y && ball.getVelocity().x() == velocity.x() && ball.getVelocity().y() == velocity.y();
+    }
 }
 
