@@ -5,6 +5,8 @@ import Model.KeyConnection;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
+import java.util.Set;
 
 public class KeyPressedController implements KeyListener {
 
@@ -33,11 +35,15 @@ public class KeyPressedController implements KeyListener {
 //
 //        model.fireAbsorbers();
 
-        if(model.getKeyConnections().containsKey(e.getKeyCode())){
 
-            KeyConnection action = model.getKeyConnections().get(e.getKeyCode());
-            action.doAction();
-        }
+            List<KeyConnection> actions = model.getKeyConnections();
+
+            for(KeyConnection connection : actions) {
+                if (connection.getKey() == e.getKeyCode() && connection.getStatus() == KeyConnection.KeyStatus.DOWN) {
+                    connection.doAction();
+                }
+            }
+
     }
 
     @Override
@@ -52,11 +58,15 @@ public class KeyPressedController implements KeyListener {
 //            default:
 //        }
 
-        if(model.getKeyConnections().containsKey(e.getKeyCode())){
 
-            KeyConnection action = model.getKeyConnections().get(e.getKeyCode());
-            action.doAction();
-        }
+            List<KeyConnection> actions = model.getKeyConnections();
+
+            for(KeyConnection connection : actions) {
+                if (connection.getKey() == e.getKeyCode() && connection.getStatus() == KeyConnection.KeyStatus.UP) {
+                    connection.doAction();
+                }
+            }
+
     }
 
 }

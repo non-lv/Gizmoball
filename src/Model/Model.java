@@ -26,16 +26,16 @@ public class Model extends Observable implements Cloneable {
     private List<LineSegment> walls;
     private List<Ball> balls;
 
-    private HashMap<IGizmo, Connection> connections;
-    private HashMap<Integer, KeyConnection> keyConnections;
+    private List<Connection> connections;
+    private List<KeyConnection> keyConnections;
 
     public Model() {
         iGizmos = new ArrayList<>();
         walls = new ArrayList<>();
         balls = new ArrayList<>();
 
-        connections = new HashMap<>();
-        keyConnections = new HashMap<>();
+        connections = new ArrayList<>();
+        keyConnections = new ArrayList<>();
 
         walls.add(new LineSegment(0, 0, gridSizeX, 0));
         walls.add(new LineSegment(0, 0, 0, gridSizeY));
@@ -91,9 +91,12 @@ public class Model extends Observable implements Cloneable {
                             gravity(ball, tuc);
 
                             if (cd.getGizmo() != null) {
-                                cd.getGizmo().trigger(ball);
-                                if (connections.containsKey(cd.getGizmo()))
-                                    connections.get(cd.getGizmo()).triggered(ball);
+                                //cd.getGizmo().trigger(ball);
+                                for(Connection connection : connections){
+                                    if(connection.getTrigger() == cd.getGizmo()){
+                                        connection.triggered(ball);
+                                    }
+                                }
                             }
                         }
                     } else {
@@ -305,7 +308,7 @@ public class Model extends Observable implements Cloneable {
         return null;
     }
 
-    public HashMap<Integer, KeyConnection> getKeyConnections() {
+    public List<KeyConnection> getKeyConnections() {
         return keyConnections;
     }
 
@@ -322,19 +325,20 @@ public class Model extends Observable implements Cloneable {
     }
 
     public void addConnection(Connection c) {
-        connections.put(c.getTrigger(), c);
+        connections.add(c);
     }
 
-    public HashMap<IGizmo, Connection> getConnections() {
+    public List<Connection> getConnections() {
         return connections;
     }
 
     public void removeConnection(Connection remove) {
-        connections.remove(remove.getTrigger(), remove);
+        connections.remove(remove);
     }
 
     public void addKeyConnection(KeyConnection kc) {
-        keyConnections.put(kc.getKey(), kc);
+
+        keyConnections.add(kc);
     }
 
     public void removeGizmo(IGizmo gizmo) {
