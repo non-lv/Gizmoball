@@ -598,11 +598,14 @@ public class BuildModeController implements ActionListener {
                         if(trigger == null){
                             for (IGizmo gizmo:model.getGizmos()) {
                                 if (gizmo.getX() == x && gizmo.getY() == y){
-                                    if(model.getConnections().containsKey(gizmo)) {
-                                        trigger = gizmo;
-                                        home.showNotification("Click the gizmo that you want to remove connection to");
-                                    } else {
-                                        home.showNotification("This gizmo does not have a connection");
+
+                                    for(Connection connection : model.getConnections()){
+                                        if(connection.getTrigger() == gizmo) {
+                                            trigger = gizmo;
+                                            home.showNotification("Click the gizmo that you want to remove connection to");
+                                        } else {
+                                            home.showNotification("This gizmo does not have a connection");
+                                        }
                                     }
                                 }
                             }
@@ -610,12 +613,12 @@ public class BuildModeController implements ActionListener {
                             for (IGizmo gizmo:model.getGizmos()) {
                                 if (gizmo.getX() == x && gizmo.getY() == y){
                                         action = gizmo;
-                                        for (Map.Entry<IGizmo, Connection> connectionEntry:model.getConnections().entrySet()){
-                                            IGizmo key = connectionEntry.getKey();
-                                            Connection value = connectionEntry.getValue();
-                                            if (key == trigger && value.getTrigger() == trigger && value.getAction() == action){
+                                        for (Connection connectionEntry:model.getConnections()){
+                                            IGizmo key = connectionEntry.getTrigger();
+
+                                            if (key == trigger && key == trigger && connectionEntry.getAction() == action){
                                                 home.showNotification("Connection removed between " + trigger.getId() + " and " + action.getId());
-                                                model.removeConnection(value);
+                                                model.removeConnection(connectionEntry);
                                             }
                                         }
                                 }

@@ -1,5 +1,6 @@
 package Model;
 
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.List;
 
@@ -137,10 +138,16 @@ public class LoadBoardFromFile {
 
                             IGizmo action = null;
                             int key = Integer.parseInt(tokens[2]);
+                            String keyStatus = tokens[3];
 
                             if((action = m.getGizmoByName(tokens[4])) != null){
-                                KeyConnection keyConnection = new KeyConnection(action, key);
-                                m.addKeyConnection(keyConnection);
+                                if(keyStatus.equals("down")){
+                                    KeyConnection keyConnection = new KeyConnection(action, key, KeyConnection.KeyStatus.DOWN);
+                                    m.addKeyConnection(keyConnection);
+                                } else if(keyStatus.equals("up")){
+                                    KeyConnection keyConnection = new KeyConnection(action, key, KeyConnection.KeyStatus.UP);
+                                    m.addKeyConnection(keyConnection);
+                                }
                             }
                         }
 
