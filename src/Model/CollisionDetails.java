@@ -56,6 +56,6 @@ public class CollisionDetails {
     }
 
     public boolean hasCollision(Ball ball) {
-        return b.equals(ball) || (b_ != null && b_.equals(ball));
+        return b == ball || (b_ != null && b_ ==ball);
     }
 }

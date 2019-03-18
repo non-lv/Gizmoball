@@ -48,15 +48,19 @@ public class Model extends Observable implements Cloneable {
         CollisionDetails cd = null;
 
         for (Ball ball : balls) {
-            CollisionDetails cd_ = timeUntilCollision(ball);
-            if (cd == null || cd.getTuc() > cd_.getTuc())
-                cd = cd_;
+            if(ball.isMoving()) {
+                CollisionDetails cd_ = timeUntilCollision(ball);
+                if (cd == null || cd.getTuc() > cd_.getTuc())
+                    cd = cd_;
+            }
         }
+
+        double tuc = cd == null ? moveTime : cd.getTuc();
+
+        moveFlippersForTime(tuc > moveTime ? moveTime : tuc);
 
         for (Ball ball : balls) {
             if (ball.isMoving()) {
-                double tuc = cd.getTuc();
-
                 if (tuc > moveTime) {
                     moveBallForTime(ball, moveTime);
 
@@ -65,7 +69,7 @@ public class Model extends Observable implements Cloneable {
                 } else {
                     if (cd.hasCollision(ball)) {
                         if (cd.isBallToBallCollision()) {
-                            if (cd.getBall_().equals(ball))
+                            if (cd.getBall_() == ball)
                                 continue;
                             Ball ball_ = cd.getBall_();
                             moveBallForTime(ball, tuc);
@@ -86,8 +90,6 @@ public class Model extends Observable implements Cloneable {
                             friction(ball, tuc);
                             gravity(ball, tuc);
 
-                            moveTime = tuc;
-
                             if (cd.getGizmo() != null) {
                                 cd.getGizmo().trigger(ball);
                                 if (connections.containsKey(cd.getGizmo()))
@@ -103,8 +105,6 @@ public class Model extends Observable implements Cloneable {
                 }
             }
         }
-
-        moveFlippersForTime(moveTime);
 
         this.setChanged();
         this.notifyObservers();
@@ -180,7 +180,7 @@ public class Model extends Observable implements Cloneable {
         Ball ball_ = null;
         VectPair newVelo_ = null;
         for (Ball b : balls) {
-            if (!b.equals(ball)) {
+            if (b != ball) {
                 time = timeUntilBallBallCollision(ballCircle, ballVelocity, b.getCircle(), b.getVelocity());
                 if (time < shortestTime) {
                     ball_ = b;
