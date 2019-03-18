@@ -229,7 +229,7 @@ public class Model extends Observable implements Cloneable {
         gravity = newGravity;
     }
 
-    public void setFriction(int newFriction) {
+    public void setFriction(double newFriction) {
         mu = newFriction;
         mu2 = newFriction;
     }

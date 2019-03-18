@@ -321,16 +321,17 @@ public class BuildModeController implements ActionListener {
                 removeListeners();
                 int xV;
                 int xY;
-                String newXVelocity = home.getBuildModePanel().getxV().getText();
-                String newYVelocity = home.getBuildModePanel().getyV().getText();
-                if (newXVelocity.matches("-?[1-9]\\d*|0") && newYVelocity.matches("-?[1-9]\\d*|0")){
-                    xV = (Integer.parseInt(newXVelocity));
-                    xY = (Integer.parseInt(newYVelocity));
+                int newXVelocity = home.getBuildModePanel().getxV();
+                int newYVelocity = home.getBuildModePanel().getyV();
+//                if (newYVelocity.matches("-?[1-9]\\d*|0")){
+                    xV = newXVelocity;
+                    xY = newYVelocity;
+                System.out.println("new xv" + xV);
                     home.showNotification("Please click anywhere you wish to add a ball");
-                } else {
-                    home.showNotification("Please enter numbers values in the X and Y velocity boxes respectively");
-                    return;
-                }
+//                } else {
+//                    home.showNotification("Please enter numbers values in the X and Y velocity boxes respectively");
+//                    return;
+//                }
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -648,25 +649,18 @@ public class BuildModeController implements ActionListener {
             case "keyDisconnect":
                 break;
             case "friction":
-                String newFriction = home.getBuildModePanel().getFrictionText().getText();
-                if (newFriction.matches("[0-9]+")){
-                    model.setFriction(Integer.parseInt(newFriction));
-                    System.out.println("Gravity changed to " + newFriction);
-                } else {
-                    home.showNotification("Please enter a number value in the gravity box");
-                }
-                System.out.println("friction");
+                double newFriction = home.getBuildModePanel().getFriction();
+
+                    model.setFriction(newFriction/10);
+                    System.out.println("Gravity changed to " + newFriction/10);
+
                 break;
             case "gravity":
-                String newGravity = home.getBuildModePanel().getGravityText().getText();
-                if (newGravity.matches("-?[0-9]\\d*|0")){
-                    model.setGravity(Integer.parseInt(newGravity));
-                    System.out.println("Gravity changed to " + newGravity);
-                } else {
-                    home.showNotification("Please enter a number value in the gravity box");
-                }
-                System.out.println("gravity");
-            break;
+                int newGravity = home.getBuildModePanel().getGravity();
+
+                model.setGravity(newGravity);
+                System.out.println("Gravity changed to " + newGravity/10);
+                break;
         }
     }
 

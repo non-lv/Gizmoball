@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 public class BuildModePanel extends JPanel implements IView{
 
@@ -34,8 +35,11 @@ public class BuildModePanel extends JPanel implements IView{
     private JPanel FrictionAndGravity;
     private JTextArea frictionText;
     private JTextArea gravityText;
-    private JTextArea xV;
-    private JTextArea yV;
+//    private JTextArea xV;
+    JSlider fric;
+    JSlider grav;
+    JSlider xV;
+    JSlider yV;
 
 
     public BuildModePanel(){
@@ -86,9 +90,19 @@ public class BuildModePanel extends JPanel implements IView{
         addGizmo.add(lFlipper);
         addGizmo.add(rFlipper);
         addGizmo.add(absorber);
+        xV = new JSlider(0, 50,1 );
+        xV.setMajorTickSpacing(10);
+        xV.setMinorTickSpacing(1);
+        xV.setPaintTicks(true);
+        xV.setPaintLabels(true);
 
-        xV = new JTextArea("X Velocity");
-        yV = new JTextArea("Y Velocity");
+        yV = new JSlider(0, 50,1 );
+
+        yV.setMajorTickSpacing(10);
+        yV.setMinorTickSpacing(1);
+
+        yV.setPaintTicks(true);
+        yV.setPaintLabels(true);
 
         //Border for text input
         Border border = BorderFactory.createLineBorder(Color.BLACK);
@@ -96,9 +110,20 @@ public class BuildModePanel extends JPanel implements IView{
         yV.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         //Velocity input
-        velocities = new JPanel(new GridLayout(0, 1));
-        velocities.add(xV);
-        velocities.add(yV);
+        velocities = new JPanel(new GridLayout(2, 2));
+        JPanel xvel = new JPanel(new FlowLayout(FlowLayout.CENTER,5,5));
+        JPanel yvel = new JPanel(new FlowLayout(FlowLayout.CENTER,5,5));
+        JLabel xv = new JLabel("X-Velocity");
+        JLabel yv = new JLabel("Y-Velocity");
+        xvel.add(xv,BorderLayout.WEST);
+        xvel.add(xV,BorderLayout.CENTER);
+        yvel.add(yv,BorderLayout.WEST);
+        yvel.add(yV,BorderLayout.CENTER);
+
+        velocities.add(xvel,BorderLayout.NORTH);
+        velocities.add(yvel,BorderLayout.SOUTH);
+
+
 
         //Ball text windows and button
         ball = new JButton();
@@ -113,17 +138,32 @@ public class BuildModePanel extends JPanel implements IView{
         //Friction and Gravity
         friction = new JButton("Set Fiction");
         friction.setActionCommand("friction");
+        fric = new JSlider(0, 10,1 );
+        fric.setMajorTickSpacing(1);
+        fric.setMinorTickSpacing(1);
+        fric.setPaintTicks(true);
+        fric.setPaintLabels(true);
+
         gravity = new JButton("Set Gravity");
         gravity.setActionCommand("gravity");
-        frictionText = new JTextArea();
-        frictionText.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        gravityText = new JTextArea();
-        gravityText.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+        grav = new JSlider(-30, 30,0 );
+        grav.setMajorTickSpacing(10);
+        grav.setMinorTickSpacing(1);
+        grav.setPaintTicks(true);
+        grav.setPaintLabels(true);
+//        frictionText = new JTextArea();
+
+//        frictionText.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+//        gravityText = new JTextArea();
+//        gravityText.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
         FrictionAndGravity = new JPanel(new GridLayout(2, 2));
         FrictionAndGravity.add(friction);
-        FrictionAndGravity.add(frictionText);
+        FrictionAndGravity.add(fric);
+
+//        FrictionAndGravity.add(frictionText);
         FrictionAndGravity.add(gravity);
-        FrictionAndGravity.add(gravityText);
+        FrictionAndGravity.add(grav);
+//        FrictionAndGravity.add(gravityText);
 
         //Gizmo and Ball panels together
         gizmoAndBall = new JPanel(new BorderLayout());
@@ -195,17 +235,16 @@ public class BuildModePanel extends JPanel implements IView{
 
     }
 
-    public JTextArea getGravityText(){
-        return gravityText;
+    public int getGravity(){
+        return grav.getValue();
     }
 
-    public JTextArea getFrictionText(){
-        return frictionText;
+    public int getFriction(){ return fric.getValue();
     }
 
-    public JTextArea getxV(){ return xV;}
+    public int getxV(){ return xV.getValue();}
 
-    public JTextArea getyV(){ return yV;}
+    public int getyV(){ return yV.getValue();}
 
     @Override
     public void addActionListeners(ActionListener actionListener){

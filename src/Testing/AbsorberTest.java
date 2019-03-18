@@ -23,6 +23,7 @@ public class AbsorberTest {
     public void testXpos() {
         assertEquals(a.getX(),1);
         assertNotEquals(a.getX(),0);
+
     }
 
     @Test
