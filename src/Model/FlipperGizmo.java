@@ -2,6 +2,7 @@ package Model;
 
 import physics.Circle;
 import physics.LineSegment;
+import physics.Vect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -213,6 +214,20 @@ public class FlipperGizmo implements IGizmo {
         y_line_2 = y2 + y_change;
         l.add(new LineSegment(x_line_, y_line_, x_line_2, y_line_2));
         return l;
+    }
+
+    public Vect getRotationCenter(){
+        switch(rotation){
+            case TOP_LEFT:
+                return new Vect(x + flipperWidth / 2, y + flipperWidth / 2);
+            case TOP_RIGHT:
+                return new Vect(x + 2 - flipperWidth / 2, y + flipperWidth / 2);
+            case BOTTOM_RIGHT:
+                return new Vect(x + 2 - flipperWidth / 2, y + 2 - flipperWidth / 2);
+            case BOTTOM_LEFT:
+            default:
+                return  new Vect(x + flipperWidth / 2, y + 2 - flipperWidth / 2);
+        }
     }
 
     @Override

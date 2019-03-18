@@ -1,20 +1,23 @@
 package Model;
 
 import physics.Circle;
-import physics.Geometry;
 import physics.LineSegment;
 import physics.Vect;
+import physics.Geometry.VectPair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
+import static physics.Geometry.*;
+
 public class Model extends Observable implements Cloneable {
 
     private static final double moveTime = 0.05;
     private static final int gridSizeX = 20;
     private static final int gridSizeY = 20;
+    private static final int ballMass = 1;
     private static double mu = 0.025;
     private static double mu2 = 0.025;
     private static double gravity = 25;
@@ -42,10 +45,16 @@ public class Model extends Observable implements Cloneable {
 
     public void moveBalls() {
         double moveTime = Model.moveTime;
+        CollisionDetails cd = null;
+
+        for (Ball ball : balls) {
+            CollisionDetails cd_ = timeUntilCollision(ball);
+            if (cd == null || cd.getTuc() > cd_.getTuc())
+                cd = cd_;
+        }
 
         for (Ball ball : balls) {
             if (ball.isMoving()) {
-                CollisionDetails cd = timeUntilCollision(ball);
                 double tuc = cd.getTuc();
 
                 if (tuc > moveTime) {
@@ -54,19 +63,42 @@ public class Model extends Observable implements Cloneable {
                     friction(ball, moveTime);
                     gravity(ball, moveTime);
                 } else {
-                    moveBallForTime(ball, tuc);
+                    if (cd.hasCollision(ball)) {
+                        if (cd.isBallToBallCollision()) {
+                            if (cd.getBall_().getId().equals(ball.getId()))
+                                continue;
+                            Ball ball_ = cd.getBall_();
+                            moveBallForTime(ball, tuc);
+                            moveBallForTime(ball_, tuc);
 
-                    ball.setVelocity(cd.getVelo());
+                            ball.setVelocity(cd.getVelocityPair().v1);
+                            ball_.setVelocity(cd.getVelocityPair().v2);
 
-                    friction(ball, tuc);
-                    gravity(ball, tuc);
+                            friction(ball, tuc);
+                            friction(ball_, tuc);
+                            gravity(ball, tuc);
+                            gravity(ball_, tuc);
+                        } else {
+                            moveBallForTime(ball, tuc);
 
-                    moveTime = tuc;
+                            ball.setVelocity(cd.getVelocity());
 
-                    if(cd.getGizmo() != null) {
-                        cd.getGizmo().trigger(ball);
-                        if (connections.containsKey(cd.getGizmo()))
-                            connections.get(cd.getGizmo()).triggered(ball);
+                            friction(ball, tuc);
+                            gravity(ball, tuc);
+
+                            moveTime = tuc;
+
+                            if (cd.getGizmo() != null) {
+                                cd.getGizmo().trigger(ball);
+                                if (connections.containsKey(cd.getGizmo()))
+                                    connections.get(cd.getGizmo()).triggered(ball);
+                            }
+                        }
+                    } else {
+                        moveBallForTime(ball, tuc);
+
+                        friction(ball, tuc);
+                        gravity(ball, tuc);
                     }
                 }
             }
@@ -97,55 +129,68 @@ public class Model extends Observable implements Cloneable {
                 // Moving Flipper physics
                 double angularVelocity = Math.toRadians(((FlipperGizmo) iIGizmo).getAngularVelocity());
 
-                Vect center = iIGizmo.getCircles().get(0).getCenter();
+                Vect center = ((FlipperGizmo) iIGizmo).getRotationCenter();
                 for (Circle circle : iIGizmo.getCircles()) {
-                    time = Geometry.timeUntilRotatingCircleCollision(circle, center, angularVelocity, ballCircle, ballVelocity);
+                    time = timeUntilRotatingCircleCollision(circle, center, angularVelocity, ballCircle, ballVelocity);
                     if (time < shortestTime) {
                         gizmo = iIGizmo;
                         shortestTime = time;
-                        newVelo = Geometry.reflectRotatingCircle(circle, center, angularVelocity, ballCircle, ballVelocity, .95D);
+                        newVelo = reflectRotatingCircle(circle, center, angularVelocity, ballCircle, ballVelocity, .95D);
                     }
                 }
 
                 for (LineSegment line : iIGizmo.getLines()) {
-                    time = Geometry.timeUntilRotatingWallCollision(line, center, angularVelocity, ballCircle, ballVelocity);
+                    time = timeUntilRotatingWallCollision(line, center, angularVelocity, ballCircle, ballVelocity);
                     if (time < shortestTime) {
                         gizmo = iIGizmo;
                         shortestTime = time;
-                        newVelo = Geometry.reflectRotatingWall(line, center, angularVelocity, ballCircle, ballVelocity, .95D);
+                        newVelo = reflectRotatingWall(line, center, angularVelocity, ballCircle, ballVelocity, .95D);
                     }
                 }
             } else {
                 // Static Physics
                 for (Circle circle : iIGizmo.getCircles()) {
-                    time = Geometry.timeUntilCircleCollision(circle, ballCircle, ballVelocity);
+                    time = timeUntilCircleCollision(circle, ballCircle, ballVelocity);
                     if (time < shortestTime) {
                         gizmo = iIGizmo;
                         shortestTime = time;
-                        newVelo = Geometry.reflectCircle(circle.getCenter(), ballCircle.getCenter(), ballVelocity);
+                        newVelo = reflectCircle(circle.getCenter(), ballCircle.getCenter(), ballVelocity);
                     }
                 }
 
                 for (LineSegment line : iIGizmo.getLines()) {
-                    time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+                    time = timeUntilWallCollision(line, ballCircle, ballVelocity);
                     if (time < shortestTime) {
                         gizmo = iIGizmo;
                         shortestTime = time;
-                        newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
+                        newVelo = reflectWall(line, ballVelocity, 1.0D);
                     }
                 }
             }
         }
 
         for (LineSegment line : walls) {
-            time = Geometry.timeUntilWallCollision(line, ballCircle, ballVelocity);
+            time = timeUntilWallCollision(line, ballCircle, ballVelocity);
             if (time < shortestTime) {
                 shortestTime = time;
-                newVelo = Geometry.reflectWall(line, ballVelocity, 1.0D);
+                newVelo = reflectWall(line, ballVelocity, 1.0D);
             }
         }
 
-        return new CollisionDetails(shortestTime, newVelo, gizmo);
+        Ball ball_ = null;
+        VectPair newVelo_ = null;
+        for (Ball b : balls) {
+            if (!b.getId().equals(ball.getId())) {
+                time = timeUntilBallBallCollision(ballCircle, ballVelocity, b.getCircle(), b.getVelocity());
+                if (time < shortestTime) {
+                    ball_ = b;
+                    shortestTime = time;
+                    newVelo_ = reflectBalls(ballCircle.getCenter(), ballMass, ballVelocity, b.getCircle().getCenter(), ballMass, b.getVelocity());
+                }
+            }
+        }
+
+        return ball_ != null ? new CollisionDetails(ball, shortestTime, newVelo_, ball_) : new CollisionDetails(ball, shortestTime, newVelo, gizmo);
     }
 
     private Ball moveBallForTime(Ball ball, double time) {
@@ -280,11 +325,11 @@ public class Model extends Observable implements Cloneable {
         connections.put(c.getTrigger(), c);
     }
 
-    public HashMap<IGizmo, Connection> getConnections(){
+    public HashMap<IGizmo, Connection> getConnections() {
         return connections;
     }
 
-    public void removeConnection(Connection remove){
+    public void removeConnection(Connection remove) {
         connections.remove(remove.getTrigger(), remove);
     }
 

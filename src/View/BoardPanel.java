@@ -33,15 +33,15 @@ public class BoardPanel extends JPanel implements Observer {
 
     }
 
-    public int getTileSize(){
+    public int getTileSize() {
         return tileSize;
     }
 
-    public void addGrid(){
+    public void addGrid() {
         grid = true;
     }
 
-    public void removeGrid(){
+    public void removeGrid() {
         grid = false;
     }
 
@@ -50,7 +50,7 @@ public class BoardPanel extends JPanel implements Observer {
 
 
         for (int i = 0; i < 20; i++) {
-            for (int j = 0; j <20 ; j++) {
+            for (int j = 0; j < 20; j++) {
                /* if(grid[i][j])
 
                 if(spaces[i][j]){
@@ -66,18 +66,18 @@ public class BoardPanel extends JPanel implements Observer {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        if(grid) {
+        if (grid) {
             for (int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1)) {
                 for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
                     boolean occupied = false;
-                    for (IGizmo gizmo:m.getGizmos()) {
-                        for (List<Integer> list:gizmo.getOccupiedSpace()) {
+                    for (IGizmo gizmo : m.getGizmos()) {
+                        for (List<Integer> list : gizmo.getOccupiedSpace()) {
                             if (PxtoLs(x) == list.get(0) && PxtoLs(y) == list.get(1)) {
                                 occupied = true;
                             }
                         }
                     }
-                    if (occupied){
+                    if (occupied) {
                         g2.setColor(new Color(255, 14, 21));
                     } else {
                         g2.setColor(new Color(157, 255, 158));
@@ -89,7 +89,7 @@ public class BoardPanel extends JPanel implements Observer {
             }
         }
 
-        if(grid) {
+        if (grid) {
             for (int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1)) {
                 for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
                     g2.drawRect(x, y, LstoPx(1), LstoPx(1));
@@ -174,7 +174,7 @@ public class BoardPanel extends JPanel implements Observer {
                         g2.rotate(angle, x + 2 * tileSize - quarterTile, y + 2 * tileSize - quarterTile);
                         break;
                     case BOTTOM_LEFT:
-                        g2.rotate(-angle, x +  quarterTile, y + 2 * tileSize - quarterTile);
+                        g2.rotate(-angle, x + quarterTile, y + 2 * tileSize - quarterTile);
                         g2.fillRoundRect(x, y + tileSize + halfTile, LstoPx(2), halfTile, 15, 50);
                         g2.rotate(angle, x + quarterTile, y + 2 * tileSize - quarterTile);
                         break;
@@ -192,9 +192,9 @@ public class BoardPanel extends JPanel implements Observer {
                         g2.rotate(-angle, x + 2 * tileSize - quarterTile, y + 2 * tileSize - quarterTile);
                         break;
                     case BOTTOM_LEFT:
-                        g2.rotate(angle, x +  quarterTile, y + 2 * tileSize - quarterTile);
+                        g2.rotate(angle, x + quarterTile, y + 2 * tileSize - quarterTile);
                         g2.fillRoundRect(x, y, halfTile, LstoPx(2), 50, 15);
-                        g2.rotate(-angle, x +  quarterTile, y + 2 * tileSize - quarterTile);
+                        g2.rotate(-angle, x + quarterTile, y + 2 * tileSize - quarterTile);
                         break;
                     case TOP_LEFT:
                         g2.rotate(angle, x + quarterTile, y + quarterTile);
