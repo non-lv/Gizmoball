@@ -116,5 +116,15 @@ public class TriangleTest {
         assertEquals(t.getState(),TriangleGizmo.Rotation.TOP_LEFT);
     }
 
+    @Test
+    public void channgingPos(){
+        t.setPos(5,3);
+
+        assertEquals(t.getX(),5);
+        assertEquals(t.getY(),3);
+        assertNotEquals(t.getX(), 10);
+        assertNotEquals(t.getY(), 10);
+    }
+
 
 }

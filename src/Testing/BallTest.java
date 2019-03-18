@@ -1,4 +1,5 @@
 package Testing;
+import Model.AbsorberGizmo;
 import Model.Ball;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -92,5 +93,19 @@ public class BallTest {
         assertTrue(a==ball.getSpeed());
         assertNotEquals(a,ball1.getVelocity());
 
+    }
+
+    @Test
+    public void testMove(){
+        ball.move();
+        assertEquals(ball.isMoving(),true);
+    }
+
+    @Test
+    public void testEquals(){
+        assertTrue(ball.equals(ball));
+        assertFalse(ball.equals(ball1));
+        AbsorberGizmo a = new AbsorberGizmo("a",1,2,3,4);
+        assertFalse(ball.equals(a));
     }
 }

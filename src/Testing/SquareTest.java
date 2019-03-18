@@ -64,4 +64,14 @@ public class SquareTest {
         assertTrue(s.equals(s));
         assertFalse(s.equals(s1));
     }
+
+    @Test
+    public void channgingPos(){
+        s.setPos(5,3);
+
+        assertEquals(s.getX(),5);
+        assertEquals(s.getY(),3);
+        assertNotEquals(s.getX(), 10);
+        assertNotEquals(s.getY(), 10);
+    }
 }

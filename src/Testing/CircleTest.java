@@ -53,4 +53,14 @@ public class CircleTest {
 
     }
 
+    @Test
+    public void channgingPos(){
+        c.setPos(5,3);
+
+        assertEquals(c.getX(),5);
+        assertEquals(c.getY(),3);
+        assertNotEquals(c.getX(), 10);
+        assertNotEquals(c.getY(), 10);
+    }
+
 }

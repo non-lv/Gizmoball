@@ -72,9 +72,7 @@ public class CircleGizmo implements IGizmo {
     }
 
     @Override
-    public void rotate() {
-
-    }
+    public void rotate() { }
 
     public Color getColour() {
         return colour;

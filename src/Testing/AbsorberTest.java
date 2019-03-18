@@ -112,4 +112,32 @@ public class AbsorberTest {
 
     }
 
+    @Test
+    public void channgingPos(){
+        a.setPos(5,3);
+        a.setPos2(17,6);
+        assertEquals(a.getX(),5);
+        assertEquals(a.getY(),3);
+        assertEquals(a.getX2(),17);
+        assertEquals(a.getY2(),6);
+    }
+
+    @Test
+    public void testOccupiedSpace(){
+        List<List<Integer>> occupiedSpace;
+            a.setOccupiedSpace(1,2,3,4);
+
+            occupiedSpace = new ArrayList<>();
+            for (int i = 1; i < 3; i++) {
+                for (int j = 2; j < 4; j++) {
+                    List<Integer> contain = new ArrayList<>();
+                    contain.add(i);
+                    contain.add(j);
+                    occupiedSpace.add(contain);
+                }
+            }
+
+        assertEquals(a.getOccupiedSpace(),occupiedSpace);
+    }
+
 }
