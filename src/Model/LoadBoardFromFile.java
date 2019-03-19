@@ -154,7 +154,6 @@ public class LoadBoardFromFile {
                         if(checkCount(tokens, 4)){
                             IGizmo gizmo = null;
                             if((gizmo = m.getGizmoByName(tokens[1])) != null){
-
                                 gizmo.setPos(1,1);
                             }
                         }
@@ -188,7 +187,7 @@ public class LoadBoardFromFile {
             } catch (NumberFormatException ex){
                 System.out.println("Types Incorrect : " + line);
             } catch (InvalidLocationException ex){
-
+                System.out.println("Attempted to add gizmo or ball in invalid loaction");
             }
         }
 
