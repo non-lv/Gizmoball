@@ -26,7 +26,7 @@ public class AbsorberGizmo implements IGizmo {
     }
 
     public List<Circle> getCircles() {
-        List l = new ArrayList<>();
+        List<Circle> l = new ArrayList<>();
         l.add(new Circle(x, y, 0));
         l.add(new Circle(x + (x2 - x + 1), y, 0));
         l.add(new Circle(x, y + (y2 - y + 1), 0));

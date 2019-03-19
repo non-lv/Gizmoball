@@ -17,6 +17,8 @@ public class Model extends Observable implements Cloneable {
     private static final int gridSizeX = 20;
     private static final int gridSizeY = 20;
     private static final int ballMass = 1;
+    private static final int maxGravity = 30;
+    private static final int maxFriction = 1;
     private static double mu = 0.025;
     private static double mu2 = 0.025;
     private static double gravity = 25;
@@ -48,7 +50,7 @@ public class Model extends Observable implements Cloneable {
         CollisionDetails cd = null;
 
         for (Ball ball : balls) {
-            if(ball.isMoving()) {
+            if (ball.isMoving()) {
                 CollisionDetails cd_ = timeUntilCollision(ball);
                 if (cd == null || cd.getTuc() > cd_.getTuc())
                     cd = cd_;
@@ -91,8 +93,8 @@ public class Model extends Observable implements Cloneable {
                             gravity(ball, tuc);
 
                             if (cd.getGizmo() != null) {
-                                for(Connection connection : connections)
-                                    if(connection.getTrigger() == cd.getGizmo())
+                                for (Connection connection : connections)
+                                    if (connection.getTrigger() == cd.getGizmo())
                                         connection.triggered(ball);
                             }
                         }
@@ -225,47 +227,17 @@ public class Model extends Observable implements Cloneable {
     }
 
     public void setGravity(double newGravity) {
-
-        if(newGravity < -30){
-            gravity = -30;
-        }else if(newGravity > 30){
-            gravity = 30;
-        } else{
-            gravity = newGravity;
-        }
+        gravity = newGravity < -maxGravity ? -maxGravity : newGravity > maxGravity ? maxGravity : newGravity;
     }
 
     public void setFriction(double newFriction) {
-
-        if(newFriction < -1){
-            mu = -1;
-            mu2 = -1;
-        }else if(newFriction > 1){
-            mu = 1;
-            mu2 = 1;
-        } else{
-            mu = newFriction;
-            mu2 = newFriction;
-        }
+        mu = newFriction < -maxFriction ? -maxFriction : newFriction > maxFriction ? maxFriction : newFriction;
+        mu2 = newFriction < -maxFriction ? -maxFriction : newFriction > maxFriction ? maxFriction : newFriction;
     }
 
     public void setFrictionXY(double x, double y) {
-
-        if(x < -1){
-            mu = -1;
-        }else if(x > 1){
-            mu = 1;
-        } else{
-            mu = x;
-        }
-
-        if(y < -1){
-            mu2 = -1;
-        }else if(y > 1){
-            mu2 = 1;
-        } else{
-            mu2 = y;
-        }
+        mu = x < -maxFriction ? -maxFriction : x > maxFriction ? maxFriction : x;
+        mu2 = y < -maxFriction ? -maxFriction : y > maxFriction ? maxFriction : y;
     }
 
     public List<IGizmo> getGizmos() {
@@ -344,7 +316,7 @@ public class Model extends Observable implements Cloneable {
     }
 
     public void addGizmo(IGizmo gizmo) throws InvalidLocationException {
-        if(isOccupied(gizmo)){
+        if (isOccupied(gizmo)) {
             throw new InvalidLocationException();
         }
         iGizmos.add(gizmo);
@@ -353,13 +325,13 @@ public class Model extends Observable implements Cloneable {
     }
 
     private boolean isOccupied(IGizmo newGizmo) {
-        for (IGizmo gizmo:getGizmos()){
-            for (List<Integer> list:gizmo.getOccupiedSpace()) {
-                for(List<Integer> newOcc : newGizmo.getOccupiedSpace()) {
+        for (IGizmo gizmo : getGizmos()) {
+            for (List<Integer> list : gizmo.getOccupiedSpace()) {
+                for (List<Integer> newOcc : newGizmo.getOccupiedSpace()) {
                     if ((newOcc.get(0).equals(list.get(0)) && newOcc.get(1).equals(list.get(1)))) {
                         return true;
                     }
-                    if (newOcc.get(0) > gridSizeX || newOcc.get(0) < 0 || newOcc.get(1) < 0 || newOcc.get(1) > gridSizeY){
+                    if (newOcc.get(0) > gridSizeX || newOcc.get(0) < 0 || newOcc.get(1) < 0 || newOcc.get(1) > gridSizeY) {
                         return true;
                     }
                 }
