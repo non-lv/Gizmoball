@@ -47,6 +47,7 @@ public class OptionPanelController implements ActionListener,Cloneable {
             case "Save":
                 JFileChooser jfc1 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
                 FileNameExtensionFilter filter1 = new FileNameExtensionFilter(".txt only!", "txt");
+                jfc1.addChoosableFileFilter(filter1);
                 jfc1.setFileFilter(filter1);
                 int returnValue1 = jfc1.showDialog( this.panel, "save");
                 if(returnValue1 == JFileChooser.APPROVE_OPTION){
@@ -59,10 +60,12 @@ public class OptionPanelController implements ActionListener,Cloneable {
                         System.out.println("cant read");
                     }
                 }
+
                 break;
             case "Open":
                 JFileChooser jfc2 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
                 FileNameExtensionFilter filter2 = new FileNameExtensionFilter(".txt", "txt");
+                jfc2.addChoosableFileFilter(filter2);
                 jfc2.setFileFilter(filter2);
                 int returnValue2 = jfc2.showDialog( this.panel, "Open");
 
@@ -75,7 +78,6 @@ public class OptionPanelController implements ActionListener,Cloneable {
                     } catch (Exception ex){
                         System.out.println("cant read");
                     }
-
                 }
 
                 break;

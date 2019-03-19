@@ -34,8 +34,8 @@ public class LoadBoardFromFile {
                             try {
                                 m.addGizmo(new SquareGizmo(id, x, y));
                             } catch (InvalidLocationException e) {
-                                JFrame frame = new JFrame();
-                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
+//                                JFrame frame = new JFrame();
+//                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
                             }
 
                         } else {
@@ -50,8 +50,8 @@ public class LoadBoardFromFile {
                             try {
                                 m.addGizmo(new CircleGizmo(id, x, y));
                             } catch (InvalidLocationException e) {
-                                JFrame frame = new JFrame();
-                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
+//                                JFrame frame = new JFrame();
+//                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
                             }
                         } else {
                             System.out.println("Incorrect Format : " + line);
@@ -62,12 +62,8 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            try {
-                                m.addGizmo(new TriangleGizmo(id, x, y, TriangleGizmo.Rotation.TOP_LEFT));
-                            } catch (InvalidLocationException e) {
-                                JFrame frame = new JFrame();
-                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
-                            }
+                            m.addGizmo(new TriangleGizmo(id, x, y, TriangleGizmo.Rotation.TOP_LEFT));
+
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -79,12 +75,8 @@ public class LoadBoardFromFile {
                             int y1 = Integer.parseInt(tokens[3]);
                             int x2 = Integer.parseInt(tokens[4]);
                             int y2 = Integer.parseInt(tokens[5]);
-                            try {
-                                m.addGizmo(new AbsorberGizmo(id, x1, y1, x2, y2));
-                            } catch (InvalidLocationException e) {
-                                JFrame frame = new JFrame();
-                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
-                            }
+                            m.addGizmo(new AbsorberGizmo(id, x1, y1, x2, y2));
+
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -94,12 +86,8 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            try {
-                                m.addGizmo(new FlipperGizmo(id, x, y, true));
-                            } catch (InvalidLocationException e) {
-                                JFrame frame = new JFrame();
-                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
-                            }
+                            m.addGizmo(new FlipperGizmo(id, x, y, true));
+
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -109,12 +97,7 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            try {
-                                m.addGizmo(new FlipperGizmo(id, x, y, false));
-                            } catch (InvalidLocationException e) {
-                                JFrame frame = new JFrame();
-                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
-                            }
+                            m.addGizmo(new FlipperGizmo(id, x, y, false));
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -174,13 +157,47 @@ public class LoadBoardFromFile {
                                 }
                             }
                         }
+                    case "move" :
+                        if(checkCount(tokens, 4)){
+                            IGizmo gizmo = null;
+                            if((gizmo = m.getGizmoByName(tokens[1])) != null){
 
+                                gizmo.setPos(1,1);
+                            }
+                        }
+                        break;
+                    case "delete" :
+                        if(checkCount(tokens, 2)){
+                            IGizmo gizmo = null;
+                            if((gizmo = m.getGizmoByName(tokens[1])) != null){
+                                m.removeGizmo(gizmo);
+                            }
+                        }
+                        break;
+                    case "gravity" :
+                        if(checkCount(tokens, 2)){
+
+                            double gravity = Double.parseDouble(tokens[1]);
+                            m.setGravity(gravity);
+                        }
+                        break;
+                    case "friction" :
+                        if(checkCount(tokens, 3)){
+
+                            double x = Double.parseDouble(tokens[1]);
+                            double y = Double.parseDouble(tokens[2]);
+
+                            m.setFrictionXY(x,y);
+                        }
+                        break;
                 }
 
 
 
             } catch (NumberFormatException ex){
                 System.out.println("Types Incorrect : " + line);
+            } catch (InvalidLocationException ex){
+
             }
 
 

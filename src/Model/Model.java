@@ -1,13 +1,11 @@
 package Model;
 
-import org.junit.Ignore;
 import physics.Circle;
 import physics.LineSegment;
 import physics.Vect;
 import physics.Geometry.VectPair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Observable;
 
@@ -226,13 +224,48 @@ public class Model extends Observable implements Cloneable {
             f.moveFlipperForTime(delta_t);
     }
 
-    public void setGravity(int newGravity) {
-        gravity = newGravity;
+    public void setGravity(double newGravity) {
+
+        if(newGravity < -30){
+            gravity = -30;
+        }else if(newGravity > 30){
+            gravity = 30;
+        } else{
+            gravity = newGravity;
+        }
     }
 
     public void setFriction(double newFriction) {
-        mu = newFriction;
-        mu2 = newFriction;
+
+        if(newFriction < -1){
+            mu = -1;
+            mu2 = -1;
+        }else if(newFriction > 1){
+            mu = 1;
+            mu2 = 1;
+        } else{
+            mu = newFriction;
+            mu2 = newFriction;
+        }
+    }
+
+    public void setFrictionXY(double x, double y) {
+
+        if(x < -1){
+            mu = -1;
+        }else if(x > 1){
+            mu = 1;
+        } else{
+            mu = x;
+        }
+
+        if(y < -1){
+            mu2 = -1;
+        }else if(y > 1){
+            mu2 = 1;
+        } else{
+            mu2 = y;
+        }
     }
 
     public List<IGizmo> getGizmos() {
