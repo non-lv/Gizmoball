@@ -136,8 +136,18 @@ public class AbsorberGizmo implements IGizmo {
     }
 
     public void setOccupiedSpace(int x, int y, int x2, int y2) {
+        if(x2<x){
+            int temp = x2;
+            x2 = x;
+            x = temp;
+        }
+        if(y2<y){
+            int temp = y2;
+            y2 = y;
+            y = temp;
+        }
         occupiedSpace = new ArrayList<>();
-        if (x < x2) {
+
             for (int i = x; i < x2; i++) {
                 for (int j = y; j < y2; j++) {
                     List<Integer> contain = new ArrayList<>();
@@ -146,7 +156,7 @@ public class AbsorberGizmo implements IGizmo {
                     occupiedSpace.add(contain);
                 }
             }
-        }
+
     }
 
 }
