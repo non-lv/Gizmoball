@@ -298,6 +298,19 @@ public class Model extends Observable implements Cloneable {
         return balls;
     }
 
+    public Ball getBallByName(String name){
+        for(Ball ball : balls){
+            if(ball.getId().equals(name)){
+                return ball;
+            }
+        }
+        return null;
+    }
+
+    public void removeBall(Ball ball){
+        balls.remove(ball);
+    }
+
     public TriangleGizmo getTriangleByName(String name) {
         for (TriangleGizmo t : getTriangles())
             if (name.equals(t.getId()))

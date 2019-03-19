@@ -107,18 +107,13 @@ public class LoadBoardFromFile {
                         }
                         break;
                     case "rotate":
+                        if(checkCount(tokens, 2)){
+                            IGizmo gizmo;
 
-                        //TODO - Use IGIZMO
-                        TriangleGizmo t = (TriangleGizmo)m.getTriangleByName(tokens[1]);
-                        if(t == null){
-                            FlipperGizmo f = (FlipperGizmo)m.getFlipperByName(tokens[1]);
-                            if(f == null){
-                                break;
+                            if((gizmo = m.getGizmoByName(tokens[1])) != null){
+                                gizmo.rotate();
                             }
-                            f.rotate();
-                            break;
                         }
-                        t.rotate();
                         break;
                     case "connect":
                         if(checkCount(tokens, 3)){
@@ -151,11 +146,26 @@ public class LoadBoardFromFile {
                             }
                         }
                     case "move" :
+                        //TODO - Error check new location
                         if(checkCount(tokens, 4)){
                             IGizmo gizmo = null;
                             if((gizmo = m.getGizmoByName(tokens[1])) != null){
 
-                                gizmo.setPos(1,1);
+                                int x = Integer.parseInt(tokens[2]);
+                                int y = Integer.parseInt(tokens[3]);
+
+                                gizmo.setPos(x,y);
+                            } else {
+                                Ball ball = null;
+
+                                if((ball = m.getBallByName(tokens[1])) != null){
+
+                                    double x = Double.parseDouble(tokens[2]);
+                                    double y = Double.parseDouble(tokens[3]);
+
+                                    ball.setX(x);
+                                    ball.setY(y);
+                                }
                             }
                         }
                         break;
@@ -164,6 +174,11 @@ public class LoadBoardFromFile {
                             IGizmo gizmo = null;
                             if((gizmo = m.getGizmoByName(tokens[1])) != null){
                                 m.removeGizmo(gizmo);
+                            } else {
+                                Ball ball = null;
+                                if((ball = m.getBallByName(tokens[1])) != null){
+                                    m.removeBall(ball);
+                                }
                             }
                         }
                         break;
@@ -188,7 +203,7 @@ public class LoadBoardFromFile {
             } catch (NumberFormatException ex){
                 System.out.println("Types Incorrect : " + line);
             } catch (InvalidLocationException ex){
-
+                System.out.println("Taking occupied space : " + line);
             }
         }
 
