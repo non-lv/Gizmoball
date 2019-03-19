@@ -121,10 +121,10 @@ public class SaveBoardToFile {
 
         for(KeyConnection keyConnection : m.getKeyConnections()){
             if(keyConnection.getStatus() == KeyConnection.KeyStatus.DOWN){
-                bw.write("KeyConnect key" + keyConnection.getKey() + " down " + keyConnection.getAction().getId());
+                bw.write("KeyConnect key " + keyConnection.getKey() + " down " + keyConnection.getAction().getId());
                 bw.newLine();
             } else {
-                bw.write("KeyConnect key" + keyConnection.getKey() + " up " + keyConnection.getAction().getId());
+                bw.write("KeyConnect key " + keyConnection.getKey() + " up " + keyConnection.getAction().getId());
                 bw.newLine();
             }
         }
