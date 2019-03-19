@@ -3,7 +3,7 @@ package Controller;
 import Model.Model;
 import View.*;
 
-public class HomeController{
+public class HomeController {
 
     private RunModePanel runModePanel;
     private BuildModePanel buildModePanel;
@@ -11,9 +11,7 @@ public class HomeController{
     private BoardPanel boardPanel;
     private NotificationPanel notificationPanel;
 
-
-    public HomeController(Model m){
-
+    public HomeController(Model m) {
         boardPanel = new BoardPanel(m, false);
 
         runModePanel = new RunModePanel(m);
@@ -39,5 +37,4 @@ public class HomeController{
         boardPanel = new BoardPanel(m, false);
         notificationPanel = new NotificationPanel();
     }
-
 }

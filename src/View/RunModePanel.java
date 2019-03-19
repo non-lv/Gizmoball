@@ -18,6 +18,7 @@ public class RunModePanel extends JPanel implements IView {
     private JScrollPane triggers;
     private JTextArea textArea;
 
+    private ActionListener runModeController;
 
     public RunModePanel(Model m) {
         model = m;
@@ -61,6 +62,11 @@ public class RunModePanel extends JPanel implements IView {
         box.add(triggers);
     }
 
+    public void buildMode(){
+        ((RunModeController) runModeController).stopTime();
+        setStart();
+    }
+
     public void setStart() {
         startStop.setText("Start");
     }
@@ -71,6 +77,7 @@ public class RunModePanel extends JPanel implements IView {
 
     @Override
     public void addActionListeners(ActionListener actionListener) {
+        runModeController = actionListener;
         startStop.addActionListener(actionListener);
         tick.addActionListener(actionListener);
         reload.addActionListener(actionListener);
