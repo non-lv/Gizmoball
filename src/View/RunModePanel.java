@@ -36,11 +36,11 @@ public class RunModePanel extends JPanel implements IView {
         tick.setHorizontalTextPosition(SwingConstants.CENTER);
 
 
-        reload = new JButton("Reload");
+        reload = new JButton("Refresh");
         reload.setIcon(new ImageIcon("src/Icons/reload.png"));
         reload.setVerticalTextPosition(SwingConstants.BOTTOM);
         reload.setHorizontalTextPosition(SwingConstants.CENTER);
-        reload = new JButton("Refresh");
+
         textArea = new JTextArea();
         textArea.setEditable(false);
         triggers = new JScrollPane(textArea);
