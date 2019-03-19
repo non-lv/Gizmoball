@@ -17,7 +17,7 @@ public class HomeController{
         boardPanel = new BoardPanel(m, false);
 
         runModePanel = new RunModePanel(m);
-        RunModeController runModeController = new RunModeController(m);
+        RunModeController runModeController = new RunModeController(m, runModePanel);
         runModePanel.addActionListeners(runModeController);
 
         buildModePanel = new BuildModePanel();
