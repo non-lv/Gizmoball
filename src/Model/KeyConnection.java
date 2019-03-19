@@ -26,5 +26,9 @@ public class KeyConnection {
     public KeyStatus getStatus(){
         return status;
     }
+
+    public IGizmo getAction(){
+        return action;
+    }
 }
 
