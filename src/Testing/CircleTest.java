@@ -40,10 +40,7 @@ public class CircleTest {
 
     }
 
-    @Test
-    public void testColour(){
-        assertEquals(c.getColour(), Color.BLACK);
-    }
+
 
     @Test
     public void equalTest(){
