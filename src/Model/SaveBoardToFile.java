@@ -6,7 +6,8 @@ import java.io.IOException;
 public class SaveBoardToFile {
 
     public static void saveToFile(String fileName, Model m) throws IOException {
-
+        if(!fileName.endsWith(".txt"))
+            fileName += ".txt";
         BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
 
         for(TriangleGizmo t : m.getTriangles()){
