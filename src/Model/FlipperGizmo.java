@@ -242,8 +242,14 @@ public class FlipperGizmo implements IGizmo {
 
     @Override
     public void trigger(Ball ball) {
+        colour = colour == Color.green ? Color.pink : Color.green;
+    }
+
+    @Override
+    public void action() {
         flipped = !flipped;
     }
+
 
     @Override
     public String getId() {

@@ -84,12 +84,11 @@ public class TriangleGizmo implements IGizmo {
 
     @Override
     public void trigger(Ball ball) {
-        if(colour == Color.BLUE){
-            colour = Color.CYAN;
-        }else{
-            colour = Color.BLUE;
-        }
+        colour = colour == Color.BLUE ? Color.CYAN : Color.BLUE;
+    }
 
+    @Override
+    public void action() {
     }
 
     @Override

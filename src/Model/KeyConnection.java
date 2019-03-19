@@ -16,7 +16,7 @@ public class KeyConnection {
     }
 
     public void doAction() {
-        action.trigger(null);
+        action.action();
     }
 
     public int getKey() {
