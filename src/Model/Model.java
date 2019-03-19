@@ -380,6 +380,8 @@ public class Model extends Observable implements Cloneable {
     public void clear() {
         iGizmos = new ArrayList<>();
         balls = new ArrayList<>();
+        connections = new ArrayList<>();
+        keyConnections = new ArrayList<>();
     }
 
     @Override
