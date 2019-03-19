@@ -77,6 +77,7 @@ public class OptionPanelController implements ActionListener, Cloneable {
                     RunModeController.setPath(path);
                     try {
                         LoadBoardFromFile.readFromFile(path, model);
+                        SaveBoardToFile.saveToFile(System.getProperty("java.io.tmpdir") + "gizmoTemp", model);
                     } catch (Exception ex) {
                         System.out.println("cant read");
                     }

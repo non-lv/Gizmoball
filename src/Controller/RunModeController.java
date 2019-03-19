@@ -48,14 +48,13 @@ public class RunModeController implements ActionListener {
                 case "Tick":
                     model.moveBalls();
                     break;
-                case "Reload":
+                case "Refresh":
                     model.clear();
                     try {
-                        LoadBoardFromFile.readFromFile(path, model);
+                        LoadBoardFromFile.readFromFile(System.getProperty("java.io.tmpdir") + "gizmoTemp.txt", model);
                     } catch (Exception ex) {
-                        System.out.println("cant read");
+                        System.out.println("can't read");
                     }
-                    break;
             }
         }
     }

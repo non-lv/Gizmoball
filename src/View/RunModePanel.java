@@ -29,7 +29,7 @@ public class RunModePanel extends JPanel implements IView {
         box = new JPanel(new GridLayout(4, 1));
         startStop = new JButton("Start");
         tick = new JButton("Tick");
-        reload = new JButton("Reload");
+        reload = new JButton("Refresh");
         textArea = new JTextArea();
         textArea.setEditable(false);
         triggers = new JScrollPane(textArea);

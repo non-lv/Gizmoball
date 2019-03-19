@@ -2,17 +2,13 @@ package View;
 
 import Controller.*;
 
-import java.awt.event.KeyEvent;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.Observable;
-import java.util.Observer;
+import java.io.File;
 
 import Model.Model;
-import Model.Ball;
-import Model.AbsorberGizmo;
+import Model.SaveBoardToFile;
+import Model.LoadBoardFromFile;
 
 public class HomeFrame {
 
@@ -47,6 +43,8 @@ public class HomeFrame {
 
 
     private void init() {
+        tempFileReset();
+
         window = new JFrame("Gizmoball");
         border = new JPanel(new BorderLayout());
         boardAndNotificationBarContainer = new JPanel(new BorderLayout());
@@ -81,7 +79,17 @@ public class HomeFrame {
         window.revalidate();
     }
 
+    private void tempFileReset(){
+        File file = new File(System.getProperty("java.io.tmpdir") + "gizmoTemp.txt");
+        file.delete();
+    }
+
     public void swapToBuild() {
+        try {
+            LoadBoardFromFile.readFromFile(System.getProperty("java.io.tmpdir") + "gizmoTemp.txt", m);
+        } catch (Exception ex) {
+            System.out.println("cant read");
+        }
         menuPanelLeft.removeAll();
         boardPanel.addGrid();
         menuPanelLeft.add(buildModePanel);
@@ -92,6 +100,11 @@ public class HomeFrame {
     }
 
     public void swapToRun() {
+        try {
+            SaveBoardToFile.saveToFile(System.getProperty("java.io.tmpdir") + "gizmoTemp.txt", m);
+        } catch (Exception ex) {
+            System.out.println("cant read");
+        }
         menuPanelLeft.removeAll();
         boardPanel.removeGrid();
         runModePanel.refreshTriggers();
