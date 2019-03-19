@@ -4,6 +4,7 @@ import physics.Circle;
 import physics.LineSegment;
 import physics.Vect;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class FlipperGizmo implements IGizmo {
     private double angle;
     private Rotation rotation;
     private boolean flipped;
+    private Color colour;
 
     public FlipperGizmo(String id, int x, int y, boolean isLeft) {
         this.id = id;
@@ -297,6 +299,10 @@ public class FlipperGizmo implements IGizmo {
         newAngle = flipped ? angle + angularVelocity * delta_t : angle - angularVelocity * delta_t;
 
         angle = newAngle > 90 ? 90 : newAngle < 0 ? 0 : newAngle;
+    }
+
+    public Color getColor(){
+        return colour;
     }
 
     public boolean isMoving() {

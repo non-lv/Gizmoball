@@ -3,6 +3,7 @@ package Model;
 import physics.Circle;
 import physics.LineSegment;
 
+import java.awt.Color;
 import java.util.List;
 
 public interface IGizmo {
@@ -14,5 +15,6 @@ public interface IGizmo {
     List<List<Integer>> getOccupiedSpace();
     int getX();
     int getY();
+    Color getColor();
     void rotate();
 }

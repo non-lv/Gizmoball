@@ -79,6 +79,10 @@ public class SquareGizmo implements IGizmo {
         return y;
     }
 
+    public Color getColor() {
+        return colour;
+    }
+
     @Override
     public void rotate() {
 

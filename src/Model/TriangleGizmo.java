@@ -19,7 +19,6 @@ public class TriangleGizmo implements IGizmo {
     private int y;
     private Color colour;
     private Rotation rotation;
-    private String name;
     public List<List<Integer>> occupiedSpace;
 
     public TriangleGizmo(String id, int x, int y, Rotation r) {
@@ -27,7 +26,7 @@ public class TriangleGizmo implements IGizmo {
         this.y = y;
         colour = new Color(65, 90, 175);
 
-        if (r == null){
+        if (r == null) {
             r = Rotation.TOP_LEFT;
         }
 
@@ -97,8 +96,8 @@ public class TriangleGizmo implements IGizmo {
     public List<List<Integer>> getOccupiedSpace() {
         return occupiedSpace;
     }
-    
-    private void setOccupiedSpace(){
+
+    private void setOccupiedSpace() {
         occupiedSpace = new ArrayList<>();
         ArrayList<Integer> triangle = new ArrayList<>();
         triangle.add(x);

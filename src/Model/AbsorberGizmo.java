@@ -3,6 +3,7 @@ package Model;
 import physics.Circle;
 import physics.LineSegment;
 
+import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ public class AbsorberGizmo implements IGizmo {
     private int y;
     private int x2;
     private int y2;
+    private Color colour;
     private List<List<Integer>> occupiedSpace = new ArrayList<>();
     private Ball ball;
 
@@ -117,6 +119,10 @@ public class AbsorberGizmo implements IGizmo {
 
     public boolean isInside(Ball ball) {
         return (ball.getX() >= x && ball.getY() >= y && ball.getX() <= x2 && ball.getY() <= y2);
+    }
+
+    public Color getColor(){
+        return colour;
     }
 
     public List<List<Integer>> getOccupiedSpace() {
