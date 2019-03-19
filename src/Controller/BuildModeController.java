@@ -571,6 +571,7 @@ public class BuildModeController implements ActionListener {
                                 if (gizmo.getX() == x && gizmo.getY() == y){
                                     action = gizmo;
                                     home.showNotification("Connection made between " + trigger.getId() + " and " + action.getId());
+
                                     Connection connection = new Connection(trigger, action);
                                     model.addConnection(connection);
                                 }

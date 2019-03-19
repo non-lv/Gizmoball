@@ -242,8 +242,8 @@ public class BuildModePanel extends JPanel implements IView{
         editGizmo.add(rotate);
         editGizmo.add(delete);
         editGizmo.add(clear);
-   //     editGizmo.add(connect);
-  //      editGizmo.add(disconnect);
+        editGizmo.add(connect);
+        editGizmo.add(disconnect);
         editGizmo.add(keyConnect);
         editGizmo.add(keyDisconnect);
 

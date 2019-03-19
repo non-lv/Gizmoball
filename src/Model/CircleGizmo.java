@@ -50,6 +50,11 @@ public class CircleGizmo implements IGizmo {
 
     @Override
     public void trigger(Ball ball) {
+        if(colour == Color.ORANGE){
+            colour = Color.magenta;
+        }else{
+            colour = Color.magenta;
+        }
 
     }
 
