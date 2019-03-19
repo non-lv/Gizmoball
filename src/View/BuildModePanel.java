@@ -117,13 +117,13 @@ public class BuildModePanel extends JPanel implements IView{
         addGizmo.add(lFlipper);
         addGizmo.add(rFlipper);
         addGizmo.add(absorber);
-        xV = new JSlider(0, 50,1 );
+        xV = new JSlider(-50, 50,0 );
         xV.setMajorTickSpacing(10);
         xV.setMinorTickSpacing(1);
         xV.setPaintTicks(true);
         xV.setPaintLabels(true);
 
-        yV = new JSlider(0, 50,1 );
+        yV = new JSlider(-50, 50,0 );
 
         yV.setMajorTickSpacing(10);
         yV.setMinorTickSpacing(1);

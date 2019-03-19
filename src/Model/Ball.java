@@ -3,7 +3,10 @@ package Model;
 import physics.Circle;
 import physics.Vect;
 
-import java.awt.Color;
+import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ball {
 
@@ -15,6 +18,7 @@ public class Ball {
     private double y;
     private boolean moving;
     private Color colour;
+    private List<List<Double>> occupiedSpace;
 
     public Ball(String id, double x, double y, double xv, double yv) {
         this.id = id;
@@ -23,6 +27,35 @@ public class Ball {
         colour = Color.black;
         velocity = new Vect(xv, yv);
         moving = true;
+        setOccupiedSpace();
+    }
+
+    private void setOccupiedSpace() {
+        occupiedSpace = new ArrayList<>();
+        ArrayList<Double> top = new ArrayList<>();
+        top.add(x);
+        top.add(y + radius);
+
+        ArrayList<Double> bottom = new ArrayList<>();
+        bottom.add(x);
+        bottom.add(y - radius);
+
+        ArrayList<Double> left = new ArrayList<>();
+        left.add(x - radius);
+        left.add(y);
+
+        ArrayList<Double> right = new ArrayList<>();
+        right.add(x + radius);
+        right.add(y);
+
+        occupiedSpace.add(top);
+        occupiedSpace.add(bottom);
+        occupiedSpace.add(left);
+        occupiedSpace.add(right);
+    }
+
+    public List<List<Double>> getOccupiedSpace() {
+        return occupiedSpace;
     }
 
     public Vect getVelocity() {

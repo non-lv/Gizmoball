@@ -340,7 +340,7 @@ public class Model extends Observable implements Cloneable {
     }
 
     public void addGizmo(IGizmo gizmo) throws InvalidLocationException {
-        if (isOccupied(gizmo)) {
+        if (isOccupied(gizmo, null)) {
             throw new InvalidLocationException();
         }
         iGizmos.add(gizmo);
@@ -348,23 +348,55 @@ public class Model extends Observable implements Cloneable {
         this.notifyObservers();
     }
 
-    private boolean isOccupied(IGizmo newGizmo) {
+    private boolean isOccupied(IGizmo newGizmo, Ball ball) {
         for (IGizmo gizmo : getGizmos()) {
             for (List<Integer> list : gizmo.getOccupiedSpace()) {
-                for (List<Integer> newOcc : newGizmo.getOccupiedSpace()) {
-                    if ((newOcc.get(0).equals(list.get(0)) && newOcc.get(1).equals(list.get(1)))) {
-                        return true;
+                if (ball == null && newGizmo != null) {
+                    for (List<Integer> newOcc : newGizmo.getOccupiedSpace()) {
+                        if ((newOcc.get(0).equals(list.get(0)) && newOcc.get(1).equals(list.get(1)))) {
+                            return true;
+                        }
+                        if (newOcc.get(0) > gridSizeX || newOcc.get(0) < 0 || newOcc.get(1) < 0 || newOcc.get(1) > gridSizeY) {
+                            return true;
+                        }
                     }
-                    if (newOcc.get(0) > gridSizeX || newOcc.get(0) < 0 || newOcc.get(1) < 0 || newOcc.get(1) > gridSizeY) {
-                        return true;
+                } else if (ball != null && newGizmo == null) {
+                    for (List<Double> ballList:ball.getOccupiedSpace()) {
+                        if ((Math.floor(ballList.get(0)) == (list.get(0)) && Math.floor(ballList.get(1)) == (list.get(1)))) {
+                            return true;
+                        }
+                        if (ballList.get(0) > gridSizeX || ballList.get(0) < 0 || ballList.get(1) < 0 || ballList.get(1) > gridSizeY) {
+                            return true;
+                        }
                     }
                 }
             }
         }
-        return false;
+        for (Ball b : getBalls()) {
+            for (List<Double> list:b.getOccupiedSpace()) {
+                if (ball == null && newGizmo != null) {
+                    for (List<Integer> newOcc : newGizmo.getOccupiedSpace()) {
+                        if ((newOcc.get(0) == Math.floor(list.get(0))) && newOcc.get(1) == Math.floor(list.get(1))) {
+                            return true;
+                        }
+                    }
+                } else if (ball != null && newGizmo == null) {
+                    for (List<Double> list1:ball.getOccupiedSpace()) {
+                        if (list1.get(0) == (list.get(0)) && list1.get(1) == (list.get(1))) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+            return false;
+
     }
 
-    public void addBall(Ball b) {
+    public void addBall(Ball b) throws InvalidLocationException {
+        if (isOccupied(null, b)){
+            throw new InvalidLocationException();
+        }
         balls.add(b);
         this.setChanged();
         this.notifyObservers();
@@ -376,6 +408,16 @@ public class Model extends Observable implements Cloneable {
 
     public List<Connection> getConnections() {
         return connections;
+    }
+
+    public List<Connection> getSpecificConnections(IGizmo gizmo){
+        ArrayList<Connection> specificConn = new ArrayList<>();
+        for (Connection connection:getConnections()) {
+            if (connection.getAction().equals(gizmo)){
+                specificConn.add(connection);
+            }
+        }
+        return specificConn;
     }
 
     public void removeConnection(Connection remove) {
