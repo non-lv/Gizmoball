@@ -1,5 +1,6 @@
 package Model;
 
+import org.junit.Ignore;
 import physics.Circle;
 import physics.LineSegment;
 import physics.Vect;
@@ -106,7 +107,6 @@ public class Model extends Observable implements Cloneable {
                 }
             }
         }
-
         this.setChanged();
         this.notifyObservers();
     }
@@ -310,10 +310,29 @@ public class Model extends Observable implements Cloneable {
         return keyConnections;
     }
 
-    public void addGizmo(IGizmo gizmo) {
+    public void addGizmo(IGizmo gizmo) throws InvalidLocationException {
+        if(isOccupied(gizmo)){
+            throw new InvalidLocationException();
+        }
         iGizmos.add(gizmo);
         this.setChanged();
         this.notifyObservers();
+    }
+
+    private boolean isOccupied(IGizmo newGizmo) {
+        for (IGizmo gizmo:getGizmos()){
+            for (List<Integer> list:gizmo.getOccupiedSpace()) {
+                for(List<Integer> newOcc : newGizmo.getOccupiedSpace()) {
+                    if ((newOcc.get(0).equals(list.get(0)) && newOcc.get(1).equals(list.get(1)))) {
+                        return true;
+                    }
+                    if (newOcc.get(0) > gridSizeX || newOcc.get(0) < 0 || newOcc.get(1) < 0 || newOcc.get(1) > gridSizeY){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public void addBall(Ball b) {

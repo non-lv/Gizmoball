@@ -1,6 +1,7 @@
 package Model;
 
 import java.awt.event.KeyEvent;
+import javax.swing.*;
 import java.io.*;
 import java.util.List;
 
@@ -30,7 +31,12 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addGizmo(new SquareGizmo(id, x, y));
+                            try {
+                                m.addGizmo(new SquareGizmo(id, x, y));
+                            } catch (InvalidLocationException e) {
+                                JFrame frame = new JFrame();
+                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
+                            }
 
                         } else {
                             System.out.println("Incorrect format : " + line);
@@ -41,7 +47,12 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addGizmo(new CircleGizmo(id, x, y));
+                            try {
+                                m.addGizmo(new CircleGizmo(id, x, y));
+                            } catch (InvalidLocationException e) {
+                                JFrame frame = new JFrame();
+                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
+                            }
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -51,14 +62,12 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            for (IGizmo gizmos:m.getGizmos()) {
-                                for (List<Integer> list:gizmos.getOccupiedSpace()) {
-                                    if (list.get(0)==x || list.get(1)==y){
-                                        System.out.println("Space is occupied");
-                                    }
-                                }
+                            try {
+                                m.addGizmo(new TriangleGizmo(id, x, y, TriangleGizmo.Rotation.TOP_LEFT));
+                            } catch (InvalidLocationException e) {
+                                JFrame frame = new JFrame();
+                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
                             }
-                            m.addGizmo(new TriangleGizmo(id, x, y, TriangleGizmo.Rotation.TOP_LEFT));
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -70,7 +79,12 @@ public class LoadBoardFromFile {
                             int y1 = Integer.parseInt(tokens[3]);
                             int x2 = Integer.parseInt(tokens[4]);
                             int y2 = Integer.parseInt(tokens[5]);
-                            m.addGizmo(new AbsorberGizmo(id, x1, y1, x2, y2));
+                            try {
+                                m.addGizmo(new AbsorberGizmo(id, x1, y1, x2, y2));
+                            } catch (InvalidLocationException e) {
+                                JFrame frame = new JFrame();
+                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
+                            }
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -80,7 +94,12 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addGizmo(new FlipperGizmo(id, x, y, true));
+                            try {
+                                m.addGizmo(new FlipperGizmo(id, x, y, true));
+                            } catch (InvalidLocationException e) {
+                                JFrame frame = new JFrame();
+                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
+                            }
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -90,7 +109,12 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            m.addGizmo(new FlipperGizmo(id, x, y, false));
+                            try {
+                                m.addGizmo(new FlipperGizmo(id, x, y, false));
+                            } catch (InvalidLocationException e) {
+                                JFrame frame = new JFrame();
+                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
+                            }
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }

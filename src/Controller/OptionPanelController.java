@@ -9,8 +9,7 @@ import View.OptionsPanel;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.File;
 
 public class OptionPanelController implements ActionListener,Cloneable {
@@ -34,12 +33,15 @@ public class OptionPanelController implements ActionListener,Cloneable {
         switch (e.getActionCommand()){
             case "switchToBuild":
                 System.out.println("swap to build");
+                removeListeners(home.getBoardPanel());
                 home.swapToBuild();
                 home.showNotification("Welcome to build mode");
                 break;
             case "switchToRun":
                 System.out.println("swap to run");
+                removeListeners(home.getBoardPanel());
                 home.swapToRun();
+                home.getWindow().requestFocus();
                 home.showNotification("Gizmoball");
                 break;
             case "Save":
@@ -60,7 +62,7 @@ public class OptionPanelController implements ActionListener,Cloneable {
                 break;
             case "Open":
                 JFileChooser jfc2 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                FileNameExtensionFilter filter2 = new FileNameExtensionFilter(".txt only!", "txt");
+                FileNameExtensionFilter filter2 = new FileNameExtensionFilter(".txt", "txt");
                 jfc2.setFileFilter(filter2);
                 int returnValue2 = jfc2.showDialog( this.panel, "Open");
 
@@ -68,13 +70,8 @@ public class OptionPanelController implements ActionListener,Cloneable {
                     File selectedFile = jfc2.getSelectedFile();
                     String path = selectedFile.getAbsolutePath();
                     RunModeController.setPath(path);
-
-
                     try{
                         LoadBoardFromFile.readFromFile(path,model);
-
-
-
                     } catch (Exception ex){
                         System.out.println("cant read");
                     }
@@ -95,8 +92,15 @@ public class OptionPanelController implements ActionListener,Cloneable {
         }
     }
 
-
-
-
-
+    public void removeListeners(JPanel panel){
+        for( MouseListener ml : panel.getMouseListeners()) {
+            panel.removeMouseListener(ml);
+        }
+        for(MouseMotionListener mm : panel.getMouseMotionListeners()){
+            panel.removeMouseMotionListener(mm);
+        }
+        for(KeyListener kl : panel.getKeyListeners()){
+            panel.removeKeyListener(kl);
+        }
+    }
 }

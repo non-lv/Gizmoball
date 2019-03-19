@@ -11,8 +11,8 @@ import Model.*;
 
 public class BoardPanel extends JPanel implements Observer {
 
-    private static final int boardWidth = 20;
-    private static final int boardHeight = 20;
+    public static final int boardWidth = 20;
+    public static final int boardHeight = 20;
     public static final int tileSize = 25;
     private Boolean grid;
 
@@ -33,40 +33,24 @@ public class BoardPanel extends JPanel implements Observer {
 
     }
 
-    public int getTileSize() {
+    public int getTileSize(){
         return tileSize;
     }
 
-    public void addGrid() {
+    public void addGrid(){
         grid = true;
     }
 
-    public void removeGrid() {
+    public void removeGrid(){
         grid = false;
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-               /* if(grid[i][j])
-
-                if(spaces[i][j]){
-                g.setColor(new Color(2,2,2));
-                }else{
-                g.setColor(new Color(3,3,3));
-                }
-                g.drawSquare(i*constant,j*constant,25/2,25/2)
-                */
-            }
-
-        }
-
         Graphics2D g2 = (Graphics2D) g;
 
-        if (grid) {
+        if(grid) {
             for (int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1)) {
                 for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
                     boolean occupied = false;
@@ -77,8 +61,8 @@ public class BoardPanel extends JPanel implements Observer {
                             }
                         }
                     }
-                    if (occupied) {
-                        g2.setColor(new Color(255, 14, 21));
+                    if (occupied){
+                        g2.setColor(new Color(255, 107, 106));
                     } else {
                         g2.setColor(new Color(157, 255, 158));
                     }
@@ -89,13 +73,6 @@ public class BoardPanel extends JPanel implements Observer {
             }
         }
 
-        if (grid) {
-            for (int x = LstoPx(0); x <= LstoPx(boardWidth); x += LstoPx(1)) {
-                for (int y = LstoPx(0); y <= LstoPx(boardHeight); y += LstoPx(1)) {
-                    g2.drawRect(x, y, LstoPx(1), LstoPx(1));
-                }
-            }
-        }
 
         // Draw all the vertical lines
         for (CircleGizmo c : m.getCircles()) {

@@ -60,7 +60,6 @@ public class RunModePanel extends JPanel implements IView{
         for (Connection connectionEntry:model.getConnections()){
             IGizmo key = connectionEntry.getTrigger();
             Connection value = connectionEntry;
-
             textArea.append("\n" + key.getId() + " -> " + value.getAction().getId());
         }
         box.add(triggers);

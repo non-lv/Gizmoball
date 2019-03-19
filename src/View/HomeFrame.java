@@ -43,14 +43,11 @@ public class HomeFrame {
         //k = new KeyPressedController(this.m);
         magic = new MagicKeyListener(new KeyPressedController(this.m));
 
-
-
         init();
     }
 
 
     private void init() {
-
         window = new JFrame("Gizmoball");
         border = new JPanel(new BorderLayout());
         leftAlignment = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -85,7 +82,6 @@ public class HomeFrame {
         notificationPanel = new NotificationPanel();
         notificationPanel.setText(notification);
         boardAndNotificationBarContainer.add(notificationPanel, BorderLayout.PAGE_END);
-
         window.pack();
         window.revalidate();
     }
@@ -95,7 +91,6 @@ public class HomeFrame {
         boardPanel.addGrid();
         menuPanelLeft.add(buildModePanel);
         optionsPanelTop.buildMode();
-
         window.pack();
         window.revalidate();
     }
@@ -105,9 +100,7 @@ public class HomeFrame {
         boardPanel.removeGrid();
         runModePanel.refreshTriggers();
         menuPanelLeft.add(runModePanel);
-
         optionsPanelTop.runMode();
-
         window.pack();
         window.revalidate();
     }
@@ -122,6 +115,10 @@ public class HomeFrame {
 
     public BuildModePanel getBuildModePanel(){
         return buildModePanel;
+    }
+
+    public RunModePanel getRunModePanel(){
+        return runModePanel;
     }
 
 }

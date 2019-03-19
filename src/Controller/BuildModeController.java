@@ -4,7 +4,9 @@ import Model.*;
 import View.BoardPanel;
 import View.BuildModePanel;
 import View.HomeFrame;
+import physics.GeometryInterface;
 
+import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,6 @@ public class BuildModeController implements ActionListener {
         this.home = home;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -43,11 +44,9 @@ public class BuildModeController implements ActionListener {
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        home.showNotification("Select a grid point to draw a square");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        if(isOccupied()){
-                            return;
-                        }
                         Random random = new Random();
                         String id;
                         ArrayList<String> taken = new ArrayList<>();
@@ -58,8 +57,11 @@ public class BuildModeController implements ActionListener {
                             id = "S" + random.nextInt(90);
                             System.out.println(id);
                         } while (taken.contains(id));
-                        model.addGizmo(new SquareGizmo(id, x, y));
-                        home.showNotification("Selected a grid point to draw a square");
+                        try {
+                            model.addGizmo(new SquareGizmo(id, x, y));
+                        } catch (InvalidLocationException e1) {
+                            home.showNotification("That space is occupied, please click another");
+                        }
                     }
 
                     @Override
@@ -89,6 +91,7 @@ public class BuildModeController implements ActionListener {
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        home.showNotification("Select a grid point to draw a triangle");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
                         if(isOccupied()){
@@ -104,7 +107,10 @@ public class BuildModeController implements ActionListener {
                             id = "T" + random.nextInt(90);
                             System.out.println(id);
                         } while (taken.contains(id));
-                        model.addGizmo(new TriangleGizmo(id, x, y, null));
+                        try {
+                            model.addGizmo(new TriangleGizmo(id, x, y, null));
+                        } catch (InvalidLocationException e1) {
+                            home.showNotification("That space is occupied, please click another");                        }
                     }
 
                     @Override
@@ -134,6 +140,7 @@ public class BuildModeController implements ActionListener {
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        home.showNotification("Select a grid point to draw a circle");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
                         if(isOccupied()){
@@ -149,9 +156,11 @@ public class BuildModeController implements ActionListener {
                             id = "C" + random.nextInt(90);
                             System.out.println(id);
                         } while (taken.contains(id));
-
-
-                        model.addGizmo(new CircleGizmo(id, x, y));
+                        try {
+                            model.addGizmo(new CircleGizmo(id, x, y));
+                        } catch (InvalidLocationException e1) {
+                            home.showNotification("That space is occupied, please click another");
+                        }
                     }
 
                     @Override
@@ -181,11 +190,9 @@ public class BuildModeController implements ActionListener {
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
+                        home.showNotification("Select a grid point to draw a left flipper");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        if(isOccupied()){
-                            return;
-                        }
                         Random random = new Random();
                         String id;
                         ArrayList<String> taken = new ArrayList<>();
@@ -196,9 +203,11 @@ public class BuildModeController implements ActionListener {
                             id = "LF" + random.nextInt(90);
                             System.out.println(id);
                         } while (taken.contains(id));
-
-
-                        model.addGizmo(new FlipperGizmo(id, x, y, true));
+                        try {
+                            model.addGizmo(new FlipperGizmo(id, x, y, true));
+                        } catch (InvalidLocationException e1) {
+                            home.showNotification("That space is occupied, please click another");
+                        }
                     }
 
                     @Override
@@ -228,13 +237,10 @@ public class BuildModeController implements ActionListener {
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        x = e.getX() / boardPanel.getTileSize();
+                        x = e.getX() / boardPanel.getTileSize() - 1;
                         y = e.getY() / boardPanel.getTileSize();
                         System.out.println(x);
                         System.out.println(y);
-                        if(isOccupied()){
-                            return;
-                        }
                         Random random = new Random();
                         String id;
                         ArrayList<String> taken = new ArrayList<>();
@@ -245,7 +251,13 @@ public class BuildModeController implements ActionListener {
                             id = "RF" + random.nextInt(90);
                             System.out.println(id);
                         } while (taken.contains(id));
-                        model.addGizmo(new FlipperGizmo(id, x, y, false));
+                        FlipperGizmo flipperGizmo = new FlipperGizmo(id, x, y, false);
+                        try {
+                            model.addGizmo(flipperGizmo);
+                            home.showNotification("Select a grid point to draw a right flipper");
+                        } catch (InvalidLocationException e1) {
+                            home.showNotification("That space is occupied, please click another");
+                        }
                     }
 
                     @Override
@@ -276,6 +288,7 @@ public class BuildModeController implements ActionListener {
                     String currentAbsorberID;
                     @Override
                     public void mousePressed(MouseEvent e) {
+                        home.showNotification("Click and drag to draw the absorber");
                         super.mousePressed(e);
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
@@ -288,7 +301,11 @@ public class BuildModeController implements ActionListener {
                             currentAbsorberID = "AB" + random.nextInt(90);
                             System.out.println(currentAbsorberID);
                         } while (taken.contains(currentAbsorberID));
-                        model.addGizmo(new AbsorberGizmo(currentAbsorberID, x, y, x, y));
+                        try {
+                            model.addGizmo(new AbsorberGizmo(currentAbsorberID, x, y, x, y));
+                        } catch (InvalidLocationException e1) {
+                            home.showNotification("That space is occupied, please click another");
+                        }
                         System.out.println("pressed");
                     }
                     @Override
@@ -411,7 +428,6 @@ public class BuildModeController implements ActionListener {
                                 }
                             }
                         } else {
-                            for (IGizmo gizmos : model.getGizmos()) {
                                 if (isOccupied()){
                                     home.showNotification("That space is occupied, please select another");
                                     return;
@@ -429,7 +445,6 @@ public class BuildModeController implements ActionListener {
                                         boardPanel.repaint();
                                     }
                                 }
-                            }
                         }
                     }
 
@@ -531,8 +546,8 @@ public class BuildModeController implements ActionListener {
                 });
                 break;
             case "Clear":
-                    model.clear();
-                    boardPanel.repaint();
+                model.clear();
+                boardPanel.repaint();
                 break;
             case "Connect":
                 removeListeners();
@@ -554,7 +569,6 @@ public class BuildModeController implements ActionListener {
                         } else {
                             for (IGizmo gizmo:model.getGizmos()) {
                                 if (gizmo.getX() == x && gizmo.getY() == y){
-                                    System.out.println("yay");
                                     action = gizmo;
                                     home.showNotification("Connection made between " + trigger.getId() + " and " + action.getId());
                                     Connection connection = new Connection(trigger, action);
@@ -648,19 +662,87 @@ public class BuildModeController implements ActionListener {
                 });
                 break;
             case "keyConnect":
+                removeListeners();
+                home.showNotification("Press the key you wish to become a trigger");
+                boardPanel.requestFocus();
+                boardPanel.addKeyListener(new KeyListener() {
+                    KeyConnection.KeyStatus status = null;
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        JFrame frame = new JFrame();
+                        Object stringArray[] = { "Pressed", "Released" };
+                        int response = JOptionPane.showOptionDialog(frame, "Would you like the trigger to be when the key is pressed or released?", "Select an Option",
+                                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,   stringArray,
+                                stringArray[0]);
+                        if (response == JOptionPane.NO_OPTION) {
+                            status = KeyConnection.KeyStatus.UP;
+                        } else if (response == JOptionPane.YES_OPTION) {
+                            System.out.println("Yes button clicked");
+                            status = KeyConnection.KeyStatus.DOWN;
+                        }
+                        char pressedChar = e.getKeyChar();
+                        int pressed = KeyEvent.getExtendedKeyCodeForChar(pressedChar);
+                            home.showNotification("Click the gizmo you wish to connect to the key trigger");
+                            boardPanel.addMouseListener(new MouseListener() {
+                                @Override
+                                public void mouseClicked(MouseEvent e) {
+                                    IGizmo action;
+                                    x = e.getX()/boardPanel.getTileSize();
+                                    y = e.getY()/boardPanel.getTileSize();
+                                    for (IGizmo gizmo:model.getGizmos()) {
+                                        if (gizmo.getX() == x && gizmo.getY() == y){
+                                            action = gizmo;
+                                            home.showNotification("Click the gizmo that you want to connect to");
+                                            model.addKeyConnection(new KeyConnection(action, pressed, status));
+                                            home.showNotification("Connection made between '" + pressedChar + "' and " + action.getId());
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void mousePressed(MouseEvent e) {
+
+                                }
+
+                                @Override
+                                public void mouseReleased(MouseEvent e) {
+
+                                }
+
+                                @Override
+                                public void mouseEntered(MouseEvent e) {
+
+                                }
+
+                                @Override
+                                public void mouseExited(MouseEvent e) {
+
+                                }
+                            });
+                        }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                });
                 break;
             case "keyDisconnect":
+                removeListeners();
+
                 break;
             case "friction":
                 double newFriction = home.getBuildModePanel().getFriction();
-
-                    model.setFriction(newFriction/10);
-                    System.out.println("Gravity changed to " + newFriction/10);
-
+                model.setFriction(newFriction/10);
+                System.out.println("Gravity changed to " + newFriction/10);
                 break;
             case "gravity":
                 int newGravity = home.getBuildModePanel().getGravity();
-
                 model.setGravity(newGravity);
                 System.out.println("Gravity changed to " + newGravity/10);
                 break;
@@ -670,7 +752,7 @@ public class BuildModeController implements ActionListener {
     private boolean isOccupied() {
         for (IGizmo gizmo:model.getGizmos()){
             for (List<Integer> list:gizmo.getOccupiedSpace()) {
-                if (x == list.get(0) && y == list.get(1)){
+                if ((x == list.get(0) && y == list.get(1))){
                     home.showNotification("That space is occupied, please click another");
                     return true;
                 }
@@ -685,6 +767,9 @@ public class BuildModeController implements ActionListener {
         }
         for(MouseMotionListener mm: boardPanel.getMouseMotionListeners()){
             boardPanel.removeMouseMotionListener(mm);
+        }
+        for(KeyListener kl:boardPanel.getKeyListeners()){
+            boardPanel.removeKeyListener(kl);
         }
     }
 }
