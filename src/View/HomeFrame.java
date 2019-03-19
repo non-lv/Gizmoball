@@ -19,7 +19,6 @@ public class HomeFrame {
     private JFrame window;
     private JPanel border;
     private JPanel menuPanelLeft;
-    private JPanel leftAlignment;
     private OptionsPanel optionsPanelTop;
     private JPanel boardAndNotificationBarContainer;
     private NotificationPanel notificationPanel;
@@ -50,16 +49,12 @@ public class HomeFrame {
     private void init() {
         window = new JFrame("Gizmoball");
         border = new JPanel(new BorderLayout());
-        leftAlignment = new JPanel(new FlowLayout(FlowLayout.LEFT));
         boardAndNotificationBarContainer = new JPanel(new BorderLayout());
         boardContainer = new JPanel();
 
         border.add(menuPanelLeft, BorderLayout.LINE_START);
 
-        leftAlignment.setPreferredSize(new Dimension(700, 80));
-        leftAlignment.add(optionsPanelTop);
-
-        border.add(leftAlignment, BorderLayout.PAGE_START);
+        window.setJMenuBar(optionsPanelTop);
 
         boardContainer.add(boardPanel);
         boardAndNotificationBarContainer.add(boardContainer, BorderLayout.CENTER);
