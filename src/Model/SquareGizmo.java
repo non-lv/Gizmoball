@@ -50,12 +50,11 @@ public class SquareGizmo implements IGizmo {
 
     @Override
     public void trigger(Ball ball) {
-        if(colour == Color.RED){
-            colour = Color.BLUE;
-        }else{
-            colour = Color.RED;
-        }
+        colour = colour == Color.RED ? Color.BLUE : Color.RED;
+    }
 
+    @Override
+    public void action() {
     }
 
     @Override

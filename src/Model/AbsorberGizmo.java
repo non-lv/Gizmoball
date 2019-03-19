@@ -16,7 +16,7 @@ public class AbsorberGizmo implements IGizmo {
     private int y2;
     private Color colour;
     private List<List<Integer>> occupiedSpace = new ArrayList<>();
-    private Ball ball;
+    private List<Ball> balls;
 
     public AbsorberGizmo(String id, int x, int y, int x2, int y2) {
         this.id = id;
@@ -24,6 +24,7 @@ public class AbsorberGizmo implements IGizmo {
         this.y = y;
         this.x2 = x2;
         this.y2 = y2;
+        balls = new ArrayList<>();
         colour = Color.CYAN;
         setOccupiedSpace(this.x, this.y, this.x2, this.y2);
     }
@@ -77,19 +78,23 @@ public class AbsorberGizmo implements IGizmo {
 
     @Override
     public void trigger(Ball ball) {
-        if (this.ball != null) {
-            this.ball.setVelocity(0, -50);
-            this.ball.move();
-            this.ball = null;
-        }
-
         if (ball != null) {
-            this.ball = ball;
+            balls.add(ball);
 
             ball.setX(x2 - .5);
             ball.setY(y2 - .5);
+            ball.setVelocity(0, 0);
 
             ball.stop();
+        }
+    }
+
+    @Override
+    public void action() {
+        for (int i = balls.size() - 1; i >= 0; i--) {
+            balls.get(i).setVelocity(0, -50);
+            balls.get(i).move();
+            balls.remove(i);
         }
     }
 

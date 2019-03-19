@@ -11,6 +11,7 @@ public interface IGizmo {
     List<LineSegment> getLines();
     void setPos(int x, int y);
     void trigger(Ball ball);
+    void action();
     String getId();
     List<List<Integer>> getOccupiedSpace();
     int getX();

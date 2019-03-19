@@ -18,7 +18,7 @@ public class Connection {
         return action;
     }
 
-    public void triggered(Ball ball){
-        action.trigger(ball);
+    public void triggered(){
+        action.action();
     }
 }

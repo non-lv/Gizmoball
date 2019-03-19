@@ -93,12 +93,10 @@ public class Model extends Observable implements Cloneable {
                             gravity(ball, tuc);
 
                             if (cd.getGizmo() != null) {
-                                if(cd.getGizmo() instanceof AbsorberGizmo) {
-                                    cd.getGizmo().trigger(ball);
-                                }
+                                cd.getGizmo().trigger(ball);
                                 for (Connection connection : connections)
                                     if (connection.getTrigger() == cd.getGizmo())
-                                        connection.triggered(ball);
+                                        connection.triggered();
                             }
                         }
                     } else {
