@@ -11,6 +11,7 @@ public class OptionsPanel extends JMenuBar implements IView {
     private JMenuItem switchToRun;
     private JMenuItem save;
     private JMenuItem open;
+    private JMenuItem reload;
     private JMenuItem quit;
 
     public OptionsPanel() {
@@ -32,6 +33,9 @@ public class OptionsPanel extends JMenuBar implements IView {
         open = new JMenuItem("Open");
         open.setActionCommand("Open");
 
+        reload = new JMenuItem("Reload");
+        reload.setActionCommand("Reload");
+
         quit = new JMenuItem("Quit");
         quit.setActionCommand("Quit");
 
@@ -39,12 +43,14 @@ public class OptionsPanel extends JMenuBar implements IView {
         switchToRun.setFocusable(false);
         save.setFocusable(false);
         open.setFocusable(false);
+        reload.setFocusable(false);
         quit.setFocusable(false);
 
         menu.add(switchToBuild);
         menu.add(switchToRun);
         menu.add(save);
         menu.add(open);
+        menu.add(reload);
         menu.add(quit);
 
         this.add(menu);
@@ -56,6 +62,7 @@ public class OptionsPanel extends JMenuBar implements IView {
         switchToRun.addActionListener(listener);
         save.addActionListener(listener);
         open.addActionListener(listener);
+        reload.addActionListener(listener);
         quit.addActionListener(listener);
     }
 

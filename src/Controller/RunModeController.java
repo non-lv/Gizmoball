@@ -18,7 +18,6 @@ public class RunModeController implements ActionListener {
     private Model model;
     private RunModePanel runPanel;
     private HomeFrame home;
-    private static String path;
 
     public RunModeController(Model m, RunModePanel rp) {
         model = m;
@@ -66,9 +65,4 @@ public class RunModeController implements ActionListener {
     public void startTime() {
         timer.start();
     }
-
-    public static void setPath(String p) {
-        path = p;
-    }
-
 }

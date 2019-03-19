@@ -19,6 +19,8 @@ public class OptionPanelController implements ActionListener, Cloneable {
     private HomeFrame home;
     private Model model;
 
+    private String path;
+
 
     public OptionPanelController(OptionsPanel panel, Model model) {
         this.model = model;
@@ -62,7 +64,6 @@ public class OptionPanelController implements ActionListener, Cloneable {
                         System.out.println("cant read");
                     }
                 }
-
                 break;
             case "Open":
                 JFileChooser jfc2 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -74,7 +75,7 @@ public class OptionPanelController implements ActionListener, Cloneable {
                 if (returnValue2 == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = jfc2.getSelectedFile();
                     String path = selectedFile.getAbsolutePath();
-                    RunModeController.setPath(path);
+                    this.path = path;
                     try {
                         LoadBoardFromFile.readFromFile(path, model);
                         SaveBoardToFile.saveToFile(System.getProperty("java.io.tmpdir") + "gizmoTemp", model);
@@ -82,7 +83,14 @@ public class OptionPanelController implements ActionListener, Cloneable {
                         System.out.println("cant read");
                     }
                 }
-
+                break;
+            case "Reload":
+                model.clear();
+                try {
+                    LoadBoardFromFile.readFromFile(path, model);
+                } catch (Exception ex) {
+                    System.out.println("cant read");
+                }
                 break;
             case "Quit":
                 if (JOptionPane.showConfirmDialog(
