@@ -27,8 +27,19 @@ public class RunModePanel extends JPanel implements IView {
 
     private void init() {
         box = new JPanel(new GridLayout(4, 1));
-        startStop = new JButton("Start");
+        startStop = new JButton();
+        setStart();
+
         tick = new JButton("Tick");
+        tick.setIcon(new ImageIcon("src/Icons/tick.png"));
+        tick.setVerticalTextPosition(SwingConstants.BOTTOM);
+        tick.setHorizontalTextPosition(SwingConstants.CENTER);
+
+
+        reload = new JButton("Reload");
+        reload.setIcon(new ImageIcon("src/Icons/reload.png"));
+        reload.setVerticalTextPosition(SwingConstants.BOTTOM);
+        reload.setHorizontalTextPosition(SwingConstants.CENTER);
         reload = new JButton("Refresh");
         textArea = new JTextArea();
         textArea.setEditable(false);
@@ -68,11 +79,16 @@ public class RunModePanel extends JPanel implements IView {
     }
 
     public void setStart() {
-        startStop.setText("Start");
+        startStop.setIcon(new ImageIcon("src/Icons/play.png"));
+        startStop.setText("");
+
     }
 
     public void setStop() {
-        startStop.setText("Stop");
+        startStop.setIcon(new ImageIcon("src/Icons/pause.png"));
+        startStop.setText(" ");
+
+
     }
 
     @Override

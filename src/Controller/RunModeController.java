@@ -34,13 +34,15 @@ public class RunModeController implements ActionListener {
         if (e.getSource() == timer) {
             model.moveBalls();
         } else {
+
             switch (e.getActionCommand()) {
-                case "Start":
+
+                case "":
                     timer.start();
                     runPanel.setStop();
                     home.showNotification("Running");
                     break;
-                case "Stop":
+                case " ":
                     timer.stop();
                     runPanel.setStart();
                     home.showNotification("Paused");
@@ -54,6 +56,7 @@ public class RunModeController implements ActionListener {
                     } catch (Exception ex) {
                         System.out.println("can't read");
                     }
+                    break;
             }
         }
     }
@@ -65,4 +68,5 @@ public class RunModeController implements ActionListener {
     public void startTime() {
         timer.start();
     }
+
 }
