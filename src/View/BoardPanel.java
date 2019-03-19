@@ -64,7 +64,7 @@ public class BoardPanel extends JPanel implements Observer {
                     if (occupied) {
                         g2.setColor(new Color(255, 107, 106));
                     } else {
-                        g2.setColor(new Color(tileSize / 27, 255, tileSize / 28));
+                        g2.setColor(new Color(157, 255, 158));
                     }
                     g2.fillRect(x, y, LstoPx(1), LstoPx(1));
                     g2.setColor(Color.black);

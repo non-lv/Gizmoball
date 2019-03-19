@@ -4,13 +4,14 @@ import Model.*;
 import View.BoardPanel;
 import View.BuildModePanel;
 import View.HomeFrame;
-import physics.GeometryInterface;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class BuildModeController implements ActionListener {
@@ -55,7 +56,6 @@ public class BuildModeController implements ActionListener {
                         }
                         do {
                             id = "S" + random.nextInt(90);
-                            System.out.println(id);
                         } while (taken.contains(id));
                         try {
                             model.addGizmo(new SquareGizmo(id, x, y));
@@ -94,9 +94,6 @@ public class BuildModeController implements ActionListener {
                         home.showNotification("Select a grid point to draw a triangle");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        if(isOccupied()){
-                            return;
-                        }
                         Random random = new Random();
                         String id = null;
                         ArrayList<String> taken = new ArrayList<>();
@@ -105,12 +102,12 @@ public class BuildModeController implements ActionListener {
                         }
                         do {
                             id = "T" + random.nextInt(90);
-                            System.out.println(id);
                         } while (taken.contains(id));
                         try {
                             model.addGizmo(new TriangleGizmo(id, x, y, null));
                         } catch (InvalidLocationException e1) {
-                            home.showNotification("That space is occupied, please click another");                        }
+                            home.showNotification("That space is occupied, please click another");
+                        }
                     }
 
                     @Override
@@ -143,9 +140,6 @@ public class BuildModeController implements ActionListener {
                         home.showNotification("Select a grid point to draw a circle");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        if(isOccupied()){
-                            return;
-                        }
                         Random random = new Random();
                         String id;
                         ArrayList<String> taken = new ArrayList<>();
@@ -365,8 +359,8 @@ public class BuildModeController implements ActionListener {
                         Random random = new Random();
                         String id;
                         ArrayList<String> taken = new ArrayList<>();
-                        for (int i = 0; i < model.getCircles().size(); i++){
-                            taken.add(model.getCircles().get(i).getId());
+                        for (int i = 0; i < model.getBalls().size(); i++){
+                            taken.add(model.getBalls().get(i).getId());
                         }
                         do {
                             id = "B" + random.nextInt(90);
@@ -399,6 +393,8 @@ public class BuildModeController implements ActionListener {
             case "Move":
                 moving = null;
                 removeListeners();
+                JFrame input = new JFrame();
+                input.setVisible(true);
                 home.showNotification("Click the gizmo you want to move");
                 boardPanel.addMouseListener(new MouseListener() {
                     AbsorberGizmo abMoving = null;
@@ -428,7 +424,7 @@ public class BuildModeController implements ActionListener {
                                 }
                             }
                         } else {
-                                if (isOccupied()){
+                                if (isOccupied(x, y)){
                                     home.showNotification("That space is occupied, please select another");
                                     return;
                                 } else {
@@ -690,12 +686,14 @@ public class BuildModeController implements ActionListener {
                                     IGizmo action;
                                     x = e.getX()/boardPanel.getTileSize();
                                     y = e.getY()/boardPanel.getTileSize();
-                                    for (IGizmo gizmo:model.getGizmos()) {
-                                        if (gizmo.getX() == x && gizmo.getY() == y){
-                                            action = gizmo;
-                                            home.showNotification("Click the gizmo that you want to connect to");
-                                            model.addKeyConnection(new KeyConnection(action, pressed, status));
-                                            home.showNotification("Connection made between '" + pressedChar + "' and " + action.getId());
+                                    for (IGizmo gizmo:model.getGizmos()){
+                                        for (List<Integer> list:gizmo.getOccupiedSpace()) {
+                                            if (x == list.get(0) && y == list.get(1)){
+                                                action = gizmo;
+                                                home.showNotification("Click the gizmo that you want to connect to");
+                                                model.addKeyConnection(new KeyConnection(action, pressed, status));
+                                                home.showNotification("Connection made between '" + KeyEvent.getKeyText(pressed) + "' and " + action.getId());
+                                            }
                                         }
                                     }
                                 }
@@ -735,7 +733,77 @@ public class BuildModeController implements ActionListener {
                 break;
             case "keyDisconnect":
                 removeListeners();
+                home.showNotification("Click the gizmo that you wish to remove a trigger for");
+                boardPanel.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        IGizmo selected;
+                        boolean clicked = false;
+                        x = e.getX() / boardPanel.getTileSize();
+                        y = e.getY() / boardPanel.getTileSize();
+                        selected = getOccupyingGizmo(x, y);
+                        if (selected != null){
+                            home.showNotification("Clicked");
+                            clicked = true;
+                        }
+                        if (clicked) {
+                            if(model.getSpecificKeyConnections(selected).isEmpty()){
+                                home.showNotification("There are no connections to this gizmo");
+                                return;
+                            }
+                            home.showNotification("Select the connection you wish to delete");
+                            JFrame frame = new JFrame();
+                            frame.setTitle("Select a connection to remove");
+                            DefaultListModel<String> triggers = new DefaultListModel<>();
+                            for (KeyConnection connection:model.getSpecificKeyConnections(selected)) {
+                                String statement = KeyEvent.getKeyText(connection.getKey()) + " --> " + connection.getAction().getId();
+                                triggers.addElement(statement);
+                            }
+                            JList<String> jList = new JList<>(triggers);
+                            JScrollPane scrollPane = new JScrollPane(jList);
+                            frame.add(scrollPane, BorderLayout.CENTER);
+                            frame.add(jList);
+                            JButton jb = new JButton("Select");
+                            jb.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    int select = jList.getSelectedIndex();
+                                    if (select < 0) {
+                                        home.showNotification("You did not select a connection to remove");
+                                        return;
+                                    }
+                                    KeyConnection connection = model.getKeyConnections().get(select);
+                                    model.removeKeyConnection(connection);
+                                    frame.setVisible(false);
+                                    home.showNotification("Connection " + KeyEvent.getKeyText(connection.getKey()) + "->" + connection.getAction().getId() + " removed");
+                                }
+                            });
+                            frame.add(jb, BorderLayout.SOUTH);
+                            frame.setMinimumSize(new Dimension(200, 200));
+                            frame.setVisible(true);
+                        }
+                    }
 
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+                });
                 break;
             case "friction":
                 double newFriction = home.getBuildModePanel().getFriction();
@@ -750,16 +818,27 @@ public class BuildModeController implements ActionListener {
         }
     }
 
-    private boolean isOccupied() {
+    private boolean isOccupied(int xpos, int ypos) {
         for (IGizmo gizmo:model.getGizmos()){
             for (List<Integer> list:gizmo.getOccupiedSpace()) {
-                if ((x == list.get(0) && y == list.get(1))){
+                if ((xpos == list.get(0) && ypos == list.get(1))){
                     home.showNotification("That space is occupied, please click another");
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    public IGizmo getOccupyingGizmo(int xpos, int ypos){
+            for (IGizmo gizmo:model.getGizmos()){
+                for (List<Integer> list:gizmo.getOccupiedSpace()) {
+                    if (xpos == list.get(0) && ypos == list.get(1)){
+                        return gizmo;
+                    }
+                }
+            }
+        return null;
     }
 
     public void removeListeners(){

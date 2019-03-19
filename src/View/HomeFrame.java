@@ -107,6 +107,7 @@ public class HomeFrame {
         }
         menuPanelLeft.removeAll();
         boardPanel.removeGrid();
+        boardPanel.requestFocus();
         runModePanel.refreshTriggers();
         menuPanelLeft.add(runModePanel);
         optionsPanelTop.runMode();

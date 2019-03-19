@@ -84,12 +84,11 @@ public class RunModePanel extends JPanel implements IView {
     public void setStart() {
         startStop.setIcon(new ImageIcon(getClass().getResource("/play.png")));
         startStop.setText("");
-
     }
 
     public void setStop() {
         startStop.setIcon(new ImageIcon(getClass().getResource("/pause.png")));
-        startStop.setText(" ");
+        startStop.setText("");
 
 
     }

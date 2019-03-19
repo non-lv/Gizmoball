@@ -316,6 +316,16 @@ public class Model extends Observable implements Cloneable {
         return keyConnections;
     }
 
+    public List<KeyConnection> getSpecificKeyConnections(IGizmo gizmo){
+        ArrayList<KeyConnection> specificConn = new ArrayList<>();
+        for (KeyConnection connection:getKeyConnections()) {
+            if (connection.getAction().equals(gizmo)){
+                specificConn.add(connection);
+            }
+        }
+        return specificConn;
+    }
+
     public void addGizmo(IGizmo gizmo) throws InvalidLocationException {
         if (isOccupied(gizmo)) {
             throw new InvalidLocationException();
@@ -380,5 +390,9 @@ public class Model extends Observable implements Cloneable {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void removeKeyConnection(KeyConnection keyConnection) {
+        keyConnections.remove(keyConnection);
     }
 }
