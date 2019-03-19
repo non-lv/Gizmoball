@@ -57,7 +57,7 @@ public class BuildModePanel extends JPanel implements IView{
         //Add gizmo button declarations
         square = new JButton();
         square.setBackground(Color.WHITE);
-        square.setIcon(new ImageIcon("src/Icons/square.png"));
+        square.setIcon(new ImageIcon(getClass().getResource("/square.png")));
         square.setText("Square");
         square.setVerticalTextPosition(SwingConstants.BOTTOM);
         square.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -68,7 +68,7 @@ public class BuildModePanel extends JPanel implements IView{
 
         triangle = new JButton();
         triangle.setBackground(Color.WHITE);
-        triangle.setIcon(new ImageIcon("src/Icons/triangle.png"));
+        triangle.setIcon(new ImageIcon(getClass().getResource("/triangle.png")));
         triangle.setText("Triangle");
         triangle.setVerticalTextPosition(SwingConstants.BOTTOM);
         triangle.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -77,7 +77,7 @@ public class BuildModePanel extends JPanel implements IView{
 
         circle = new JButton();
         circle.setBackground(Color.WHITE);
-        circle.setIcon(new ImageIcon("src/Icons/circle.png"));
+        circle.setIcon(new ImageIcon(getClass().getResource("/circle.png")));
         circle.setText("Circle");
         circle.setVerticalTextPosition(SwingConstants.BOTTOM);
         circle.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -86,7 +86,7 @@ public class BuildModePanel extends JPanel implements IView{
 
         lFlipper = new JButton();
         lFlipper.setBackground(Color.WHITE);
-        lFlipper.setIcon(new ImageIcon("src/Icons/leftFlipper.png"));
+        lFlipper.setIcon(new ImageIcon(getClass().getResource("/leftFlipper.png")));
         lFlipper.setText("Left Flipper");
         lFlipper.setVerticalTextPosition(SwingConstants.BOTTOM);
         lFlipper.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -95,7 +95,7 @@ public class BuildModePanel extends JPanel implements IView{
 
         rFlipper = new JButton();
         rFlipper.setBackground(Color.WHITE);
-        rFlipper.setIcon(new ImageIcon("src/Icons/rightFlipper.png"));
+        rFlipper.setIcon(new ImageIcon(getClass().getResource("/rightFlipper.png")));
         rFlipper.setText("Right Flipper");
         rFlipper.setVerticalTextPosition(SwingConstants.BOTTOM);
         rFlipper.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -104,7 +104,7 @@ public class BuildModePanel extends JPanel implements IView{
 
         absorber = new JButton();
         absorber.setBackground(Color.WHITE);
-        absorber.setIcon(new ImageIcon("src/Icons/absorber.png"));
+        absorber.setIcon(new ImageIcon(getClass().getResource("/absorber.png")));
         absorber.setText("Absorber");
         absorber.setVerticalTextPosition(SwingConstants.BOTTOM);
         absorber.setHorizontalTextPosition(SwingConstants.CENTER);

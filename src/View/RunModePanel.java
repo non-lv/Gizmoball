@@ -28,15 +28,18 @@ public class RunModePanel extends JPanel implements IView {
     private void init() {
         box = new JPanel(new GridLayout(4, 1));
         startStop = new JButton();
+        startStop.setBackground(Color.WHITE);
         setStart();
 
         tick = new JButton("Tick");
+        tick.setBackground(Color.WHITE);
         tick.setIcon(new ImageIcon(getClass().getResource("/tick.png")));
         tick.setVerticalTextPosition(SwingConstants.BOTTOM);
         tick.setHorizontalTextPosition(SwingConstants.CENTER);
 
 
         reload = new JButton("Refresh");
+        reload.setBackground(Color.WHITE);
         reload.setIcon(new ImageIcon(getClass().getResource("/reload.png")));
         reload.setVerticalTextPosition(SwingConstants.BOTTOM);
         reload.setHorizontalTextPosition(SwingConstants.CENTER);
