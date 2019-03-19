@@ -126,9 +126,9 @@ public class BuildModePanel extends JPanel implements IView{
         yV.setPaintLabels(true);
 
         //Border for text input
-        Border border = BorderFactory.createLineBorder(Color.BLACK);
-        xV.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        yV.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+//        Border border = BorderFactory.createLineBorder(Color.BLACK);
+//        xV.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
+//        yV.setBorder(BorderFactory.createCompoundBorder(border, BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
         //Velocity input
         velocities = new JPanel(new GridLayout(2, 2));
