@@ -79,7 +79,7 @@ public class BoardPanel extends JPanel implements Observer {
             int x = (LstoPx(c.getX()));
             int y = (LstoPx(c.getY()));
 
-            g2.setColor(Color.ORANGE);
+            g2.setColor(c.getColour());
             g2.fillOval(x, y, LstoPx(1), LstoPx(1));
         }
 
@@ -87,7 +87,7 @@ public class BoardPanel extends JPanel implements Observer {
             int x = (LstoPx(s.getX()));
             int y = (LstoPx(s.getY()));
 
-            g2.setColor(Color.RED);
+            g2.setColor(s.getColour());
             g2.fillRect(x, y, LstoPx(1), LstoPx(1));
         }
 
@@ -101,7 +101,7 @@ public class BoardPanel extends JPanel implements Observer {
             int xpoints[] = {x, x2, x3};
             int ypoints[] = {y, y2, y3};
             int npoints = 3;
-            g2.setColor(Color.blue);
+            g2.setColor(s.getColour());
             g2.fillPolygon(xpoints, ypoints, npoints);
         }
 
@@ -121,7 +121,7 @@ public class BoardPanel extends JPanel implements Observer {
                 y = y2;
                 y2 = temp;
             }
-            g2.setColor(Color.CYAN);
+            g2.setColor(a.getColour());
             g2.fillRect(x, y, x2 - x, y2 - y);
         }
 
@@ -131,7 +131,7 @@ public class BoardPanel extends JPanel implements Observer {
             int x = LstoPx(f.getX());
             int y = LstoPx(f.getY());
             double angle = Math.toRadians(f.getAngle());
-            g2.setColor(Color.green);
+            g2.setColor(f.getColour());
 
             if (f.isLeft()) {
                 switch (f.getState()) {
@@ -184,7 +184,7 @@ public class BoardPanel extends JPanel implements Observer {
 
         for (Ball b : m.getBalls()) {
             if (b != null) {
-                g2.setColor(Color.black);
+                g2.setColor(b.getColour());
 
                 double x = (LstoPxDouble(b.getX()) - LstoPxDouble(b.getRadius()));
                 double y = (LstoPxDouble(b.getY()) - LstoPxDouble(b.getRadius()));

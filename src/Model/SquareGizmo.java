@@ -19,7 +19,7 @@ public class SquareGizmo implements IGizmo {
         this.id = id;
         this.x = x;
         this.y = y;
-        colour = Color.BLUE;
+        colour = Color.RED;
         setOccupiedSpace();
     }
 
@@ -79,7 +79,7 @@ public class SquareGizmo implements IGizmo {
         return y;
     }
 
-    public Color getColor() {
+    public Color getColour() {
         return colour;
     }
 

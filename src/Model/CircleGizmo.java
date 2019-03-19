@@ -18,7 +18,7 @@ public class CircleGizmo implements IGizmo {
     public CircleGizmo(String id, int x, int y) {
         this.x = x;
         this.y = y;
-        colour = Color.BLACK;
+        colour = Color.ORANGE;
         this.id = id;
         setOccupiedSpace();
     }
@@ -29,7 +29,7 @@ public class CircleGizmo implements IGizmo {
         return l;
     }
 
-    public void setOccupiedSpace(){
+    public void setOccupiedSpace() {
         occupiedSpace = new ArrayList<>();
         ArrayList<Integer> circle = new ArrayList<>();
         circle.add(x);
@@ -72,7 +72,8 @@ public class CircleGizmo implements IGizmo {
     }
 
     @Override
-    public void rotate() { }
+    public void rotate() {
+    }
 
     public Color getColour() {
         return colour;

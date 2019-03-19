@@ -15,6 +15,6 @@ public interface IGizmo {
     List<List<Integer>> getOccupiedSpace();
     int getX();
     int getY();
-    Color getColor();
+    Color getColour();
     void rotate();
 }

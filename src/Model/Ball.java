@@ -3,6 +3,8 @@ package Model;
 import physics.Circle;
 import physics.Vect;
 
+import java.awt.Color;
+
 public class Ball {
 
     private static final double radius = .25;
@@ -12,11 +14,13 @@ public class Ball {
     private double x;
     private double y;
     private boolean moving;
+    private Color colour;
 
     public Ball(String id, double x, double y, double xv, double yv) {
         this.id = id;
         this.x = x;
         this.y = y;
+        colour = Color.black;
         velocity = new Vect(xv, yv);
         moving = true;
     }
@@ -77,12 +81,16 @@ public class Ball {
         return id;
     }
 
+    public Color getColour() {
+        return colour;
+    }
+
     @Override
-    public boolean equals(Object o){
-        if(!(o instanceof Ball))
+    public boolean equals(Object o) {
+        if (!(o instanceof Ball))
             return false;
 
-        if(o == this)
+        if (o == this)
             return true;
 
         Ball ball = (Ball) o;

@@ -24,6 +24,7 @@ public class AbsorberGizmo implements IGizmo {
         this.y = y;
         this.x2 = x2;
         this.y2 = y2;
+        colour = Color.CYAN;
         setOccupiedSpace(this.x, this.y, this.x2, this.y2);
     }
 
@@ -121,7 +122,7 @@ public class AbsorberGizmo implements IGizmo {
         return (ball.getX() >= x && ball.getY() >= y && ball.getX() <= x2 && ball.getY() <= y2);
     }
 
-    public Color getColor(){
+    public Color getColour() {
         return colour;
     }
 
@@ -131,7 +132,7 @@ public class AbsorberGizmo implements IGizmo {
 
     public void setOccupiedSpace(int x, int y, int x2, int y2) {
         occupiedSpace = new ArrayList<>();
-        if(x < x2) {
+        if (x < x2) {
             for (int i = x; i < x2; i++) {
                 for (int j = y; j < y2; j++) {
                     List<Integer> contain = new ArrayList<>();

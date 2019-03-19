@@ -34,6 +34,7 @@ public class FlipperGizmo implements IGizmo {
         this.y = y;
         left = isLeft;
         flipped = false;
+        colour = Color.green;
         rotation = left ? Rotation.TOP_LEFT : Rotation.TOP_RIGHT;
         setOccupiedSpace();
     }
@@ -301,7 +302,7 @@ public class FlipperGizmo implements IGizmo {
         angle = newAngle > 90 ? 90 : newAngle < 0 ? 0 : newAngle;
     }
 
-    public Color getColor(){
+    public Color getColour() {
         return colour;
     }
 

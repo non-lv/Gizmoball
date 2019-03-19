@@ -24,7 +24,7 @@ public class TriangleGizmo implements IGizmo {
     public TriangleGizmo(String id, int x, int y, Rotation r) {
         this.x = x;
         this.y = y;
-        colour = new Color(65, 90, 175);
+        colour = Color.blue;
 
         if (r == null) {
             r = Rotation.TOP_LEFT;
