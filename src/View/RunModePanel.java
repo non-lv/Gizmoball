@@ -31,13 +31,13 @@ public class RunModePanel extends JPanel implements IView {
         setStart();
 
         tick = new JButton("Tick");
-        tick.setIcon(new ImageIcon("src/Icons/tick.png"));
+        tick.setIcon(new ImageIcon(getClass().getResource("/tick.png")));
         tick.setVerticalTextPosition(SwingConstants.BOTTOM);
         tick.setHorizontalTextPosition(SwingConstants.CENTER);
 
 
         reload = new JButton("Refresh");
-        reload.setIcon(new ImageIcon("src/Icons/reload.png"));
+        reload.setIcon(new ImageIcon(getClass().getResource("/reload.png")));
         reload.setVerticalTextPosition(SwingConstants.BOTTOM);
         reload.setHorizontalTextPosition(SwingConstants.CENTER);
 
@@ -73,19 +73,19 @@ public class RunModePanel extends JPanel implements IView {
         box.add(triggers);
     }
 
-    public void buildMode(){
+    public void buildMode() {
         ((RunModeController) runModeController).stopTime();
         setStart();
     }
 
     public void setStart() {
-        startStop.setIcon(new ImageIcon("src/Icons/play.png"));
+        startStop.setIcon(new ImageIcon(getClass().getResource("/play.png")));
         startStop.setText("");
 
     }
 
     public void setStop() {
-        startStop.setIcon(new ImageIcon("src/Icons/pause.png"));
+        startStop.setIcon(new ImageIcon(getClass().getResource("/pause.png")));
         startStop.setText(" ");
 
 
