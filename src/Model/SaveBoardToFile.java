@@ -108,12 +108,22 @@ public class SaveBoardToFile {
             }
         }
         bw.newLine();
-
         for(Ball b : m.getBalls()){
             bw.write("Ball " + b.getId() + " " + b.getX() + " " + b.getY() + " " + b.getVelocity().x() + " " + b.getVelocity().y());
             bw.newLine();
         }
         bw.newLine();
+
+        for(Connection connection : m.getConnections()){
+            bw.write("Connect " + connection.getTrigger().getId() + " " + connection.getAction().getId());
+            bw.newLine();
+        }
+
+        for(KeyConnection keyConnection : m.getKeyConnections()){
+            if(keyConnection.getStatus() == KeyConnection.KeyStatus.DOWN){
+                bw.write("KeyConnect key" + keyConnection.getKey() + " down ");
+            }
+        }
         bw.close();
     }
 }

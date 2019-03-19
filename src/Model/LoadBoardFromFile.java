@@ -31,12 +31,7 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            try {
-                                m.addGizmo(new SquareGizmo(id, x, y));
-                            } catch (InvalidLocationException e) {
-//                                JFrame frame = new JFrame();
-//                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
-                            }
+                            m.addGizmo(new SquareGizmo(id, x, y));
 
                         } else {
                             System.out.println("Incorrect format : " + line);
@@ -47,12 +42,8 @@ public class LoadBoardFromFile {
                             String id = tokens[1];
                             int x = Integer.parseInt(tokens[2]);
                             int y = Integer.parseInt(tokens[3]);
-                            try {
-                                m.addGizmo(new CircleGizmo(id, x, y));
-                            } catch (InvalidLocationException e) {
-//                                JFrame frame = new JFrame();
-//                                JOptionPane.showMessageDialog(frame, "File contains overlapping gizmos");
-                            }
+                            m.addGizmo(new CircleGizmo(id, x, y));
+
                         } else {
                             System.out.println("Incorrect Format : " + line);
                         }
@@ -116,6 +107,8 @@ public class LoadBoardFromFile {
                         }
                         break;
                     case "rotate":
+
+                        //TODO - Use IGIZMO
                         TriangleGizmo t = (TriangleGizmo)m.getTriangleByName(tokens[1]);
                         if(t == null){
                             FlipperGizmo f = (FlipperGizmo)m.getFlipperByName(tokens[1]);
@@ -192,15 +185,11 @@ public class LoadBoardFromFile {
                         break;
                 }
 
-
-
             } catch (NumberFormatException ex){
                 System.out.println("Types Incorrect : " + line);
             } catch (InvalidLocationException ex){
 
             }
-
-
         }
 
     }

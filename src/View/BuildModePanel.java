@@ -56,7 +56,8 @@ public class BuildModePanel extends JPanel implements IView{
 
         //Add gizmo button declarations
         square = new JButton();
-        square.setIcon(new ImageIcon(getClass().getResource("/square.png")));
+        square.setBackground(Color.WHITE);
+        square.setIcon(new ImageIcon("src/Icons/square.png"));
         square.setText("Square");
         square.setVerticalTextPosition(SwingConstants.BOTTOM);
         square.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -66,7 +67,8 @@ public class BuildModePanel extends JPanel implements IView{
 
 
         triangle = new JButton();
-        triangle.setIcon(new ImageIcon(getClass().getResource("/triangle.png")));
+        triangle.setBackground(Color.WHITE);
+        triangle.setIcon(new ImageIcon("src/Icons/triangle.png"));
         triangle.setText("Triangle");
         triangle.setVerticalTextPosition(SwingConstants.BOTTOM);
         triangle.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -74,7 +76,8 @@ public class BuildModePanel extends JPanel implements IView{
         triangle.setPreferredSize(addGizmoDim);
 
         circle = new JButton();
-        circle.setIcon(new ImageIcon(getClass().getResource("/circle.png")));
+        circle.setBackground(Color.WHITE);
+        circle.setIcon(new ImageIcon("src/Icons/circle.png"));
         circle.setText("Circle");
         circle.setVerticalTextPosition(SwingConstants.BOTTOM);
         circle.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -82,7 +85,8 @@ public class BuildModePanel extends JPanel implements IView{
         circle.setPreferredSize(addGizmoDim);
 
         lFlipper = new JButton();
-        lFlipper.setIcon(new ImageIcon(getClass().getResource("/leftFlipper.png")));
+        lFlipper.setBackground(Color.WHITE);
+        lFlipper.setIcon(new ImageIcon("src/Icons/leftFlipper.png"));
         lFlipper.setText("Left Flipper");
         lFlipper.setVerticalTextPosition(SwingConstants.BOTTOM);
         lFlipper.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -90,7 +94,8 @@ public class BuildModePanel extends JPanel implements IView{
         lFlipper.setPreferredSize(addGizmoDim);
 
         rFlipper = new JButton();
-        rFlipper.setIcon(new ImageIcon(getClass().getResource("/rightFlipper.png")));
+        rFlipper.setBackground(Color.WHITE);
+        rFlipper.setIcon(new ImageIcon("src/Icons/rightFlipper.png"));
         rFlipper.setText("Right Flipper");
         rFlipper.setVerticalTextPosition(SwingConstants.BOTTOM);
         rFlipper.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -98,7 +103,8 @@ public class BuildModePanel extends JPanel implements IView{
         rFlipper.setActionCommand("rFlipper");
 
         absorber = new JButton();
-        absorber.setIcon(new ImageIcon(getClass().getResource("/absorber.png")));
+        absorber.setBackground(Color.WHITE);
+        absorber.setIcon(new ImageIcon("src/Icons/absorber.png"));
         absorber.setText("Absorber");
         absorber.setVerticalTextPosition(SwingConstants.BOTTOM);
         absorber.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -148,6 +154,7 @@ public class BuildModePanel extends JPanel implements IView{
 
         //Ball text windows and button
         ball = new JButton();
+        ball.setBackground(Color.WHITE);
         ball.setActionCommand("Ball");
         Dimension ballButtonSize = new Dimension(80, 80);
         ball.setPreferredSize(ballButtonSize);
@@ -158,6 +165,7 @@ public class BuildModePanel extends JPanel implements IView{
 
         //Friction and Gravity
         friction = new JButton("Set Fiction");
+        friction.setBackground(Color.WHITE);
         friction.setActionCommand("friction");
         fric = new JSlider(0, 10,1 );
         fric.setMajorTickSpacing(1);
@@ -166,6 +174,7 @@ public class BuildModePanel extends JPanel implements IView{
         fric.setPaintLabels(true);
 
         gravity = new JButton("Set Gravity");
+        gravity.setBackground(Color.WHITE);
         gravity.setActionCommand("gravity");
         grav = new JSlider(-30, 30,0 );
         grav.setMajorTickSpacing(10);
@@ -198,41 +207,49 @@ public class BuildModePanel extends JPanel implements IView{
 
         //Edit gizmo button declarations
         move = new JButton();
+        move.setBackground(Color.WHITE);
         move.setText("Move");
         move.setActionCommand("Move");
         move.setPreferredSize(editGizmoButton);
 
         rotate = new JButton();
+        rotate.setBackground(Color.WHITE);
         rotate.setText("Rotate");
         rotate.setActionCommand("Rotate");
         rotate.setPreferredSize(editGizmoButton);
 
         delete = new JButton();
+        delete.setBackground(Color.WHITE);
         delete.setText("Delete");
         delete.setActionCommand("Delete");
         delete.setPreferredSize(editGizmoButton);
 
         clear = new JButton();
+        clear.setBackground(Color.WHITE);
         clear.setText("Clear");
         clear.setActionCommand("Clear");
         clear.setPreferredSize(editGizmoButton);
 
         connect = new JButton();
+        connect.setBackground(Color.WHITE);
         connect.setText("Connect");
         connect.setActionCommand("Connect");
         connect.setPreferredSize(editGizmoButton);
 
         disconnect = new JButton();
+        disconnect.setBackground(Color.WHITE);
         disconnect.setText("Disconnect");
         disconnect.setActionCommand("Disconnect");
         disconnect.setPreferredSize(editGizmoButton);
 
         keyConnect = new JButton();
+        keyConnect.setBackground(Color.WHITE);
         keyConnect.setText("<html>Keyboard<br/>Connect</html>");
         keyConnect.setActionCommand("keyConnect");
         keyConnect.setPreferredSize(editGizmoButton);
 
         keyDisconnect = new JButton();
+        keyDisconnect.setBackground(Color.WHITE);
         keyDisconnect.setText("<html>Keyboard<br/>Disconnect</html>");
         keyDisconnect.setActionCommand("keyDisconnect");
         keyDisconnect.setPreferredSize(editGizmoButton);
