@@ -398,7 +398,6 @@ public class Model extends Observable {
             }
         }
 
-
         for (List<Integer> list : potentialSpaces) {
             if (isOccupied(list.get(0), list.get(1))) {
                 return true;
