@@ -429,7 +429,7 @@ public class BuildModeController implements ActionListener {
                             ballInner = getOccupyingBall(xBall, yBall);
                             moving = getOccupyingGizmo(ogX, ogY);
                             if (moving != null) {
-                                if (moving.getId().startsWith("AB")) {
+                                if (moving instanceof AbsorberGizmo) {
                                     for (AbsorberGizmo ab : model.getAbsorbers()) {
                                         for (List<Integer> xy : ab.getOccupiedSpace()) {
                                             if (ogX == xy.get(0) && ogY == xy.get(1)) {
@@ -458,7 +458,7 @@ public class BuildModeController implements ActionListener {
                                     boardPanel.repaint();
                                 } else if (moving != null) {
                                     if (moving instanceof FlipperGizmo) {
-                                        if (x + 1 >= boardPanel.boardWidth || y + 1 >= boardPanel.boardHeight) {
+                                        if (isOccupied(x + 1, y) || isOccupied(x, y + 1) || isOccupied(x + 1, y + 1) || x + 1 >= boardPanel.boardWidth || y + 1 >= boardPanel.boardHeight) {
                                             home.showNotification("That space is occupied, please select another");
                                             return;
                                         }

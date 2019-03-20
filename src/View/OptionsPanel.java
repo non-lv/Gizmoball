@@ -47,7 +47,6 @@ public class OptionsPanel extends JMenuBar implements IView {
         quit.setFocusable(false);
 
         menu.add(switchToBuild);
-        menu.add(switchToRun);
         menu.add(save);
         menu.add(open);
         menu.add(reload);
