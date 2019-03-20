@@ -55,6 +55,7 @@ public class Ball {
     }
 
     public List<List<Double>> getOccupiedSpace() {
+        setOccupiedSpace();
         return occupiedSpace;
     }
 

@@ -233,7 +233,7 @@ public class Model extends Observable {
 
     public void setFriction(double newFriction) {
         mu = newFriction < -maxFriction ? -maxFriction : newFriction > maxFriction ? maxFriction : newFriction;
-        mu2 = newFriction < -maxFriction ? -maxFriction : newFriction > maxFriction ? maxFriction : newFriction;
+        mu2 = mu;
     }
 
     public void setFrictionXY(double x, double y) {
