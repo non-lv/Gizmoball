@@ -6,8 +6,6 @@ import View.BuildModePanel;
 import View.HomeFrame;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -459,16 +457,14 @@ public class BuildModeController implements ActionListener {
                                     }
                                     boardPanel.repaint();
                                 } else if (moving != null) {
+                                    if (moving instanceof FlipperGizmo) {
+                                        if (x + 1 >= boardPanel.boardWidth || y + 1 >= boardPanel.boardHeight) {
+                                            home.showNotification("That space is occupied, please select another");
+                                            return;
+                                        }
+                                    }
                                     moving.setPos(x, y);
                                     boardPanel.repaint();
-                                } else if (moving != null) {
-                                    try {
-                                        model.moveGizmo(moving, x, y);
-                                        boardPanel.repaint();
-                                    } catch (InvalidLocationException e1) {
-                                        home.showNotification("That space is occupied, please select another");
-                                    }
-
                                 } else if (ballInner != null) {
                                     try {
                                         model.moveBall(ballInner, xBall, yBall);
@@ -476,7 +472,6 @@ public class BuildModeController implements ActionListener {
                                     } catch (InvalidLocationException e1) {
                                         home.showNotification("That space is occupied, please select another");
                                     }
-
                                 }
                             }
                         }
