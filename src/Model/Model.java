@@ -1,5 +1,6 @@
 package Model;
 
+import org.junit.Ignore;
 import physics.Circle;
 import physics.LineSegment;
 import physics.Vect;
@@ -356,8 +357,6 @@ public class Model extends Observable {
     }
 
     public void moveAbsorber(AbsorberGizmo absorberGizmo, int x, int y) throws InvalidLocationException {
-        int originX = absorberGizmo.getX();
-        int originY = absorberGizmo.getY();
         int x1 = absorberGizmo.getX();
         int y1 = absorberGizmo.getY();
         int x2 = absorberGizmo.getX2();
@@ -379,15 +378,12 @@ public class Model extends Observable {
         if (isOccupied(x, y, xLong, yLong) || x + xLong > gridSizeX || y + yLong > gridSizeY) {
             throw new InvalidLocationException();
         }
-        int XAway = Math.abs(absorberGizmo.getX() - originX);
-        int YAway = Math.abs(absorberGizmo.getY() - originY);
-        int X2Away = Math.abs(absorberGizmo.getX2() - originX);
-        int Y2Away = Math.abs(absorberGizmo.getY2() - originY);
-        absorberGizmo.setPos(x + XAway, y + YAway);
-        absorberGizmo.setPos2(x + X2Away, y + Y2Away);
+
+        absorberGizmo.setPos(x, y);
+        absorberGizmo.setPos2(x + xLong, y + yLong);
     }
 
-    private boolean isOccupied(int xDes, int yDes, int xLong, int yLong) {
+    public boolean isOccupied(int xDes, int yDes, int xLong, int yLong) {
         ArrayList<ArrayList<Integer>> potentialSpaces = new ArrayList<>();
         for (int i = xDes; i < xDes + xLong; i++) {
             for (int j = yDes; j < yDes + yLong; j++) {
@@ -400,6 +396,25 @@ public class Model extends Observable {
 
         for (List<Integer> list : potentialSpaces) {
             if (isOccupied(list.get(0), list.get(1))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isOccupied(IGizmo giz, int xDes, int yDes, int xLong, int yLong) {
+        ArrayList<ArrayList<Integer>> potentialSpaces = new ArrayList<>();
+        for (int i = xDes; i < xDes + xLong; i++) {
+            for (int j = yDes; j < yDes + yLong; j++) {
+                ArrayList<Integer> space = new ArrayList<>();
+                space.add(i);
+                space.add(j);
+                potentialSpaces.add(space);
+            }
+        }
+
+        for (List<Integer> list : potentialSpaces) {
+            if (isOccupied(giz, list.get(0), list.get(1))) {
                 return true;
             }
         }
@@ -467,6 +482,30 @@ public class Model extends Observable {
 
     private boolean isOccupied(int xpos, int ypos) {
         for (IGizmo gizmo : getGizmos()) {
+            for (List<Integer> list : gizmo.getOccupiedSpace()) {
+                if ((xpos == list.get(0) && ypos == list.get(1))) {
+                    return true;
+                }
+            }
+        }
+        for (Ball b : getBalls()) {
+            for (List<Double> list : b.getOccupiedSpace()) {
+                if (Math.floor(list.get(0)) == xpos && Math.floor(list.get(1)) == ypos) {
+                    return true;
+                }
+            }
+            if (xpos > gridSizeX || xpos < 0 || ypos > gridSizeY || ypos < 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isOccupied(IGizmo g, int xpos, int ypos) {
+        for (IGizmo gizmo : getGizmos()) {
+            if (g == gizmo) {
+                continue;
+            }
             for (List<Integer> list : gizmo.getOccupiedSpace()) {
                 if ((xpos == list.get(0) && ypos == list.get(1))) {
                     return true;

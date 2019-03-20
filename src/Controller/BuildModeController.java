@@ -281,6 +281,7 @@ public class BuildModeController implements ActionListener {
                 home.showNotification("Click and drag to draw the absorber");
                 MouseAdapter ma = new MouseAdapter() {
                     String currentAbsorberID;
+                    int x2_ = 0, y2_ = 0;
 
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -326,7 +327,16 @@ public class BuildModeController implements ActionListener {
                             if (absorber.getId().equals(currentAbsorberID)) {
                                 int x2 = boardPanel.PxtoLs(e.getX()) + 1;
                                 int y2 = boardPanel.PxtoLs(e.getY()) + 1;
-                                absorber.setPos2(x2 > boardPanel.boardWidth ? boardPanel.boardWidth : x2 <= x ? x + 1 : x2, y2 > boardPanel.boardHeight ? boardPanel.boardHeight : y2 <= y ? y + 1 : y2);
+                                x2 = x2 > boardPanel.boardWidth ? boardPanel.boardWidth : x2 <= x ? x + 1 : x2;
+                                y2 = y2 > boardPanel.boardHeight ? boardPanel.boardHeight : y2 <= y ? y + 1 : y2;
+                                if (model.isOccupied(absorber, x, y, x2 - x, y2 - y)) {
+                                    x2 = x2_ == 0 ? x : x2_;
+                                    y2 = y2_ == 0 ? y : y2_;
+                                } else {
+                                    x2_ = x2;
+                                    y2_ = y2;
+                                }
+                                absorber.setPos2(x2, y2);
                                 boardPanel.repaint();
                             }
                         }
