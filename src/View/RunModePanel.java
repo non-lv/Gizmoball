@@ -64,7 +64,6 @@ public class RunModePanel extends JPanel implements IView {
     }
 
     public void refreshTriggers() {
-        System.out.println("i am refreshded");
         box.remove(triggers);
         textArea.setText(null);
         textArea.append("Triggers");

@@ -94,6 +94,7 @@ public class HomeFrame {
         boardPanel.addGrid();
         menuPanelLeft.add(buildModePanel);
         optionsPanelTop.buildMode();
+        runModePanel.refreshTriggers();
         runModePanel.buildMode();
         window.pack();
         window.revalidate();

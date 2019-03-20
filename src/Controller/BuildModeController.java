@@ -47,15 +47,8 @@ public class BuildModeController implements ActionListener {
                         home.showNotification("Select a grid point to draw a square");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        Random random = new Random();
-                        String id;
-                        ArrayList<String> taken = new ArrayList<>();
-                        for (int i = 0; i < model.getSquares().size(); i++) {
-                            taken.add(model.getSquares().get(i).getId());
-                        }
-                        do {
-                            id = "S" + random.nextInt(90);
-                        } while (taken.contains(id));
+                        String id = "S" + model.getSquares().size();
+                        System.out.println(id);
                         try {
                             model.addGizmo(new SquareGizmo(id, x, y));
                         } catch (InvalidLocationException e1) {
@@ -93,15 +86,8 @@ public class BuildModeController implements ActionListener {
                         home.showNotification("Select a grid point to draw a triangle");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        Random random = new Random();
-                        String id = null;
-                        ArrayList<String> taken = new ArrayList<>();
-                        for (int i = 0; i < model.getTriangles().size(); i++) {
-                            taken.add(model.getTriangles().get(i).getId());
-                        }
-                        do {
-                            id = "T" + random.nextInt(90);
-                        } while (taken.contains(id));
+                        String id = "T" + model.getTriangles().size();
+                        System.out.println(id);
                         try {
                             model.addGizmo(new TriangleGizmo(id, x, y, null));
                         } catch (InvalidLocationException e1) {
@@ -139,16 +125,8 @@ public class BuildModeController implements ActionListener {
                         home.showNotification("Select a grid point to draw a circle");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        Random random = new Random();
-                        String id;
-                        ArrayList<String> taken = new ArrayList<>();
-                        for (int i = 0; i < model.getCircles().size(); i++) {
-                            taken.add(model.getCircles().get(i).getId());
-                        }
-                        do {
-                            id = "C" + random.nextInt(90);
-                            System.out.println(id);
-                        } while (taken.contains(id));
+                        String id = "C" + model.getCircles().size();
+                        System.out.println(id);
                         try {
                             model.addGizmo(new CircleGizmo(id, x, y));
                         } catch (InvalidLocationException e1) {
@@ -186,16 +164,8 @@ public class BuildModeController implements ActionListener {
                         home.showNotification("Select a grid point to draw a left flipper");
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        Random random = new Random();
-                        String id;
-                        ArrayList<String> taken = new ArrayList<>();
-                        for (int i = 0; i < model.getFlippers().size(); i++) {
-                            taken.add(model.getFlippers().get(i).getId());
-                        }
-                        do {
-                            id = "LF" + random.nextInt(90);
-                            System.out.println(id);
-                        } while (taken.contains(id));
+                        String id = "LF" + model.getFlippers().size();
+                        System.out.println(id);
                         try {
                             model.addGizmo(new FlipperGizmo(id, x, y, true));
                         } catch (InvalidLocationException e1) {
@@ -234,16 +204,8 @@ public class BuildModeController implements ActionListener {
                         y = e.getY() / boardPanel.getTileSize();
                         System.out.println(x);
                         System.out.println(y);
-                        Random random = new Random();
-                        String id;
-                        ArrayList<String> taken = new ArrayList<>();
-                        for (int i = 0; i < model.getFlippers().size(); i++) {
-                            taken.add(model.getFlippers().get(i).getId());
-                        }
-                        do {
-                            id = "RF" + random.nextInt(90);
-                            System.out.println(id);
-                        } while (taken.contains(id));
+                        String id = "RF" + model.getFlippers().size();
+                        System.out.println(id);
                         FlipperGizmo flipperGizmo = new FlipperGizmo(id, x, y, false);
                         try {
                             model.addGizmo(flipperGizmo);
@@ -287,15 +249,8 @@ public class BuildModeController implements ActionListener {
                         super.mousePressed(e);
                         x = e.getX() / boardPanel.getTileSize();
                         y = e.getY() / boardPanel.getTileSize();
-                        Random random = new Random();
-                        ArrayList<String> taken = new ArrayList<>();
-                        for (int i = 0; i < model.getAbsorbers().size(); i++) {
-                            taken.add(model.getAbsorbers().get(i).getId());
-                        }
-                        do {
-                            currentAbsorberID = "AB" + random.nextInt(90);
-                            System.out.println(currentAbsorberID);
-                        } while (taken.contains(currentAbsorberID));
+                        currentAbsorberID = "AB" + model.getAbsorbers().size();
+                        System.out.println(currentAbsorberID);
                         try {
                             model.addGizmo(new AbsorberGizmo(currentAbsorberID, x, y, x + 1, y + 1));
                         } catch (InvalidLocationException e1) {
@@ -306,15 +261,7 @@ public class BuildModeController implements ActionListener {
 
                     @Override
                     public void mouseReleased(MouseEvent e) {
-                        super.mouseReleased(e);
-                        System.out.println("released");
-                        for (AbsorberGizmo absorber : model.getAbsorbers()) {
-                            int abs_value = absorber.getX();
-                            if (absorber.getId().equals(currentAbsorberID) && (abs_value == absorber.getX2()) && (abs_value == absorber.getY()) && (abs_value == absorber.getY2())) {
-                                model.removeGizmo(absorber);
-                                home.showNotification("Absorber too small");
-                            }
-                        }
+
                     }
 
                     @Override
@@ -367,16 +314,8 @@ public class BuildModeController implements ActionListener {
                                 return;
                             }
                         }
-                        Random random = new Random();
-                        String id;
-                        ArrayList<String> taken = new ArrayList<>();
-                        for (int i = 0; i < model.getBalls().size(); i++) {
-                            taken.add(model.getBalls().get(i).getId());
-                        }
-                        do {
-                            id = "B" + random.nextInt(90);
-                            System.out.println(id);
-                        } while (taken.contains(id));
+                        String id = "B" + model.getBalls().size();
+                        System.out.println(id);
                         try {
                             model.addBall(new Ball(id, xBall, yBall, xV, xY));
                         } catch (InvalidLocationException e1) {
@@ -433,12 +372,13 @@ public class BuildModeController implements ActionListener {
                                     for (AbsorberGizmo ab : model.getAbsorbers()) {
                                         for (List<Integer> xy : ab.getOccupiedSpace()) {
                                             if (ogX == xy.get(0) && ogY == xy.get(1)) {
-                                                home.showNotification("Please click where you want the selected gizmo to move to");
+
                                                 abMoving = ab;
                                             }
                                         }
                                     }
                                 }
+                                home.showNotification("Please click where you want the selected gizmo to move to");
                             } else {
                                 if (ballInner != null) {
                                     home.showNotification("Please click where you want the selected ball to move to");
