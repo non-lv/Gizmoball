@@ -440,10 +440,14 @@ public class BuildModeController implements ActionListener {
                                 return;
                             } else {
                                 if (abMoving != null){
-                                    int XAway = Math.abs(abMoving.getX() - ogX);
-                                    int YAway = Math.abs(abMoving.getY() - ogy);
-                                    int X2Away = Math.abs(abMoving.getX2() - ogX);
-                                    int Y2Away = Math.abs(abMoving.getY2() - ogy);
+                                    List<Integer> xy = abMoving.getOccupiedSpace().get(0);
+                                    List<Integer> xy2 = abMoving.getOccupiedSpace().get(abMoving.getOccupiedSpace().size()-1);
+                                    int originx = xy.get(0);
+                                    int originy = xy.get(1);
+                                    int XAway = Math.abs(abMoving.getX() - originx);
+                                    int YAway = Math.abs(abMoving.getY() - originy);
+                                    int X2Away = Math.abs(abMoving.getX2() - originx);
+                                    int Y2Away = Math.abs(abMoving.getY2() - originy);
                                     abMoving.setPos(x+XAway, y+YAway);
                                     abMoving.setPos2(x+X2Away, y+Y2Away);
                                     boardPanel.repaint();
