@@ -86,7 +86,7 @@ public class HomeFrame {
 
     public void swapToBuild() {
         try {
-            LoadBoardFromFile.readFromFile(System.getProperty("java.io.tmpdir") + "gizmoTemp.txt", m);
+            //LoadBoardFromFile.readFromFile(System.getProperty("java.io.tmpdir") + "gizmoTemp.txt", m);
         } catch (Exception ex) {
             System.out.println("cant read");
         }

@@ -11,7 +11,7 @@ import java.util.Observable;
 
 import static physics.Geometry.*;
 
-public class Model extends Observable implements Cloneable {
+public class Model extends Observable {
 
     private static final double moveTime = 0.05;
     private static final int gridSizeX = 20;
@@ -298,16 +298,16 @@ public class Model extends Observable implements Cloneable {
         return balls;
     }
 
-    public Ball getBallByName(String name){
-        for(Ball ball : balls){
-            if(ball.getId().equals(name)){
+    public Ball getBallByName(String name) {
+        for (Ball ball : balls) {
+            if (ball.getId().equals(name)) {
                 return ball;
             }
         }
         return null;
     }
 
-    public void removeBall(Ball ball){
+    public void removeBall(Ball ball) {
         balls.remove(ball);
     }
 
@@ -329,10 +329,10 @@ public class Model extends Observable implements Cloneable {
         return keyConnections;
     }
 
-    public List<KeyConnection> getSpecificKeyConnections(IGizmo gizmo){
+    public List<KeyConnection> getSpecificKeyConnections(IGizmo gizmo) {
         ArrayList<KeyConnection> specificConn = new ArrayList<>();
-        for (KeyConnection connection:getKeyConnections()) {
-            if (connection.getAction().equals(gizmo)){
+        for (KeyConnection connection : getKeyConnections()) {
+            if (connection.getAction().equals(gizmo)) {
                 specificConn.add(connection);
             }
         }
@@ -349,7 +349,7 @@ public class Model extends Observable implements Cloneable {
     }
 
     public void moveGizmo(IGizmo gizmo, int x, int y) throws InvalidLocationException {
-        if (isOccupied(x, y)){
+        if (isOccupied(x, y)) {
             throw new InvalidLocationException();
         }
         gizmo.setPos(x, y);
@@ -363,12 +363,12 @@ public class Model extends Observable implements Cloneable {
         int x2 = absorberGizmo.getX2();
         int y2 = absorberGizmo.getY2();
 
-        if(x2<x1){
+        if (x2 < x1) {
             int temp = x2;
             x2 = x1;
             x1 = temp;
         }
-        if(y2<y1){
+        if (y2 < y1) {
             int temp = y2;
             y2 = y1;
             y1 = temp;
@@ -376,21 +376,21 @@ public class Model extends Observable implements Cloneable {
         int xLong = x2 - x1;
         int yLong = y2 - y1;
 
-        if(isOccupied(x, y, xLong, yLong)){
+        if (isOccupied(x, y, xLong, yLong)) {
             throw new InvalidLocationException();
         }
         int XAway = Math.abs(absorberGizmo.getX() - originX);
         int YAway = Math.abs(absorberGizmo.getY() - originY);
         int X2Away = Math.abs(absorberGizmo.getX2() - originX);
         int Y2Away = Math.abs(absorberGizmo.getY2() - originY);
-        absorberGizmo.setPos(x+XAway, y+YAway);
-        absorberGizmo.setPos2(x+X2Away, y+Y2Away);
+        absorberGizmo.setPos(x + XAway, y + YAway);
+        absorberGizmo.setPos2(x + X2Away, y + Y2Away);
     }
 
     private boolean isOccupied(int xDes, int yDes, int xLong, int yLong) {
         ArrayList<ArrayList<Integer>> potentialSpaces = new ArrayList<>();
-        for (int i = xDes; i < xDes+xLong; i++){
-            for (int j = yDes; j < yDes+yLong; j++){
+        for (int i = xDes; i < xDes + xLong; i++) {
+            for (int j = yDes; j < yDes + yLong; j++) {
                 ArrayList<Integer> space = new ArrayList<>();
                 space.add(i);
                 space.add(j);
@@ -399,8 +399,8 @@ public class Model extends Observable implements Cloneable {
         }
 
 
-        for (List<Integer> list:potentialSpaces){
-            if (isOccupied(list.get(0), list.get(1))){
+        for (List<Integer> list : potentialSpaces) {
+            if (isOccupied(list.get(0), list.get(1))) {
                 return true;
             }
         }
@@ -408,7 +408,7 @@ public class Model extends Observable implements Cloneable {
     }
 
     public void moveBall(Ball ball, double x, double y) throws InvalidLocationException {
-        if(isOccupied((int)Math.floor(x), (int)Math.floor(y))){
+        if (isOccupied((int) Math.floor(x), (int) Math.floor(y))) {
             throw new InvalidLocationException();
         }
         ball.setX(x);
@@ -428,7 +428,7 @@ public class Model extends Observable implements Cloneable {
                         }
                     }
                 } else if (ball != null && newGizmo == null) {
-                    for (List<Double> ballList:ball.getOccupiedSpace()) {
+                    for (List<Double> ballList : ball.getOccupiedSpace()) {
                         if ((Math.floor(ballList.get(0)) == (list.get(0)) && Math.floor(ballList.get(1)) == (list.get(1)))) {
                             return true;
                         }
@@ -440,7 +440,7 @@ public class Model extends Observable implements Cloneable {
             }
         }
         for (Ball b : getBalls()) {
-            for (List<Double> list:b.getOccupiedSpace()) {
+            for (List<Double> list : b.getOccupiedSpace()) {
                 if (ball == null && newGizmo != null) {
                     for (List<Integer> newOcc : newGizmo.getOccupiedSpace()) {
                         if ((newOcc.get(0) == Math.floor(list.get(0))) && newOcc.get(1) == Math.floor(list.get(1))) {
@@ -448,7 +448,7 @@ public class Model extends Observable implements Cloneable {
                         }
                     }
                 } else if (ball != null && newGizmo == null) {
-                    for (List<Double> list1:ball.getOccupiedSpace()) {
+                    for (List<Double> list1 : ball.getOccupiedSpace()) {
                         if (list1.get(0) == (list.get(0)) && list1.get(1) == (list.get(1))) {
                             return true;
                         }
@@ -460,20 +460,20 @@ public class Model extends Observable implements Cloneable {
     }
 
     private boolean isOccupied(int xpos, int ypos) {
-        for (IGizmo gizmo:getGizmos()){
-            for (List<Integer> list:gizmo.getOccupiedSpace()) {
-                if ((xpos == list.get(0) && ypos == list.get(1))){
+        for (IGizmo gizmo : getGizmos()) {
+            for (List<Integer> list : gizmo.getOccupiedSpace()) {
+                if ((xpos == list.get(0) && ypos == list.get(1))) {
                     return true;
                 }
             }
         }
-        for (Ball b:getBalls()){
-            for (List<Double> list:b.getOccupiedSpace()){
-                if (Math.floor(list.get(0)) == xpos && Math.floor(list.get(1)) == ypos){
+        for (Ball b : getBalls()) {
+            for (List<Double> list : b.getOccupiedSpace()) {
+                if (Math.floor(list.get(0)) == xpos && Math.floor(list.get(1)) == ypos) {
                     return true;
                 }
             }
-            if (xpos > gridSizeX || xpos < 0 || ypos > gridSizeY || ypos < 0){
+            if (xpos > gridSizeX || xpos < 0 || ypos > gridSizeY || ypos < 0) {
                 return true;
             }
         }
@@ -481,7 +481,7 @@ public class Model extends Observable implements Cloneable {
     }
 
     public void addBall(Ball b) throws InvalidLocationException {
-        if (isOccupied(null, b)){
+        if (isOccupied(null, b)) {
             throw new InvalidLocationException();
         }
         balls.add(b);
@@ -497,10 +497,10 @@ public class Model extends Observable implements Cloneable {
         return connections;
     }
 
-    public List<Connection> getSpecificConnections(IGizmo gizmo){
+    public List<Connection> getSpecificConnections(IGizmo gizmo) {
         ArrayList<Connection> specificConn = new ArrayList<>();
-        for (Connection connection:getConnections()) {
-            if (connection.getAction().equals(gizmo)){
+        for (Connection connection : getConnections()) {
+            if (connection.getAction().equals(gizmo)) {
                 specificConn.add(connection);
             }
         }
@@ -526,19 +526,7 @@ public class Model extends Observable implements Cloneable {
         keyConnections = new ArrayList<>();
     }
 
-    @Override
-    public Model clone() {
-        try {
-            return (Model) super.clone();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public void removeKeyConnection(KeyConnection keyConnection) {
         keyConnections.remove(keyConnection);
     }
-
-
 }

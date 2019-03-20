@@ -210,8 +210,8 @@ public class BoardPanel extends JPanel implements Observer {
         return a * tileSize;
     }
 
-    public int PxtoLs(int a) {
-        return a / tileSize;
+    public int PxtoLs(double a) {
+        return (int) Math.floor(a / tileSize);
     }
 
 
