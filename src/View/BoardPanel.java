@@ -214,6 +214,9 @@ public class BoardPanel extends JPanel implements Observer {
         return (int) Math.floor(a / tileSize);
     }
 
+    public double PxtoLsDouble(double a) {
+        return a / tileSize;
+    }
 
     @Override
     public void update(Observable o, Object arg) {
