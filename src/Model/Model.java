@@ -376,7 +376,7 @@ public class Model extends Observable {
         int xLong = x2 - x1;
         int yLong = y2 - y1;
 
-        if (isOccupied(x, y, xLong, yLong)) {
+        if (isOccupied(x, y, xLong, yLong) || x + xLong > gridSizeX || y + yLong > gridSizeY) {
             throw new InvalidLocationException();
         }
         int XAway = Math.abs(absorberGizmo.getX() - originX);
@@ -453,6 +453,13 @@ public class Model extends Observable {
                         }
                     }
                 }
+            }
+        }
+        if (newGizmo != null) {
+            if (newGizmo instanceof FlipperGizmo) {
+                FlipperGizmo fg = (FlipperGizmo) newGizmo;
+                if (fg.getX() == gridSizeX - 1 || fg.getY() == gridSizeY - 1)
+                    return true;
             }
         }
         return false;
