@@ -358,33 +358,33 @@ public class Model extends Observable implements Cloneable {
     public void moveAbsorber(AbsorberGizmo absorberGizmo, int x, int y) throws InvalidLocationException {
         int originX = absorberGizmo.getX();
         int originY = absorberGizmo.getY();
-        int xPerm = x;
-        int yPerm = y;
+        int x1 = absorberGizmo.getX();
+        int y1 = absorberGizmo.getY();
         int x2 = absorberGizmo.getX2();
         int y2 = absorberGizmo.getY2();
-/*
-        if(x2<x){
+
+        if(x2<x1){
             int temp = x2;
-            x2 = x;
-            x = temp;
+            x2 = x1;
+            x1 = temp;
         }
-        if(y2<y){
+        if(y2<y1){
             int temp = y2;
-            y2 = y;
-            y = temp;
+            y2 = y1;
+            y1 = temp;
         }
-        int xLong = x2 - x;
-        int yLong = y2 - y;
+        int xLong = x2 - x1;
+        int yLong = y2 - y1;
 
         if(isOccupied(x, y, xLong, yLong)){
             throw new InvalidLocationException();
-        } */
+        }
         int XAway = Math.abs(absorberGizmo.getX() - originX);
         int YAway = Math.abs(absorberGizmo.getY() - originY);
         int X2Away = Math.abs(absorberGizmo.getX2() - originX);
         int Y2Away = Math.abs(absorberGizmo.getY2() - originY);
-        absorberGizmo.setPos(xPerm+XAway, yPerm+YAway);
-        absorberGizmo.setPos2(xPerm+X2Away, yPerm+Y2Away);
+        absorberGizmo.setPos(x+XAway, y+YAway);
+        absorberGizmo.setPos2(x+X2Away, y+Y2Away);
     }
 
     private boolean isOccupied(int xDes, int yDes, int xLong, int yLong) {
