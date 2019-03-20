@@ -535,10 +535,10 @@ public class BuildModeController implements ActionListener {
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        x = e.getX();
-                        y = e.getY();
-                        double xBall = (double) x / boardPanel.getTileSize();
-                        double yBall = (double) y / boardPanel.getTileSize();
+                        x = boardPanel.PxtoLs(e.getX());
+                        y = boardPanel.PxtoLs(e.getY());
+                        double xBall = boardPanel.PxtoLsDouble(e.getX());
+                        double yBall = boardPanel.PxtoLsDouble(e.getY());
                         IGizmo gizmo = getOccupyingGizmo(x, y);
                         Ball ball = getOccupyingBall(xBall, yBall);
                         if (gizmo != null) {
