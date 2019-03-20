@@ -397,8 +397,6 @@ public class Model extends Observable implements Cloneable {
                 potentialSpaces.add(space);
             }
         }
-
-
         for (List<Integer> list:potentialSpaces){
             if (isOccupied(list.get(0), list.get(1))){
                 return true;

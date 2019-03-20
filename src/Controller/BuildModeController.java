@@ -335,6 +335,7 @@ public class BuildModeController implements ActionListener {
                 int xY;
                 int newXVelocity = home.getBuildModePanel().getxV();
                 int newYVelocity = home.getBuildModePanel().getyV();
+
                     xV = newXVelocity;
                     xY = newYVelocity;
                 System.out.println("new xv" + xV);
@@ -392,24 +393,27 @@ public class BuildModeController implements ActionListener {
                 break;
             case "Move":
                 moving = null;
+                Ball ball = null;
                 AbsorberGizmo abMove = null;
                 removeListeners();
                 home.showNotification("Click the gizmo you want to move");
                 boardPanel.addMouseListener(new MouseListener() {
+                    Ball ballInner = ball;
                     AbsorberGizmo abMoving = abMove;
                     int ogX;
                     int ogy;
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        x = e.getX() / boardPanel.getTileSize();
-                        y = e.getY() / boardPanel.getTileSize();
-                        if (moving == null && abMoving == null) {
+                        x = e.getX();
+                        y = e.getY();
+                        double xBall = (double)x/boardPanel.getTileSize();
+                        double yBall = (double)y/boardPanel.getTileSize();
+                        if (moving == null && abMoving == null && ballInner == null) {
                             ogX = x;
                             ogy = y;
+                            ballInner = getOccupyingBall(xBall, yBall);
                             moving = getOccupyingGizmo(ogX, ogy);
-                            if (moving == null) {
-                                return;
-                            }
+                            if (moving != null) {
                             if (moving.getId().startsWith("AB")) {
                                 for (AbsorberGizmo ab : model.getAbsorbers()) {
                                     for (List<Integer> xy : ab.getOccupiedSpace()) {
@@ -419,12 +423,11 @@ public class BuildModeController implements ActionListener {
                                         }
                                     }
                                 }
+                            }
                             } else {
-                                moving = getOccupyingGizmo(x, y);
-                                if (moving == null) {
-                                    return;
+                                if (ballInner != null) {
+                                    home.showNotification("Please click where you want the selected ball to move to");
                                 }
-                                home.showNotification("Please click where you want the selected gizmo to move to");
                             }
                     } else {
                             if (isOccupied(x, y)){
@@ -437,11 +440,23 @@ public class BuildModeController implements ActionListener {
                                     } catch (InvalidLocationException e1) {
                                         home.showNotification("That space is occupied, please select another");
                                     }
-
                                     boardPanel.repaint();
                                 } else if (moving != null){
-                                    moving.setPos(x, y);
-                                    boardPanel.repaint();
+                                    try {
+                                        model.moveGizmo(moving, x, y);
+                                        boardPanel.repaint();
+                                    } catch (InvalidLocationException e1) {
+                                        home.showNotification("That space is occupied, please select another");
+                                    }
+
+                                } else if (ballInner != null){
+                                    try {
+                                        model.moveBall(ballInner, xBall, yBall);
+                                        boardPanel.repaint();
+                                    } catch (InvalidLocationException e1) {
+                                        home.showNotification("That space is occupied, please select another");
+                                    }
+
                                 }
                             }
                         }
@@ -510,13 +525,19 @@ public class BuildModeController implements ActionListener {
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        x = e.getX() / boardPanel.getTileSize();
-                        y = e.getY() / boardPanel.getTileSize();
+                        x = e.getX();
+                        y = e.getY();
+                        double xBall = (double)x/boardPanel.getTileSize();
+                        double yBall = (double)y/boardPanel.getTileSize();
                         IGizmo gizmo = getOccupyingGizmo(x, y);
+                        Ball ball = getOccupyingBall(xBall, yBall);
                         if (gizmo != null) {
                             model.removeGizmo(gizmo);
                             boardPanel.repaint();
                             home.showNotification("Gizmo " + gizmo.getId() + " removed");
+                        } else if (ball != null){
+                            model.removeBall(ball);
+                            boardPanel.repaint();
                         }
                     }
 
@@ -848,6 +869,16 @@ public class BuildModeController implements ActionListener {
                     }
                 }
             }
+        return null;
+    }
+
+    public Ball getOccupyingBall(double xpos, double ypos){
+        for (Ball b:model.getBalls()){
+            if ((ypos < b.getOccupiedSpace().get(0).get(1) && ypos > b.getOccupiedSpace().get(1).get(1)) && (xpos > b.getOccupiedSpace().get(2).get(0) && xpos < b.getOccupiedSpace().get(3).get(0))){
+                home.showNotification("ball clicked");
+                return b;
+            }
+        }
         return null;
     }
 
