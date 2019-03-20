@@ -146,15 +146,16 @@ public class LoadBoardFromFile {
                             }
                         }
                     case "move" :
-                        //TODO - Error check new location
                         if(checkCount(tokens, 4)){
                             IGizmo gizmo = null;
                             if((gizmo = m.getGizmoByName(tokens[1])) != null){
-
                                 int x = Integer.parseInt(tokens[2]);
                                 int y = Integer.parseInt(tokens[3]);
-
-                                gizmo.setPos(x,y);
+                                if (gizmo.getId().startsWith("AB")){
+                                    m.moveAbsorber((AbsorberGizmo)gizmo, x, y);
+                                } else {
+                                    m.moveGizmo(gizmo, x, y);
+                                }
                             } else {
                                 Ball ball = null;
 
@@ -163,8 +164,8 @@ public class LoadBoardFromFile {
                                     double x = Double.parseDouble(tokens[2]);
                                     double y = Double.parseDouble(tokens[3]);
 
-                                    ball.setX(x);
-                                    ball.setY(y);
+                                    m.moveBall(ball, x, y);
+
                                 }
                             }
                         }

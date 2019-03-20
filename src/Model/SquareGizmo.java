@@ -55,6 +55,7 @@ public class SquareGizmo implements IGizmo {
 
     @Override
     public void action() {
+        colour = colour == Color.RED ? Color.BLUE : Color.RED;
     }
 
     @Override

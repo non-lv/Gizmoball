@@ -348,6 +348,73 @@ public class Model extends Observable implements Cloneable {
         this.notifyObservers();
     }
 
+    public void moveGizmo(IGizmo gizmo, int x, int y) throws InvalidLocationException {
+        if (isOccupied(x, y)){
+            throw new InvalidLocationException();
+        }
+        gizmo.setPos(x, y);
+    }
+
+    public void moveAbsorber(AbsorberGizmo absorberGizmo, int x, int y) throws InvalidLocationException {
+        int originX = absorberGizmo.getX();
+        int originY = absorberGizmo.getY();
+        int xPerm = x;
+        int yPerm = y;
+        int x2 = absorberGizmo.getX2();
+        int y2 = absorberGizmo.getY2();
+/*
+        if(x2<x){
+            int temp = x2;
+            x2 = x;
+            x = temp;
+        }
+        if(y2<y){
+            int temp = y2;
+            y2 = y;
+            y = temp;
+        }
+        int xLong = x2 - x;
+        int yLong = y2 - y;
+
+        if(isOccupied(x, y, xLong, yLong)){
+            throw new InvalidLocationException();
+        } */
+        int XAway = Math.abs(absorberGizmo.getX() - originX);
+        int YAway = Math.abs(absorberGizmo.getY() - originY);
+        int X2Away = Math.abs(absorberGizmo.getX2() - originX);
+        int Y2Away = Math.abs(absorberGizmo.getY2() - originY);
+        absorberGizmo.setPos(xPerm+XAway, yPerm+YAway);
+        absorberGizmo.setPos2(xPerm+X2Away, yPerm+Y2Away);
+    }
+
+    private boolean isOccupied(int xDes, int yDes, int xLong, int yLong) {
+        ArrayList<ArrayList<Integer>> potentialSpaces = new ArrayList<>();
+        for (int i = xDes; i < xDes+xLong; i++){
+            for (int j = yDes; j < yDes+yLong; j++){
+                ArrayList<Integer> space = new ArrayList<>();
+                space.add(i);
+                space.add(j);
+                potentialSpaces.add(space);
+            }
+        }
+
+
+        for (List<Integer> list:potentialSpaces){
+            if (isOccupied(list.get(0), list.get(1))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void moveBall(Ball ball, double x, double y) throws InvalidLocationException {
+        if(isOccupied((int)Math.floor(x), (int)Math.floor(y))){
+            throw new InvalidLocationException();
+        }
+        ball.setX(x);
+        ball.setY(y);
+    }
+
     private boolean isOccupied(IGizmo newGizmo, Ball ball) {
         for (IGizmo gizmo : getGizmos()) {
             for (List<Integer> list : gizmo.getOccupiedSpace()) {
@@ -389,8 +456,28 @@ public class Model extends Observable implements Cloneable {
                 }
             }
         }
-            return false;
+        return false;
+    }
 
+    private boolean isOccupied(int xpos, int ypos) {
+        for (IGizmo gizmo:getGizmos()){
+            for (List<Integer> list:gizmo.getOccupiedSpace()) {
+                if ((xpos == list.get(0) && ypos == list.get(1))){
+                    return true;
+                }
+            }
+        }
+        for (Ball b:getBalls()){
+            for (List<Double> list:b.getOccupiedSpace()){
+                if (Math.floor(list.get(0)) == xpos && Math.floor(list.get(1)) == ypos){
+                    return true;
+                }
+            }
+            if (xpos > gridSizeX || xpos < 0 || ypos > gridSizeY || ypos < 0){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addBall(Ball b) throws InvalidLocationException {

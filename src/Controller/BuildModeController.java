@@ -335,15 +335,10 @@ public class BuildModeController implements ActionListener {
                 int xY;
                 int newXVelocity = home.getBuildModePanel().getxV();
                 int newYVelocity = home.getBuildModePanel().getyV();
-//                if (newYVelocity.matches("-?[1-9]\\d*|0")){
                     xV = newXVelocity;
                     xY = newYVelocity;
                 System.out.println("new xv" + xV);
                     home.showNotification("Please click anywhere you wish to add a ball");
-//                } else {
-//                    home.showNotification("Please enter numbers values in the X and Y velocity boxes respectively");
-//                    return;
-//                }
                 boardPanel.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
@@ -400,13 +395,10 @@ public class BuildModeController implements ActionListener {
                 AbsorberGizmo abMove = null;
                 removeListeners();
                 home.showNotification("Click the gizmo you want to move");
-
                 boardPanel.addMouseListener(new MouseListener() {
-
                     AbsorberGizmo abMoving = abMove;
                     int ogX;
                     int ogy;
-
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         x = e.getX() / boardPanel.getTileSize();
@@ -440,16 +432,12 @@ public class BuildModeController implements ActionListener {
                                 return;
                             } else {
                                 if (abMoving != null){
-                                    List<Integer> xy = abMoving.getOccupiedSpace().get(0);
-                                    List<Integer> xy2 = abMoving.getOccupiedSpace().get(abMoving.getOccupiedSpace().size()-1);
-                                    int originx = xy.get(0);
-                                    int originy = xy.get(1);
-                                    int XAway = Math.abs(abMoving.getX() - originx);
-                                    int YAway = Math.abs(abMoving.getY() - originy);
-                                    int X2Away = Math.abs(abMoving.getX2() - originx);
-                                    int Y2Away = Math.abs(abMoving.getY2() - originy);
-                                    abMoving.setPos(x+XAway, y+YAway);
-                                    abMoving.setPos2(x+X2Away, y+Y2Away);
+                                    try {
+                                        model.moveAbsorber(abMoving, x, y);
+                                    } catch (InvalidLocationException e1) {
+                                        home.showNotification("That space is occupied, please select another");
+                                    }
+
                                     boardPanel.repaint();
                                 } else if (moving != null){
                                     moving.setPos(x, y);

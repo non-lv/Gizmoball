@@ -55,6 +55,7 @@ public class CircleGizmo implements IGizmo {
 
     @Override
     public void action() {
+        colour = colour == Color.ORANGE ? Color.magenta : Color.ORANGE;
     }
 
     @Override

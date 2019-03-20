@@ -89,6 +89,7 @@ public class TriangleGizmo implements IGizmo {
 
     @Override
     public void action() {
+        colour = colour == Color.BLUE ? Color.CYAN : Color.BLUE;
     }
 
     @Override
