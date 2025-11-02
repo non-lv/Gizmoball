@@ -1,0 +1,32 @@
+LeftFlipper LF0 2 17
+LeftFlipper LF1 4 18
+Rotate LF1
+Rotate LF1
+Rotate LF1
+LeftFlipper LF2 6 18
+Rotate LF2
+RightFlipper RF3 17 17
+RightFlipper RF4 15 18
+Rotate RF4
+RightFlipper RF5 13 18
+Rotate RF5
+Rotate RF5
+Rotate RF5
+
+Ball B0 5.5 17.7 0.0 0.0
+Ball B1 6.5 17.7 0.0 0.0
+Ball B2 14.5 17.7 0.0 0.0
+Ball B3 15.5 17.7 0.0 0.0
+
+KeyConnect key 32 down LF0
+KeyConnect key 32 up LF0
+KeyConnect key 32 down LF1
+KeyConnect key 32 up LF1
+KeyConnect key 32 down LF2
+KeyConnect key 32 up LF2
+KeyConnect key 32 down RF3
+KeyConnect key 32 up RF3
+KeyConnect key 32 down RF4
+KeyConnect key 32 up RF4
+KeyConnect key 32 down RF5
+KeyConnect key 32 up RF5

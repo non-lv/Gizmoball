@@ -1,0 +1,11 @@
+Absorber AB0 1 15 19 16
+Absorber AB1 3 13 17 14
+Absorber AB2 5 11 15 12
+
+Ball B0 1.50 7.50 0.0 0.0
+Ball B1 3.50 5.50 0.0 0.0
+Ball B2 5.50 3.50 0.0 0.0
+
+KeyConnect key 32 down AB0
+KeyConnect key 32 down AB1
+KeyConnect key 32 down AB2

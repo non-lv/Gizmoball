@@ -1,6 +1,5 @@
 package Model;
 
-import org.junit.Ignore;
 import physics.Circle;
 import physics.LineSegment;
 import physics.Vect;
